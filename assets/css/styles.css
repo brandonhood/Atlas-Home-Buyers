@@ -280,7 +280,7 @@ img{max-width:100%;height:auto;display:block}
 }
 
 .hero-offer-trust img{
-  height:44px;       /* bigger + consistent */
+  height:44px;
   max-width:100%;
   width:auto;
   object-fit:contain;
@@ -398,14 +398,12 @@ section{padding:44px 0}
    PROCESS (GRID + ICONS)
 ========================= */
 
-/* Always keep the process cards in a grid */
 .cards.three{
   display:grid;
   gap:14px;
-  padding-top:34px; /* more room under subtitle */
+  padding-top:34px;
 }
 
-/* 3 columns on desktop */
 @media (min-width: 900px){
   .cards.three{
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -413,14 +411,12 @@ section{padding:44px 0}
   }
 }
 
-/* Card layout + positioning context */
 .card.process-card{
   position:relative;
-  padding-top:54px; /* more space for icon */
-  overflow:visible; /* make sure icon isn't clipped */
+  padding-top:54px;
+  overflow:visible;
 }
 
-/* Icon badge anchored to the card */
 .process-icon{
   position:absolute;
   top:-28px;
@@ -444,7 +440,6 @@ section{padding:44px 0}
   height:28px;
 }
 
-/* Tight title/sub spacing */
 .process-title{
   margin:0 0 4px;
   font-size:16px;
@@ -459,7 +454,6 @@ section{padding:44px 0}
   line-height:1.4;
 }
 
-/* Bullet list cleanup */
 .process-list{
   margin:0;
   padding-left:16px;
@@ -473,10 +467,215 @@ section{padding:44px 0}
 }
 
 /* =========================
-   WHO IT’S FOR / NOT FOR
-   ========================= */
+   TESTIMONIALS
+========================= */
 
-/* Grid */
+.testimonials{
+  background:#fafafa;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+/* Tighten intro spacing just for testimonials */
+.testimonials .testimonial-intro{
+  margin-bottom:18px;
+}
+
+.testimonials .testimonial-intro .section-sub{
+  margin:0 auto 6px;
+}
+
+.testimonials .testimonial-micro{
+  margin:0;
+  font-size:14px;
+  color:var(--muted);
+  text-align:center;
+  line-height:1.45;
+}
+
+/* Carousel shell */
+.t-shell{
+  position:relative;
+  margin-top:12px;
+}
+
+/* Viewport wrapper in your HTML */
+.t-viewport{
+  outline:none;
+}
+
+/* Track */
+.t-track{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+  padding:6px 2px 12px;
+  scrollbar-width:none;
+}
+.t-track::-webkit-scrollbar{display:none;}
+
+.t-track .t-card{
+  scroll-snap-align:start;
+  flex:0 0 100%;
+}
+
+@media (min-width: 900px){
+  .t-track .t-card{
+    flex:0 0 calc((100% - 28px) / 3);
+  }
+}
+
+/* Card */
+.t-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:16px;
+  box-shadow:0 12px 30px rgba(0,0,0,.06);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.t-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.t-stars{
+  font-weight:900;
+  letter-spacing:.08em;
+  font-size:12px;
+  color:var(--brand);
+}
+
+.t-tag{
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.10em;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(153,0,0,.18);
+  background:rgba(153,0,0,.08);
+  color:var(--brand);
+}
+
+.t-quote{
+  margin:0;
+  color:var(--text);
+  font-size:14px;
+  line-height:1.55;
+}
+
+/* Person footer (matches your HTML) */
+.t-person{
+  margin-top:auto;
+  padding-top:10px;
+  border-top:1px solid rgba(229,231,235,.7);
+}
+
+.t-person strong{
+  display:block;
+  font-size:13px;
+  font-weight:900;
+}
+
+.t-person span{
+  display:block;
+  margin-top:2px;
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* “Read full review” inside testimonial cards (override global details styles) */
+.t-more{
+  border:1px solid rgba(229,231,235,.8);
+  border-radius:12px;
+  background:rgba(255,255,255,.7);
+  padding:10px 12px;
+}
+
+.t-more summary{
+  cursor:pointer;
+  font-weight:900;
+  list-style:none;
+}
+.t-more summary::-webkit-details-marker{display:none;}
+
+.t-more p{
+  margin:10px 0 0;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.5;
+}
+
+/* Nav buttons */
+.t-nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:#fff;
+  box-shadow:0 12px 26px rgba(0,0,0,.10);
+  font-weight:900;
+  font-size:22px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  z-index:5;
+}
+
+.t-prev{left:-6px;}
+.t-next{right:-6px;}
+
+@media (max-width: 520px){
+  .t-prev{left:-2px;}
+  .t-next{right:-2px;}
+}
+
+.t-nav:active{transform:translateY(-50%) scale(.98);}
+.t-nav:focus{
+  outline:none;
+  box-shadow:0 0 0 4px rgba(153,0,0,.10), 0 12px 26px rgba(0,0,0,.10);
+}
+
+/* Dots */
+.t-dots{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  margin-top:10px;
+}
+
+.t-dot{
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  border:1px solid rgba(107,114,128,.35);
+  background:rgba(107,114,128,.12);
+  cursor:pointer;
+}
+
+.t-dot.is-active{
+  background:rgba(153,0,0,.18);
+  border-color:rgba(153,0,0,.35);
+}
+
+/* =========================
+   WHO IT’S FOR / NOT FOR
+========================= */
+
 .fit-grid{
   display:grid;
   gap:14px;
@@ -490,7 +689,6 @@ section{padding:44px 0}
   }
 }
 
-/* Card + title */
 .fit-card{
   padding:18px;
 }
@@ -502,7 +700,6 @@ section{padding:44px 0}
   letter-spacing:-.01em;
 }
 
-/* List */
 .fit-list{
   margin:0;
   padding:0;
@@ -518,12 +715,11 @@ section{padding:44px 0}
   line-height:1.45;
 }
 
-/* Icon bubble base */
 .fit-list li::before{
   content:"";
   position:absolute;
   left:0;
-  top:0.15em;          /* consistent vertical alignment */
+  top:0.15em;
   width:20px;
   height:20px;
   border-radius:999px;
@@ -532,10 +728,9 @@ section{padding:44px 0}
   justify-content:center;
   font-weight:900;
   font-size:13px;
-  line-height:1;       /* prevents “wobble” */
+  line-height:1;
 }
 
-/* YES bullets – green check */
 .fit-yes li::before{
   content:"✓";
   background:rgba(22,163,74,.12);
@@ -543,7 +738,6 @@ section{padding:44px 0}
   color:#16a34a;
 }
 
-/* NO bullets – muted gray X */
 .fit-no li::before{
   content:"✕";
   background:rgba(107,114,128,.10);
@@ -551,7 +745,6 @@ section{padding:44px 0}
   color:var(--muted);
 }
 
-/* Optional CTA under the grid (if you add it) */
 .fit-cta{
   text-align:center;
   margin-top:18px;
@@ -563,7 +756,6 @@ section{padding:44px 0}
   font-size:12px;
 }
 
-/* Green “highlight” on the first card (YES) */
 .fit-card:first-child{
   box-shadow:0 16px 40px rgba(22,163,74,.12);
   border-color:rgba(22,163,74,.25);
@@ -572,6 +764,7 @@ section{padding:44px 0}
 /* =========================
    FORM
 ========================= */
+
 .form-wrap{
   max-width:760px;
   margin:0 auto;
@@ -649,237 +842,9 @@ input:focus, select:focus, textarea:focus{
 }
 
 /* =========================
-   TESTIMONIALS 
-========================= */
-
-.testimonials{
-  background:#fafafa;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-}
-
-/* Trust bar */
-.trust-bar{
-  display:grid;
-  gap:10px;
-  margin:6px auto 18px;
-  max-width:980px;
-}
-
-@media (min-width: 760px){
-  .trust-bar{
-    grid-template-columns:repeat(4, minmax(0, 1fr));
-  }
-}
-
-.trust-item{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:12px 12px;
-  text-align:center;
-  box-shadow:0 10px 24px rgba(0,0,0,.05);
-}
-
-.trust-item strong{
-  display:block;
-  font-size:13px;
-  font-weight:900;
-  letter-spacing:-.01em;
-}
-
-.trust-item span{
-  display:block;
-  margin-top:2px;
-  font-size:12px;
-  color:var(--muted);
-}
-
-/* Testimonial cards */
-.testimonial-grid{
-  display:grid;
-  gap:14px;
-  margin-top:10px;
-}
-
-@media (min-width: 900px){
-  .testimonial-grid{
-    grid-template-columns:repeat(3, minmax(0, 1fr));
-    align-items:stretch;
-  }
-}
-
-.t-card{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:16px;
-  box-shadow:0 12px 30px rgba(0,0,0,.06);
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.t-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.t-stars{
-  font-weight:900;
-  letter-spacing:.08em;
-  font-size:12px;
-  color:var(--brand);
-}
-
-.t-tag{
-  font-size:11px;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:.10em;
-  padding:6px 10px;
-  border-radius:999px;
-  border:1px solid rgba(153,0,0,.18);
-  background:rgba(153,0,0,.08);
-  color:var(--brand);
-}
-
-.t-quote{
-  margin:0;
-  color:var(--text);
-  font-size:14px;
-  line-height:1.55;
-}
-
-.t-meta{
-  margin-top:auto;
-  padding-top:10px;
-  border-top:1px solid rgba(229,231,235,.7);
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.t-who strong{
-  display:block;
-  font-size:13px;
-}
-
-.t-who span{
-  display:block;
-  font-size:12px;
-  color:var(--muted);
-  margin-top:2px;
-}
-
-.t-verified{
-  font-size:12px;
-  color:var(--muted);
-  white-space:nowrap;
-}
-
-/* CTA */
-.t-cta{
-  text-align:center;
-  margin-top:18px;
-}
-
-.t-micro{
-  margin-top:8px;
-  color:var(--muted);
-  font-size:12px;
-}
-
-/* =========================
-   TESTIMONIAL CAROUSEL
-========================= */
-
-.t-carousel{
-  position:relative;
-  margin-top:12px;
-}
-
-.t-track{
-  display:flex;
-  gap:14px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  scroll-behavior:smooth;
-  -webkit-overflow-scrolling:touch;
-  padding:6px 2px 12px;
-  scrollbar-width:none; /* Firefox */
-}
-.t-track::-webkit-scrollbar{display:none;} /* Chrome/Safari */
-
-.t-track .t-card{
-  scroll-snap-align:start;
-  flex:0 0 100%;
-}
-
-@media (min-width: 900px){
-  .t-track .t-card{
-    flex:0 0 calc((100% - 28px) / 3); /* 3 cards per view with 2 gaps */
-  }
-}
-
-.t-nav{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  width:44px;
-  height:44px;
-  border-radius:999px;
-  border:1px solid var(--line);
-  background:#fff;
-  box-shadow:0 12px 26px rgba(0,0,0,.10);
-  font-weight:900;
-  font-size:22px;
-  line-height:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  z-index:5;
-}
-
-.t-prev{left:-6px;}
-.t-next{right:-6px;}
-
-@media (max-width: 520px){
-  .t-prev{left:-2px;}
-  .t-next{right:-2px;}
-}
-
-.t-nav:active{transform:translateY(-50%) scale(.98);}
-.t-nav:focus{outline:none; box-shadow:0 0 0 4px rgba(153,0,0,.10), 0 12px 26px rgba(0,0,0,.10);}
-
-.t-dots{
-  display:flex;
-  gap:8px;
-  justify-content:center;
-  margin-top:10px;
-}
-
-.t-dot{
-  width:8px;
-  height:8px;
-  border-radius:999px;
-  border:1px solid rgba(107,114,128,.35);
-  background:rgba(107,114,128,.12);
-  cursor:pointer;
-}
-
-.t-dot.is-active{
-  background:rgba(153,0,0,.18);
-  border-color:rgba(153,0,0,.35);
-}
-
-/* =========================
    FAQ
 ========================= */
+
 .faq{
   max-width:860px;
   margin:0 auto;
@@ -909,6 +874,7 @@ details p{
 /* =========================
    FOOTER
 ========================= */
+
 footer{
   padding:28px 0 88px;
   color:var(--muted);
@@ -927,6 +893,7 @@ footer a{color:var(--muted)}
 /* =========================
    STICKY CTA (MOBILE)
 ========================= */
+
 .sticky-cta{
   position:fixed;
   left:0; right:0; bottom:0;
