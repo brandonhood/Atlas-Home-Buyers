@@ -402,7 +402,7 @@ section{padding:44px 0}
 .cards.three{
   display:grid;
   gap:14px;
-  padding-top:22px; /* room for icon above cards */
+  padding-top:34px; /* more room under subtitle */
 }
 
 /* 3 columns on desktop */
@@ -416,14 +416,14 @@ section{padding:44px 0}
 /* Card layout + positioning context */
 .card.process-card{
   position:relative;
-  padding-top:34px; /* space for icon */
+  padding-top:54px; /* more space for icon */
   overflow:visible; /* make sure icon isn't clipped */
 }
 
 /* Icon badge anchored to the card */
 .process-icon{
   position:absolute;
-  top:-18px;
+  top:-28px;
   left:50%;
   transform:translateX(-50%);
   width:58px;
