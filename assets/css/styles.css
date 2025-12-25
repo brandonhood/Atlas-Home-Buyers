@@ -649,32 +649,149 @@ input:focus, select:focus, textarea:focus{
 }
 
 /* =========================
-   TESTIMONIALS
+   TESTIMONIALS (CRO)
 ========================= */
+
 .testimonials{
   background:#fafafa;
   border-top:1px solid var(--line);
   border-bottom:1px solid var(--line);
 }
 
-.two-col{
+/* Trust bar */
+.trust-bar{
   display:grid;
-  gap:14px;
-}
-@media (min-width: 900px){
-  .two-col{grid-template-columns:1fr 1fr}
+  gap:10px;
+  margin:6px auto 18px;
+  max-width:980px;
 }
 
-.quote{
+@media (min-width: 760px){
+  .trust-bar{
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+  }
+}
+
+.trust-item{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:12px 12px;
+  text-align:center;
+  box-shadow:0 10px 24px rgba(0,0,0,.05);
+}
+
+.trust-item strong{
+  display:block;
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:-.01em;
+}
+
+.trust-item span{
+  display:block;
+  margin-top:2px;
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* Testimonial cards */
+.testimonial-grid{
+  display:grid;
+  gap:14px;
+  margin-top:10px;
+}
+
+@media (min-width: 900px){
+  .testimonial-grid{
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+    align-items:stretch;
+  }
+}
+
+.t-card{
   background:#fff;
   border:1px solid var(--line);
   border-radius:var(--radius);
   padding:16px;
-  box-shadow:0 10px 24px rgba(0,0,0,.06);
+  box-shadow:0 12px 30px rgba(0,0,0,.06);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
 
-.quote p{margin:0 0 10px}
-.quote strong{display:block; font-size:13px}
+.t-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.t-stars{
+  font-weight:900;
+  letter-spacing:.08em;
+  font-size:12px;
+  color:var(--brand);
+}
+
+.t-tag{
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.10em;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(153,0,0,.18);
+  background:rgba(153,0,0,.08);
+  color:var(--brand);
+}
+
+.t-quote{
+  margin:0;
+  color:var(--text);
+  font-size:14px;
+  line-height:1.55;
+}
+
+.t-meta{
+  margin-top:auto;
+  padding-top:10px;
+  border-top:1px solid rgba(229,231,235,.7);
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.t-who strong{
+  display:block;
+  font-size:13px;
+}
+
+.t-who span{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+  margin-top:2px;
+}
+
+.t-verified{
+  font-size:12px;
+  color:var(--muted);
+  white-space:nowrap;
+}
+
+/* CTA */
+.t-cta{
+  text-align:center;
+  margin-top:18px;
+}
+
+.t-micro{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:12px;
+}
 
 /* =========================
    FAQ
