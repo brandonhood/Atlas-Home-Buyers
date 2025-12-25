@@ -228,14 +228,34 @@ font-weight:600;
   background:#fff;
 }
 
-/* Trust badges inside the box */
+/* Trust badges inside the hero box (side-by-side) */
 .hero-offer-trust{
-  display:flex;
-  justify-content:center;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
   align-items:center;
-  gap:14px;
-  padding-top:6px;
+  justify-items:center;
+  padding-top:10px;
   border-top:1px solid rgba(229,231,235,.6);
+}
+
+.hero-offer-trust img{
+  max-height:34px;   /* hard cap so big PNGs don't blow out */
+  max-width:100%;
+  width:auto;
+  object-fit:contain;
+  display:block;
+  opacity:.92;
+}
+
+/* If screen is tiny, stack them cleanly */
+@media (max-width: 420px){
+  .hero-offer-trust{
+    grid-template-columns:1fr;
+  }
+  .hero-offer-trust img{
+    max-height:28px;
+  }
 }
 
 .hero-offer-trust img{
