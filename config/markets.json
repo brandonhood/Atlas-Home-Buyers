@@ -1,0 +1,87 @@
+{
+  "duval-jacksonville": {
+    "marketName": "Jacksonville (Duval County)",
+    "h1": "Sell Your House Fast in Jacksonville",
+    "subhead": "Sell as-is. No agent fees. Close on your timeline.",
+    "areas": "Serving Jacksonville and surrounding Duval County areas.",
+    "phone": "+1 (904) 555-0123",
+    "ctaPrimary": "Check My Options",
+    "ctaSecondary": "Schedule My Consultation",
+    "testimonials": [
+      {
+        "name": "Megan R.",
+        "location": "Jacksonville, FL",
+        "text": "They were calm, clear, and did exactly what they said. We picked the closing date and didn\u2019t have to fix a thing."
+      },
+      {
+        "name": "Darius T.",
+        "location": "Duval County",
+        "text": "No pressure. They explained my options and helped me move on quickly. The process was simple."
+      }
+    ]
+  },
+  "pinellas": {
+    "marketName": "Pinellas County",
+    "h1": "Sell Your House Fast in Pinellas County",
+    "subhead": "Sell as-is. No agent fees. Pick your closing date.",
+    "areas": "Serving Pinellas County homeowners.",
+    "phone": "+1 (727) 555-0134",
+    "ctaPrimary": "Check My Options",
+    "ctaSecondary": "Schedule My Consultation",
+    "testimonials": [
+      {
+        "name": "Rachel S.",
+        "location": "Pinellas County",
+        "text": "Straightforward and professional. They made it easy and we avoided repairs and showings."
+      }
+    ]
+  },
+  "hillsborough": {
+    "marketName": "Hillsborough County",
+    "h1": "Sell Your House Fast in Hillsborough County",
+    "subhead": "As-is sale. No agent fees. Close when you\u2019re ready.",
+    "areas": "Serving Hillsborough County homeowners.",
+    "phone": "+1 (813) 555-0147",
+    "ctaPrimary": "Check My Options",
+    "ctaSecondary": "Schedule My Consultation",
+    "testimonials": [
+      {
+        "name": "Kevin L.",
+        "location": "Hillsborough County",
+        "text": "They gave me a clear plan and followed through. No drama, no surprises."
+      }
+    ]
+  },
+  "polk": {
+    "marketName": "Polk County",
+    "h1": "Sell Your House Fast in Polk County",
+    "subhead": "Skip repairs and fees. Get a clear next step today.",
+    "areas": "Serving Polk County homeowners.",
+    "phone": "+1 (863) 555-0162",
+    "ctaPrimary": "Check My Options",
+    "ctaSecondary": "Schedule My Consultation",
+    "testimonials": [
+      {
+        "name": "Angela M.",
+        "location": "Polk County",
+        "text": "I expected a hard sell. Instead it felt like a consultation and I stayed in control."
+      }
+    ]
+  },
+  "orange": {
+    "marketName": "Orange County",
+    "h1": "Sell Your House Fast in Orange County",
+    "subhead": "Sell as-is. No agent fees. Close on your timeline.",
+    "areas": "Serving Orange County homeowners.",
+    "phone": "+1 (407) 555-0179",
+    "ctaPrimary": "Check My Options",
+    "ctaSecondary": "Schedule My Consultation",
+    "testimonials": [
+      {
+        "name": "Chris P.",
+        "location": "Orange County",
+        "text": "Fast communication and a simple process. We didn\u2019t have to clean out the house."
+      }
+    ]
+  }
+}
