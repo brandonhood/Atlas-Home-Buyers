@@ -77,10 +77,11 @@
     });
   })();
 
-  // Testimonials carousel
+   // Testimonials carousel
   (function testimonialsCarousel() {
     const track = document.getElementById("tTrack");
     const dotsWrap = document.getElementById("tDots");
+    const viewport = document.querySelector(".t-viewport");
     if (!track || !dotsWrap) return;
 
     const prevBtn = document.querySelector(".t-prev");
@@ -100,6 +101,19 @@
       return card.getBoundingClientRect().width + getGap();
     };
 
+    const getPageIndex = () => {
+      const step = getStep() || 1;
+      const ps = pageSize();
+      return Math.round(track.scrollLeft / (step * ps));
+    };
+
+    const goToPage = (idx) => {
+      const step = getStep();
+      if (!step) return;
+      const ps = pageSize();
+      track.scrollTo({ left: step * ps * idx, behavior: "smooth" });
+    };
+
     let dots = [];
     let lastPageSize = pageSize();
 
@@ -113,10 +127,7 @@
         b.type = "button";
         b.className = "t-dot";
         b.setAttribute("aria-label", `Go to testimonials ${i + 1}`);
-        b.addEventListener("click", () => {
-          const step = getStep();
-          track.scrollTo({ left: step * pageSize() * i, behavior: "smooth" });
-        });
+        b.addEventListener("click", () => goToPage(i));
         dotsWrap.appendChild(b);
         return b;
       });
@@ -125,20 +136,21 @@
     };
 
     const setActiveDot = () => {
-      const step = getStep() || 1;
-      const idx = Math.round(track.scrollLeft / (step * pageSize()));
+      if (!dots.length) return;
+      const idx = getPageIndex();
       const clamped = Math.max(0, Math.min(idx, dots.length - 1));
       dots.forEach((d, i) => d.classList.toggle("is-active", i === clamped));
     };
 
-    const scrollByCards = (dir = 1) => {
-      const step = getStep();
-      if (!step) return;
-      track.scrollBy({ left: step * pageSize() * dir, behavior: "smooth" });
+    const scrollPage = (dir = 1) => {
+      if (!dots.length) return;
+      const idx = getPageIndex();
+      const next = Math.max(0, Math.min(idx + dir, dots.length - 1));
+      goToPage(next);
     };
 
-    prevBtn && prevBtn.addEventListener("click", () => scrollByCards(-1));
-    nextBtn && nextBtn.addEventListener("click", () => scrollByCards(1));
+    prevBtn && prevBtn.addEventListener("click", () => scrollPage(-1));
+    nextBtn && nextBtn.addEventListener("click", () => scrollPage(1));
 
     track.addEventListener("scroll", () => window.requestAnimationFrame(setActiveDot));
 
@@ -152,12 +164,11 @@
       }
     });
 
-    // Keyboard support
-    track.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowRight") scrollByCards(1);
-      if (e.key === "ArrowLeft") scrollByCards(-1);
+    // Keyboard support (focus is on .t-viewport in your HTML)
+    (viewport || track).addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") scrollPage(1);
+      if (e.key === "ArrowLeft") scrollPage(-1);
     });
 
     buildDots();
   })();
-})();
