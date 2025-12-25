@@ -31,7 +31,8 @@ img{max-width:100%;height:auto;display:block}
   padding:0 18px;
 }
 
-:target { scroll-margin-top: 96px; }
+/* Offset anchor scroll for fixed header */
+:target{scroll-margin-top:96px}
 
 /* Accessibility helper */
 .sr-only{
@@ -71,7 +72,6 @@ img{max-width:100%;height:auto;display:block}
   font-weight:800;
   letter-spacing:.3px;
 }
-
 .brand img{height:34px;width:auto}
 
 .call{
@@ -94,7 +94,7 @@ img{max-width:100%;height:auto;display:block}
 }
 
 .call strong{display:none}
-@media (min-width: 768px){
+@media (min-width:768px){
   .call strong{display:inline}
 }
 
@@ -131,7 +131,7 @@ img{max-width:100%;height:auto;display:block}
 
 /* HERO */
 .hero{
-  padding-top:86px; /* header space */
+  padding-top:86px;
   position:relative;
   overflow:hidden;
   border-bottom:1px solid var(--line);
@@ -226,7 +226,7 @@ img{max-width:100%;height:auto;display:block}
   font-weight:600;
 }
 
-/* ===== HERO OFFER (Input + CTA + Trust Badges) ===== */
+/* HERO OFFER */
 .hero-offer{
   margin:10px auto 10px;
   max-width:760px;
@@ -243,7 +243,7 @@ img{max-width:100%;height:auto;display:block}
 
 .hero-offer-main{
   display:grid;
-  grid-template-columns: 1fr 240px; /* input left, button right */
+  grid-template-columns:1fr 240px;
   gap:10px;
   align-items:stretch;
 }
@@ -297,27 +297,15 @@ img{max-width:100%;height:auto;display:block}
 }
 
 /* HERO responsive */
-@media (max-width: 640px){
+@media (max-width:640px){
   .hero-inner{padding:34px 0 26px}
   .hero h1{font-size:30px}
-
-  .hero-offer-main{
-    grid-template-columns:1fr;
-  }
-
-  .hero-offer-main .btn{
-    height:52px;
-  }
-
-  .hero-offer-trust img{
-    height:40px;
-  }
+  .hero-offer-main{grid-template-columns:1fr}
+  .hero-offer-main .btn{height:52px}
+  .hero-offer-trust img{height:40px}
 }
-
-@media (max-width: 420px){
-  .hero-offer-trust{
-    grid-template-columns:1fr;
-  }
+@media (max-width:420px){
+  .hero-offer-trust{grid-template-columns:1fr}
 }
 
 /* Sections */
@@ -391,25 +379,22 @@ section{padding:44px 0}
   object-fit:contain;
 }
 
-@media (min-width: 768px){
+@media (min-width:768px){
   .logo-item{height:60px}
   .logo-item img{height:38px; max-width:160px}
 }
 
-/* =========================
-   PROCESS (GRID + ICONS)
-========================= */
-
+/* PROCESS */
 .cards.three{
   display:grid;
   gap:14px;
   padding-top:34px;
 }
 
-@media (min-width: 900px){
+@media (min-width:900px){
   .cards.three{
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    align-items: stretch;
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+    align-items:stretch;
   }
 }
 
@@ -437,10 +422,7 @@ section{padding:44px 0}
   z-index:2;
 }
 
-.process-icon svg{
-  width:28px;
-  height:28px;
-}
+.process-icon svg{width:28px;height:28px}
 
 .process-title{
   margin:0 0 4px;
@@ -468,24 +450,16 @@ section{padding:44px 0}
   color:var(--text);
 }
 
-/* =========================
-   TESTIMONIALS
-========================= */
-
+/* TESTIMONIALS */
 .testimonials{
   background:#fafafa;
   border-top:1px solid var(--line);
   border-bottom:1px solid var(--line);
+  padding-bottom:90px; /* prevents dots being hidden by sticky CTA on mobile */
 }
 
-/* Tighten intro spacing just for testimonials */
-.testimonials .testimonial-intro{
-  margin-bottom:18px;
-}
-
-.testimonials .testimonial-intro .section-sub{
-  margin:0 auto 6px;
-}
+.testimonials .testimonial-intro{margin-bottom:18px}
+.testimonials .testimonial-intro .section-sub{margin:0 auto 6px}
 
 .testimonials .testimonial-micro{
   margin:0;
@@ -495,18 +469,13 @@ section{padding:44px 0}
   line-height:1.45;
 }
 
-/* Carousel shell */
 .t-shell{
   position:relative;
   margin-top:12px;
 }
 
-/* Viewport wrapper in your HTML */
-.t-viewport{
-  outline:none;
-}
+.t-viewport{outline:none}
 
-/* Track */
 .t-track{
   display:flex;
   gap:14px;
@@ -517,20 +486,19 @@ section{padding:44px 0}
   padding:6px 2px 12px;
   scrollbar-width:none;
 }
-.t-track::-webkit-scrollbar{display:none;}
+.t-track::-webkit-scrollbar{display:none}
 
 .t-track .t-card{
   scroll-snap-align:start;
   flex:0 0 100%;
 }
 
-@media (min-width: 900px){
+@media (min-width:900px){
   .t-track .t-card{
     flex:0 0 calc((100% - 28px) / 3);
   }
 }
 
-/* Card */
 .t-card{
   background:#fff;
   border:1px solid var(--line);
@@ -575,7 +543,6 @@ section{padding:44px 0}
   line-height:1.55;
 }
 
-/* Person footer (matches your HTML) */
 .t-person{
   margin-top:auto;
   padding-top:10px;
@@ -595,7 +562,7 @@ section{padding:44px 0}
   color:var(--muted);
 }
 
-/* “Read full review” inside testimonial cards (override global details styles) */
+/* Full review accordion inside card */
 .t-more{
   border:1px solid rgba(229,231,235,.8);
   border-radius:12px;
@@ -608,7 +575,7 @@ section{padding:44px 0}
   font-weight:900;
   list-style:none;
 }
-.t-more summary::-webkit-details-marker{display:none;}
+.t-more summary::-webkit-details-marker{display:none}
 
 .t-more p{
   margin:10px 0 0;
@@ -617,40 +584,8 @@ section{padding:44px 0}
   line-height:1.5;
 }
 
-/* Nav buttons */
-.t-nav{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  width:44px;
-  height:44px;
-  border-radius:999px;
-  border:1px solid var(--line);
-  background:#fff;
-  box-shadow:0 12px 26px rgba(0,0,0,.10);
-  font-weight:900;
-  font-size:22px;
-  line-height:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  z-index:5;
-}
-
-.t-prev{left:-6px;}
-.t-next{right:-6px;}
-
-@media (max-width: 520px){
-  .t-prev{left:-2px;}
-  .t-next{right:-2px;}
-}
-
-.t-nav:active{transform:translateY(-50%) scale(.98);}
-.t-nav:focus{
-  outline:none;
-  box-shadow:0 0 0 4px rgba(153,0,0,.10), 0 12px 26px rgba(0,0,0,.10);
-}
+/* Hide arrows entirely (we’re using dots + swipe) */
+.t-nav{display:none !important}
 
 /* Dots */
 .t-dots{
@@ -674,26 +609,21 @@ section{padding:44px 0}
   border-color:rgba(153,0,0,.35);
 }
 
-/* =========================
-   WHO IT’S FOR / NOT FOR
-========================= */
-
+/* WHO IT’S FOR / NOT FOR */
 .fit-grid{
   display:grid;
   gap:14px;
   margin-top:6px;
 }
 
-@media (min-width: 900px){
+@media (min-width:900px){
   .fit-grid{
     grid-template-columns:repeat(2, minmax(0, 1fr));
     align-items:stretch;
   }
 }
 
-.fit-card{
-  padding:18px;
-}
+.fit-card{padding:18px}
 
 .fit-title{
   margin:0 0 10px;
@@ -747,26 +677,15 @@ section{padding:44px 0}
   color:var(--muted);
 }
 
-.fit-cta{
-  text-align:center;
-  margin-top:18px;
-}
-
-.fit-micro{
-  margin-top:8px;
-  color:var(--muted);
-  font-size:12px;
-}
+.fit-cta{text-align:center;margin-top:18px}
+.fit-micro{margin-top:8px;color:var(--muted);font-size:12px}
 
 .fit-card:first-child{
   box-shadow:0 16px 40px rgba(22,163,74,.12);
   border-color:rgba(22,163,74,.25);
 }
 
-/* =========================
-   FORM
-========================= */
-
+/* FORM */
 .form-wrap{
   max-width:760px;
   margin:0 auto;
@@ -810,11 +729,8 @@ input:focus, select:focus, textarea:focus{
   background:#fff;
 }
 
-.grid-2{
-  display:grid;
-  gap:12px;
-}
-@media (min-width: 560px){
+.grid-2{display:grid;gap:12px}
+@media (min-width:560px){
   .grid-2{grid-template-columns:1fr 1fr}
 }
 
@@ -843,14 +759,8 @@ input:focus, select:focus, textarea:focus{
   text-align:center;
 }
 
-/* =========================
-   FAQ
-========================= */
-
-.faq{
-  max-width:860px;
-  margin:0 auto;
-}
+/* FAQ */
+.faq{max-width:860px;margin:0 auto}
 
 details{
   border:1px solid var(--line);
@@ -873,10 +783,7 @@ details p{
   font-size:14px;
 }
 
-/* =========================
-   FOOTER
-========================= */
-
+/* FOOTER */
 footer{
   padding:28px 0 88px;
   color:var(--muted);
@@ -884,18 +791,12 @@ footer{
 }
 footer a{color:var(--muted)}
 
-.footer-grid{
-  display:grid;
-  gap:12px;
-}
-@media (min-width: 900px){
+.footer-grid{display:grid;gap:12px}
+@media (min-width:900px){
   .footer-grid{grid-template-columns:1fr 1fr}
 }
 
-/* =========================
-   STICKY CTA (MOBILE)
-========================= */
-
+/* STICKY CTA (MOBILE) */
 .sticky-cta{
   position:fixed;
   left:0; right:0; bottom:0;
@@ -911,6 +812,6 @@ footer a{color:var(--muted)}
   font-size:14px;
 }
 
-@media (min-width: 992px){
+@media (min-width:992px){
   .sticky-cta{display:none}
 }
