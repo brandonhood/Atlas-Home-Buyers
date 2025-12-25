@@ -190,55 +190,82 @@ box-shadow:0 6px 18px rgba(0,0,0,.05);
 font-weight:600;
 }
 
-/* address-only module */
+/* address-only module (v3 + trust inside box) */
 .hero-offer{
-margin:10px auto 10px;
-max-width:760px;
-display:grid;
-grid-template-columns: 1fr auto;
-gap:10px;
-padding:12px;
-background:#fff;
-border:1px solid var(--line);
-border-radius:16px;
-box-shadow:var(--shadow);
-text-align:left;
-}
-.hero-offer input{
-width:100%;
-border:1px solid var(--line);
-border-radius:12px;
-padding:14px 14px;
-font-size:16px;
-outline:none;
-background:var(--panel);
-}
-.hero-offer input:focus{
-border-color:rgba(153,0,0,.35);
-box-shadow:0 0 0 4px rgba(153,0,0,.08);
-background:#fff;
-}
-.hero-micro{
-margin-top:10px;
-color:var(--muted);
-font-size:13px;
+  margin:10px auto 10px;
+  max-width:760px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  padding:12px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  text-align:left;
 }
 
-.sr-only{
-position:absolute;
-width:1px;height:1px;
-padding:0;margin:-1px;
-overflow:hidden;
-clip:rect(0,0,0,0);
-white-space:nowrap;
-border:0;
+/* Input + CTA row */
+.hero-offer-main{
+  display:grid;
+  grid-template-columns: 1fr auto;
+  gap:10px;
+}
+
+.hero-offer input{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:14px 14px;
+  font-size:16px;
+  outline:none;
+  background:var(--panel);
+}
+
+.hero-offer input:focus{
+  border-color:rgba(153,0,0,.35);
+  box-shadow:0 0 0 4px rgba(153,0,0,.08);
+  background:#fff;
+}
+
+/* Trust badges inside the box */
+.hero-offer-trust{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:14px;
+  padding-top:6px;
+  border-top:1px solid rgba(229,231,235,.6);
+}
+
+.hero-offer-trust img{
+  max-height:26px;
+  width:auto;
+  object-fit:contain;
+  opacity:.92;
+}
+
+.hero-micro{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:13px;
 }
 
 @media (max-width: 640px){
-.hero-inner{padding:34px 0 26px}
-.hero h1{font-size:30px}
-.hero-offer{grid-template-columns: 1fr;}
-.hero-offer button{width:100%}
+  .hero-inner{padding:34px 0 26px}
+  .hero h1{font-size:30px}
+
+  .hero-offer-main{
+    grid-template-columns: 1fr;
+  }
+
+  .hero-offer button{
+    width:100%;
+  }
+
+  .hero-offer-trust img{
+    max-height:24px;
+  }
 }
 
 /* Sections */
