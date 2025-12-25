@@ -530,15 +530,15 @@ WHO IT’S FOR
   font-size:13px;
 }
 
-/* YES bullets */
+/* YES bullets – green check */
 .fit-yes li::before{
   content:"✓";
-  background:rgba(153,0,0,.10);
-  border:1px solid rgba(153,0,0,.20);
-  color:var(--brand);
+  background:rgba(22,163,74,.12); /* soft green */
+  border:1px solid rgba(22,163,74,.35);
+  color:#16a34a; /* green-600 */
 }
 
-/* NO bullets */
+/* NO bullets – muted gray X */
 .fit-no li::before{
   content:"✕";
   background:rgba(107,114,128,.10);
@@ -555,6 +555,11 @@ WHO IT’S FOR
   margin-top:8px;
   color:var(--muted);
   font-size:12px;
+}
+
+.fit-card:first-child{
+  box-shadow:0 16px 40px rgba(22,163,74,.12);
+  border-color:rgba(22,163,74,.25);
 }
 
 /* =========================
