@@ -471,3 +471,179 @@ section{padding:44px 0}
   font-size:14px;
   color:var(--text);
 }
+
+/* =========================
+   FORM
+========================= */
+.form-wrap{
+  max-width:760px;
+  margin:0 auto;
+}
+
+.form-title{
+  margin:0 0 6px;
+  font-weight:900;
+  font-size:18px;
+  text-align:center;
+}
+
+.form-sub{
+  margin:0 0 14px;
+  color:var(--muted);
+  font-size:13px;
+  text-align:center;
+}
+
+label{
+  display:block;
+  font-weight:700;
+  font-size:12px;
+  letter-spacing:.02em;
+  margin:12px 0 6px;
+}
+
+input, select, textarea{
+  width:100%;
+  padding:12px 12px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  font-size:14px;
+  outline:none;
+}
+
+input:focus, select:focus, textarea:focus{
+  border-color:rgba(153,0,0,.45);
+  box-shadow:0 0 0 3px rgba(153,0,0,.10);
+  background:#fff;
+}
+
+.grid-2{
+  display:grid;
+  gap:12px;
+}
+@media (min-width: 560px){
+  .grid-2{grid-template-columns:1fr 1fr}
+}
+
+.under-submit{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:12px;
+  text-align:center;
+}
+
+.fineprint{
+  margin-top:10px;
+  font-size:12px;
+  color:var(--muted);
+  display:flex;
+  gap:8px;
+  align-items:flex-start;
+  justify-content:center;
+}
+
+.consent{
+  margin-top:10px;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.35;
+  text-align:center;
+}
+
+/* =========================
+   TESTIMONIALS
+========================= */
+.testimonials{
+  background:#fafafa;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+.two-col{
+  display:grid;
+  gap:14px;
+}
+@media (min-width: 900px){
+  .two-col{grid-template-columns:1fr 1fr}
+}
+
+.quote{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:16px;
+  box-shadow:0 10px 24px rgba(0,0,0,.06);
+}
+
+.quote p{margin:0 0 10px}
+.quote strong{display:block; font-size:13px}
+
+/* =========================
+   FAQ
+========================= */
+.faq{
+  max-width:860px;
+  margin:0 auto;
+}
+
+details{
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#fff;
+  padding:14px 14px;
+  margin-bottom:12px;
+}
+
+summary{
+  cursor:pointer;
+  font-weight:900;
+  list-style:none;
+}
+summary::-webkit-details-marker{display:none}
+
+details p{
+  margin:10px 0 0;
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer{
+  padding:28px 0 88px;
+  color:var(--muted);
+  font-size:12px;
+}
+footer a{color:var(--muted)}
+
+.footer-grid{
+  display:grid;
+  gap:12px;
+}
+@media (min-width: 900px){
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+
+/* =========================
+   STICKY CTA (MOBILE)
+========================= */
+.sticky-cta{
+  position:fixed;
+  left:0; right:0; bottom:0;
+  z-index:60;
+  padding:10px 12px;
+  background:rgba(255,255,255,.92);
+  border-top:1px solid rgba(229,231,235,.9);
+  backdrop-filter:saturate(180%) blur(10px);
+}
+
+.sticky-cta .btn{
+  height:52px;
+  font-size:14px;
+}
+
+@media (min-width: 992px){
+  .sticky-cta{display:none}
+}
