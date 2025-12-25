@@ -473,6 +473,91 @@ section{padding:44px 0}
 }
 
 /* =========================
+WHO IT’S FOR
+========================= */
+
+.fit-grid{
+  display:grid;
+  gap:14px;
+  margin-top:6px;
+}
+
+@media (min-width: 900px){
+  .fit-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+  }
+}
+
+.fit-card{
+  padding:18px;
+}
+
+.fit-title{
+  margin:0 0 10px;
+  font-size:16px;
+  font-weight:900;
+  letter-spacing:-.01em;
+}
+
+.fit-list{
+  margin:0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:10px;
+}
+
+.fit-list li{
+  position:relative;
+  padding-left:32px;
+  font-size:14px;
+  line-height:1.45;
+}
+
+.fit-list li::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:2px;
+  width:20px;
+  height:20px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  font-size:13px;
+}
+
+/* YES bullets */
+.fit-yes li::before{
+  content:"✓";
+  background:rgba(153,0,0,.10);
+  border:1px solid rgba(153,0,0,.20);
+  color:var(--brand);
+}
+
+/* NO bullets */
+.fit-no li::before{
+  content:"✕";
+  background:rgba(107,114,128,.10);
+  border:1px solid rgba(107,114,128,.25);
+  color:var(--muted);
+}
+
+.fit-cta{
+  text-align:center;
+  margin-top:18px;
+}
+
+.fit-micro{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+/* =========================
    FORM
 ========================= */
 .form-wrap{
