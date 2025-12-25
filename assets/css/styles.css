@@ -31,6 +31,8 @@ img{max-width:100%;height:auto;display:block}
   padding:0 18px;
 }
 
+:target { scroll-margin-top: 96px; }
+
 /* Accessibility helper */
 .sr-only{
   position:absolute !important;
