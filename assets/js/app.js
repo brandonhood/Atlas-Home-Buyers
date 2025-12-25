@@ -71,3 +71,70 @@
     });
   })();
 })();
+
+
+(() => {
+  const track = document.getElementById("tTrack");
+  const dotsWrap = document.getElementById("tDots");
+  if (!track || !dotsWrap) return;
+
+  const cards = Array.from(track.querySelectorAll(".t-card"));
+  const prevBtn = document.querySelector(".t-prev");
+  const nextBtn = document.querySelector(".t-next");
+
+  const getStep = () => {
+    const card = cards[0];
+    if (!card) return 0;
+    const styles = getComputedStyle(track);
+    const gap = parseFloat(styles.columnGap || styles.gap || "14") || 14;
+    return card.getBoundingClientRect().width + gap;
+  };
+
+  const pageSize = () => (window.matchMedia("(min-width: 900px)").matches ? 3 : 1);
+
+  const scrollByCards = (dir = 1) => {
+    const step = getStep();
+    const move = step * pageSize() * dir;
+    track.scrollBy({ left: move, behavior: "smooth" });
+  };
+
+  // Dots
+  const dotCount = Math.max(1, Math.ceil(cards.length / pageSize()));
+  dotsWrap.innerHTML = "";
+  const dots = Array.from({ length: dotCount }).map((_, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "t-dot";
+    b.setAttribute("aria-label", `Go to testimonials ${i + 1}`);
+    b.addEventListener("click", () => {
+      const step = getStep();
+      track.scrollTo({ left: step * pageSize() * i, behavior: "smooth" });
+    });
+    dotsWrap.appendChild(b);
+    return b;
+  });
+
+  const setActiveDot = () => {
+    const step = getStep() || 1;
+    const idx = Math.round(track.scrollLeft / (step * pageSize()));
+    dots.forEach((d, i) => d.classList.toggle("is-active", i === Math.max(0, Math.min(idx, dots.length - 1))));
+  };
+
+  prevBtn && prevBtn.addEventListener("click", () => scrollByCards(-1));
+  nextBtn && nextBtn.addEventListener("click", () => scrollByCards(1));
+
+  track.addEventListener("scroll", () => window.requestAnimationFrame(setActiveDot));
+  window.addEventListener("resize", () => {
+    // Rebuild dots on breakpoint change
+    const newCount = Math.max(1, Math.ceil(cards.length / pageSize()));
+    if (newCount !== dots.length) location.reload(); // simple + safe for now
+  });
+
+  // Keyboard support
+  track.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") scrollByCards(1);
+    if (e.key === "ArrowLeft") scrollByCards(-1);
+  });
+
+  setActiveDot();
+})();
