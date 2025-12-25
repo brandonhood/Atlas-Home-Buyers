@@ -473,9 +473,10 @@ section{padding:44px 0}
 }
 
 /* =========================
-WHO IT’S FOR
-========================= */
+   WHO IT’S FOR / NOT FOR
+   ========================= */
 
+/* Grid */
 .fit-grid{
   display:grid;
   gap:14px;
@@ -484,11 +485,12 @@ WHO IT’S FOR
 
 @media (min-width: 900px){
   .fit-grid{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: stretch;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    align-items:stretch;
   }
 }
 
+/* Card + title */
 .fit-card{
   padding:18px;
 }
@@ -500,6 +502,7 @@ WHO IT’S FOR
   letter-spacing:-.01em;
 }
 
+/* List */
 .fit-list{
   margin:0;
   padding:0;
@@ -515,11 +518,12 @@ WHO IT’S FOR
   line-height:1.45;
 }
 
+/* Icon bubble base */
 .fit-list li::before{
   content:"";
   position:absolute;
   left:0;
-  top:2px;
+  top:0.15em;          /* consistent vertical alignment */
   width:20px;
   height:20px;
   border-radius:999px;
@@ -528,14 +532,15 @@ WHO IT’S FOR
   justify-content:center;
   font-weight:900;
   font-size:13px;
+  line-height:1;       /* prevents “wobble” */
 }
 
 /* YES bullets – green check */
 .fit-yes li::before{
   content:"✓";
-  background:rgba(22,163,74,.12); /* soft green */
+  background:rgba(22,163,74,.12);
   border:1px solid rgba(22,163,74,.35);
-  color:#16a34a; /* green-600 */
+  color:#16a34a;
 }
 
 /* NO bullets – muted gray X */
@@ -546,6 +551,7 @@ WHO IT’S FOR
   color:var(--muted);
 }
 
+/* Optional CTA under the grid (if you add it) */
 .fit-cta{
   text-align:center;
   margin-top:18px;
@@ -557,6 +563,7 @@ WHO IT’S FOR
   font-size:12px;
 }
 
+/* Green “highlight” on the first card (YES) */
 .fit-card:first-child{
   box-shadow:0 16px 40px rgba(22,163,74,.12);
   border-color:rgba(22,163,74,.25);
