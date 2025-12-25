@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sell Your House Fast | Atlas Home Buyers</title>
+  <meta name="description" content="Sell your house as-is without agent fees. Talk through your options and close on your timeline." />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="preload" href="../assets/css/styles.css" as="style" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body data-market="polk" data-config="../config/markets.json">
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand" aria-label="Atlas Home Buyers">
+        <span style="display:inline-grid;place-items:center;width:34px;height:34px;border-radius:12px;background:rgba(153,0,0,.12);">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3l9 6-9 6-9-6 9-6Z" stroke="#7a0000" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M3 9v6l9 6 9-6V9" stroke="#7a0000" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <div>
+          Atlas Home Buyers
+          <div style="font-weight:700;font-size:12px;color:#6b7280" data-bind="marketName">Jacksonville (Duval County)</div>
+        </div>
+      </div>
+      <div class="badge">No pressure • No obligation</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="kicker" data-bind="areas">Serving Jacksonville and surrounding Duval County areas.</div>
+          <h1 data-bind="h1">Sell Your House Fast in Jacksonville</h1>
+          <p class="subhead" data-bind="subhead">Sell as-is. No agent fees. Close on your timeline.</p>
+
+          <ul class="bullets" aria-label="Key benefits">
+            <li>
+              <span class="check" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#7a0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span><strong>As-is</strong> sale, even if the property needs repairs.</span>
+            </li>
+            <li>
+              <span class="check" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#7a0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span><strong>No agent fees</strong> and no showings.</span>
+            </li>
+            <li>
+              <span class="check" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#7a0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span><strong>Your timeline</strong>, from fast close to a later date.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div id="form" class="card form-card" role="region" aria-label="Request options form">
+          <p class="form-title">Start with your address</p>
+          <p class="form-sub">We’ll review your situation and explain your options. No pressure.</p>
+
+          <div id="step1">
+            <div class="field">
+              <label for="propertyAddress">Property address</label>
+              <input id="propertyAddress" name="propertyAddress" type="text" autocomplete="street-address" placeholder="123 Main St, Jacksonville, FL" />
+            </div>
+            <button class="btn" id="toStep2" data-bind="ctaPrimary">Check My Options</button>
+            <div class="micro">By submitting, you agree to be contacted about your request. <a href="../privacy.html">Privacy</a>.</div>
+
+            <div class="split">
+              <div class="pills" aria-label="Common situations">
+                <span class="pill">Repairs</span>
+                <span class="pill">Probate</span>
+                <span class="pill">Liens</span>
+                <span class="pill">Foreclosure timing</span>
+                <span class="pill">Tenants</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="step2" style="display:none;">
+            <form id="leadForm" data-thankyou="../thank-you.html">
+              <input type="hidden" id="propertyAddress2" name="propertyAddress" />
+              <input type="hidden" id="trackingJson" name="trackingJson" />
+
+              <div class="field">
+                <label for="fullName">Full name</label>
+                <input id="fullName" name="fullName" type="text" autocomplete="name" required />
+              </div>
+              <div class="field">
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required />
+              </div>
+              <div class="field">
+                <label for="email">Email (optional)</label>
+                <input id="email" name="email" type="email" autocomplete="email" />
+              </div>
+              <div class="field">
+                <label for="timeline">When are you hoping to sell?</label>
+                <select id="timeline" name="timeline" required>
+                  <option value="" selected disabled>Select one</option>
+                  <option>ASAP (0–30 days)</option>
+                  <option>1–2 months</option>
+                  <option>3+ months</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="condition">Property condition</label>
+                <select id="condition" name="condition" required>
+                  <option value="" selected disabled>Select one</option>
+                  <option>Needs major repairs</option>
+                  <option>Needs some repairs</option>
+                  <option>In decent shape</option>
+                  <option>Not sure</option>
+                </select>
+              </div>
+
+              <button class="btn" type="submit">Request My Consultation</button>
+              <div class="micro">No obligation. If it’s not a fit, we’ll tell you.</div>
+              <div class="micro"><a href="#" id="backTo1">← Go back</a></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>How it works</h2>
+        <div class="grid-3">
+          <div class="card step">
+            <div class="num">1</div>
+            <strong>Consultation</strong>
+            <p>We learn what’s going on and what you want to do next.</p>
+          </div>
+          <div class="card step">
+            <div class="num">2</div>
+            <strong>Clear options</strong>
+            <p>We explain the paths available, including cash and other solutions.</p>
+          </div>
+          <div class="card step">
+            <div class="num">3</div>
+            <strong>You decide</strong>
+            <p>You choose what works. If you proceed, we set the timeline together.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Comparison">
+      <div class="container">
+        <h2>Why some sellers choose this instead of listing</h2>
+        <div class="compare">
+          <div class="card col">
+            <h3>Sell with an agent</h3>
+            <ul>
+              <li>Repairs and prep often required</li>
+              <li>Showings and uncertainty</li>
+              <li>Fees and commissions</li>
+              <li>Timeline depends on the market</li>
+            </ul>
+          </div>
+          <div class="card col">
+            <h3>Talk to Atlas</h3>
+            <ul>
+              <li>Sell as-is</li>
+              <li>No showings</li>
+              <li>No agent fees</li>
+              <li>Pick your closing date</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Testimonials">
+      <div class="container">
+        <h2>What sellers say</h2>
+        <div id="testimonials" class="testis">
+          <div class="card quote">
+            <p>“Calm, clear, and easy. We stayed in control.”</p>
+            <div class="who">Local Seller • Florida</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="FAQ">
+      <div class="container">
+        <h2>Common questions</h2>
+        <div class="faq">
+          <details>
+            <summary>Do I have to clean or repair anything?</summary>
+            <p>No. Many sellers prefer an as-is sale. We’ll discuss the condition and what makes sense for your situation.</p>
+          </details>
+          <details>
+            <summary>How fast can you close?</summary>
+            <p>It depends on the property and your needs. Some sellers want a fast close, others need time. We’ll work around your timeline.</p>
+          </details>
+          <details>
+            <summary>Is this a pressure sales call?</summary>
+            <p>No. The goal is clarity. If it’s not a fit, we’ll tell you.</p>
+          </details>
+          <details>
+            <summary>What information do you need?</summary>
+            <p>Address, a few details about the home, and your timeline. That’s it.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="card" style="padding:16px; display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;">
+          <div>
+            <div style="font-weight:900; font-size:18px;">Ready for a clear next step?</div>
+            <div style="color:#6b7280; font-size:13px;">Start with your address and we’ll walk through your options.</div>
+          </div>
+          <button class="btn" id="heroCta" style="width:auto;" data-bind="ctaPrimary">Check My Options</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+          <div>© 2025 Atlas Home Buyers</div>
+          <div><a href="../privacy.html">Privacy</a> • <a href="../thank-you.html">Thank you</a></div>
+        </div>
+        <div style="margin-top:8px;">Phone: <span data-bind="phone">(904) 555-0123</span></div>
+      </div>
+    </footer>
+  </main>
+
+  <div class="sticky" role="region" aria-label="Sticky call to action">
+    <div class="sticky-inner">
+      <div>
+        <div style="font-weight:900;">Get your options</div>
+        <div class="small">No pressure. Start with your address.</div>
+      </div>
+      <button class="btn" id="stickyCta" data-bind="ctaPrimary">Check My Options</button>
+    </div>
+  </div>
+
+  <script src="../assets/js/app.js" defer></script>
+</body>
+</html>
