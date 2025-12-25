@@ -395,21 +395,33 @@ section{padding:44px 0}
 }
 
 /* =========================
-   PROCESS ICONS (CLEAN)
+/* =========================
+   PROCESS (GRID + ICONS)
 ========================= */
 
-/* Give the row room so icons never collide with section subtitle */
+/* Always keep the process cards in a grid */
 .cards.three{
-  padding-top: 22px;
+  display:grid;
+  gap:14px;
+  padding-top:22px; /* room for icon above cards */
+}
+
+/* 3 columns on desktop */
+@media (min-width: 900px){
+  .cards.three{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+  }
 }
 
 /* Card layout + positioning context */
-.process-card{
+.card.process-card{
   position:relative;
-  padding-top: 34px; /* space for icon */
+  padding-top:34px; /* space for icon */
+  overflow:visible; /* make sure icon isn't clipped */
 }
 
-/* Icon badge anchored to the card (no margin hacks) */
+/* Icon badge anchored to the card */
 .process-icon{
   position:absolute;
   top:-18px;
