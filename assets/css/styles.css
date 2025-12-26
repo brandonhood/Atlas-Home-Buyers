@@ -1316,16 +1316,10 @@ footer a{color:var(--muted)}
 }
 
 .ty-quote{
-  background: var(--successBg);
-  border: 1px solid var(--successLine);
-  border-radius: 14px;
-  padding: 14px;
+  background: var(--successBg);          /* light green */
+  border: 1px solid var(--successLine);  /* green border */
 }
 
-.ty-quote-text{
-  color: var(--text);
-}
-
-.ty-stars{
-  color: var(--success);
+.ty-quote-who{
+  color: var(--successDark);
 }
