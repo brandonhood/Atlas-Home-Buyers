@@ -1,102 +1,94 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thanks — Next Steps | Atlas Home Buyers</title>
+  <meta name="robots" content="noindex, nofollow" />
 
-  <title>Request Received | Atlas Home Buyers</title>
-  <meta name="description" content="Thanks — we received your request. Here’s what happens next and how to get your cash offer quickly." />
-
-  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="assets/css/styles.css" />
-
-  <!-- OPTIONAL: If you’re using GA4 gtag directly (not only GTM), keep this.
-       If GA is only via GTM, remove this block and track in GTM instead. -->
-  <script>
-    // Fire ONLY on thank-you page (cleanest conversion signal)
-    window.dataLayer = window.dataLayer || [];
-  </script>
 </head>
 
 <body>
 
+  <!-- Optional: keep your existing header if you want site-wide continuity
   <header class="header">
-    <div class="container">
-      <div class="header-inner">
-        <a class="brand" href="/" aria-label="Atlas Home Buyers">
-          <img src="assets/img/atlas-logo.png" alt="Atlas Home Buyers" />
-        </a>
-
-        <a class="call pill" href="tel:9049449419" aria-label="Call Atlas Home Buyers">
-          📞 <strong>(904) 944-9419</strong>
-        </a>
-      </div>
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <img src="assets/img/logo.png" alt="Atlas Home Buyers" />
+      </a>
+      <a class="call pill" href="tel:+19049449419"><strong>Call:</strong> (904) 944-9419</a>
     </div>
   </header>
+  -->
 
-  <main class="hero" style="padding-top: 26px;">
+  <main class="ty-page">
     <div class="container">
-      <div class="hero-inner">
-        <div class="hero-copy">
 
-          <div class="hero-eyebrow">Request Received</div>
-
-          <h1>You're All Set: Here’s What Happens Next</h1>
-
-          <p class="subhead">You'll receive a text from our team shortly.<br> One of our local home buying specialists will then call you to discuss a few details and make sure we understand your situation.</p>
-    
-          <!-- Credibility / What to expect -->
-  <section aria-label="What to expect">
-    <div class="container">
-      <div class="fit-grid">
-        <div class="card fit-card fit-yes">
-          <h3 class="fit-title">We’ll clarify:</h3>
-          <ul class="fit-list">
-            <li>Property condition (any condition is fine)</li>
-            <li>Your ideal timeline</li>
-            <li>Any liens or financial pressure (if applicable)</li>
-            <li>Occupancy (vacant, tenant, owner-occupied)</li>
-          </ul>
-        </div>
-
-        <div class="card fit-card fit-no">
-          <h3 class="fit-title">We won’t do:</h3>
-          <ul class="fit-list">
-            <li>Pushy sales tactics</li>
-            <li>Surprise fees or commissions</li>
-            <li>Showings or open houses</li>
-            <li>Repair requests or cleanup demands</li>
-          </ul>
-        </div>
-      </div>
-
-  </section>
-
-      <section class="ty-grid">
-
-        <!-- LEFT: Calendar -->
-        <div class="ty-card ty-calendar">
-                  <p class="ty-sub">
-            Or - If you’d like to to book in a specific time, feel free to do so below.
+      <!-- HERO / CONFIRMATION -->
+      <section class="ty-hero card">
+        <div class="ty-hero-top">
+          <div class="ty-badge" aria-hidden="true">✅ Request Received</div>
+          <h1 class="ty-title">Thanks — Next Step: Pick a Time</h1>
+          <p class="ty-sub">
+            Your details are in. Book a quick call below so we can confirm a few specifics and walk through your options.
           </p>
 
-        
-          <!-- GHL / calendar widget -->
-          <iframe
-            class="ty-iframe"
-            src="https://link.unapologeticresultsrei.com/widget/booking/3ocldyF3ZLDK9PvGxHgM"
-            scrolling="no"
-            loading="lazy"
-            id="3ocldyF3ZLDK9PvGxHgM_1766781766306">
-          </iframe>
-          <script src="https://link.unapologeticresultsrei.com/js/form_embed.js" type="text/javascript"></script>
+          <div class="ty-actions">
+            <a class="btn" href="#schedule">Schedule My Call</a>
+            <a class="btn secondary" href="tel:+19049449419">Call Now: (904) 944-9419</a>
+          </div>
 
+          <div class="ty-micro">
+            No pressure. No obligation. Just a straightforward conversation to clarify what makes sense.
+          </div>
+        </div>
+      </section>
 
-        <!-- RIGHT: Trust / Reinforcement -->
-        <aside class="offer-trust" aria-label="Why homeowners choose Atlas">
+      <!-- MAIN: CALENDAR + TRUST (SIDE BY SIDE) -->
+      <section id="schedule" class="ty-grid">
+        <!-- LEFT: CALENDAR CARD -->
+        <div class="card ty-calendar">
+          <h2 class="ty-section-title">Schedule Your Seller Consultation</h2>
+          <p class="ty-section-sub">
+            Choose a time that works for you. We’ll review your property, timeline, and the simplest path forward.
+          </p>
+
+          <div class="ty-inline-cta">
+            <div class="ty-inline-note">
+              Prefer to talk now? Call <a href="tel:+19049449419">(904) 944-9419</a>
+            </div>
+          </div>
+
+          <!-- Calendar embed -->
+          <div class="ty-embed">
+            <iframe
+              src="https://link.unapologeticresultsrei.com/widget/booking/3ocldyF3ZLDK9PvGxHgM"
+              style="width: 100%; border: none; overflow: hidden;"
+              scrolling="no"
+              loading="lazy"
+              id="3ocldyF3ZLDK9PvGxHgM_1766781766306"></iframe>
+            <script src="https://link.unapologeticresultsrei.com/js/form_embed.js" type="text/javascript"></script>
+          </div>
+
+          <div class="ty-after">
+            <div class="ty-nextsteps">
+              <h3 class="ty-mini-title">What happens next</h3>
+              <ol class="ty-steps">
+                <li><strong>Confirm details:</strong> we’ll verify the property info and your timing.</li>
+                <li><strong>Walk through options:</strong> we’ll explain the cleanest way to move forward.</li>
+                <li><strong>Offer:</strong> if it’s a fit, we’ll outline a clear cash offer and next steps.</li>
+              </ol>
+              <p class="ty-fine">
+                If you don’t see a good time, call us — we can work around your schedule.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: EXACT TRUSTED BUYER BLOCK (MATCHING YOUR PRIOR PAGE) -->
+        <aside class="offer-trust ty-trust" aria-label="Trusted buyer reassurance">
           <h3 class="offer-trust-title">A Trusted Local Option for Jacksonville Homeowners</h3>
 
           <ul class="offer-trust-list">
@@ -109,61 +101,48 @@
           </ul>
 
           <div class="offer-badges" aria-label="Trust badges">
-            <img src="assets/img/google-reviews.png" alt="Google Reviews" loading="lazy" />
-            <img src="assets/img/bbb-business.png" alt="Better Business Bureau Accredited Business" loading="lazy" />
+            <!-- Use your existing badge assets -->
+            <img src="assets/img/google-reviews.png" alt="Google Reviews" loading="lazy">
+            <img src="assets/img/bbb-business.png" alt="BBB Accredited Business" loading="lazy">
+          </div>
+
+          <!-- Reinforcing testimonial (short + punchy) -->
+          <div class="ty-quote">
+            <div class="ty-stars" aria-hidden="true">★★★★★</div>
+            <p class="ty-quote-text">
+              “Efficient, direct, and smooth from beginning to end. Great communication.”
+            </p>
+            <div class="ty-quote-who"><strong>Rick O.</strong> · Jacksonville, FL</div>
+          </div>
+
+          <div class="ty-note">
+            Not sure you’re ready yet? This call is simply to clarify your options — you decide what happens next.
           </div>
         </aside>
-
       </section>
-<p class="context-bridge" style="margin-top: 14px;">
-            Important: If you don’t see our call, check your email, texts, or voicemail.
-          </p>
+
+      <!-- OPTIONAL: SECONDARY REASSURANCE STRIP (keeps them moving) -->
+      <section class="ty-reassure card">
+        <h2 class="ty-section-title">Quick reminders</h2>
+        <div class="ty-reassure-grid">
+          <div class="ty-reassure-item">
+            <h3 class="ty-mini-title">No repairs required</h3>
+            <p>We buy as-is. You don’t need to clean, fix, or prep the house.</p>
+          </div>
+          <div class="ty-reassure-item">
+            <h3 class="ty-mini-title">Your info stays private</h3>
+            <p>We only use your details to follow up about your request.</p>
+          </div>
+          <div class="ty-reassure-item">
+            <h3 class="ty-mini-title">Fast timeline options</h3>
+            <p>If timing matters, we can move quickly once details are confirmed.</p>
+          </div>
+        </div>
+      </section>
+
     </div>
   </main>
 
-         <!-- As Seen In -->
-  <section class="seen" aria-label="As seen in">
-    <div class="container">
-      <h5>As Seen In</h5>
-      <div class="logo-grid">
-        <div class="logo-item"><img loading="lazy" src="assets/img/logo-fox.svg" alt="FOX" /></div>
-        <div class="logo-item"><img loading="lazy" src="assets/img/logo-nbc.svg" alt="NBC" /></div>
-        <div class="logo-item"><img loading="lazy" src="assets/img/logo-abc.svg" alt="ABC" /></div>
-        <div class="logo-item"><img loading="lazy" src="assets/img/logo-cbs.svg" alt="CBS" /></div>
-        <div class="logo-item"><img loading="lazy" src="assets/img/logo-benzinga.svg" alt="Benzinga" /></div>
-      </div>
-    </div>
-  </section>
-
-
-
-          <!-- FOOTER BAND -->
-  <section class="footer-band">
-    <footer>
-      <div class="container">
-        <div class="footer-grid">
-
-          <div class="footer-brand" style="display:flex; gap:14px; align-items:flex-start;">
-            <img src="assets/img/atlas-logo.png" alt="Atlas Home Buyers" style="height:42px; width:auto;" />
-            <div class="footer-info">
-              <strong>Atlas Home Buyers</strong>
-              <p>Jacksonville, FL</p>
-              <p><a href="tel:19049449419">(904) 944-9419</a></p>
-            </div>
-          </div>
-
-          <div>
-            <p>This site is for informational purposes only and does not constitute legal or financial advice.</p>
-            <p>All offers subject to verification and property review.</p>
-            <p><a href="/privacy.html">Privacy Policy</a></p>
-          </div>
-
-        </div>
-      </div>
-    </footer>
-  </section>
-        
-  <!-- Keep your main JS if you want -->
   <script src="assets/js/app.js" defer></script>
 </body>
 </html>
