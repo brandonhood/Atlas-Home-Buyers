@@ -450,27 +450,48 @@ section{padding:44px 0}
   color:var(--text);
 }
 
-*/
+/* TESTIMONIALS (connected band into form) */
 .testimonials{
+  position:relative;
   background:linear-gradient(to bottom, #fafafa 0%, #ffffff 88%);
-  border-top:1px solid var(--line);
-  border-bottom:none;     /* removes the divider line */
-  padding-bottom:28px;    /* tighter handoff to next section */
+  border-top:none;
+  border-bottom:none;
+  padding-top:56px;
+  padding-bottom:28px;
 }
 
-/* Tighten spacing between testimonials and the next section */
+/* Centered divider BEFORE testimonials */
+.testimonials::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:140px;
+  height:1px;
+  background:rgba(229,231,235,.9);
+}
+
+/* Tighten spacing between testimonials and the next section (form) */
 .testimonials + section{
-  padding-top:18px; /* was 44px */
+  padding-top:24px; /* was 44px */
 }
 
-/* Optional: if you want it even tighter on desktop */
+/* Optional tighter on desktop */
 @media (min-width:900px){
   .testimonials + section{
-    padding-top:10px;
+    padding-top:18px;
   }
 }
-.testimonials .testimonial-intro{margin-bottom:18px}
-.testimonials .testimonial-intro .section-sub{margin:0 auto 6px}
+
+/* Existing testimonial text styles */
+.testimonials .testimonial-intro{
+  margin-bottom:18px;
+}
+
+.testimonials .testimonial-intro .section-sub{
+  margin:0 auto 6px;
+}
 
 .testimonials .testimonial-micro{
   margin:0;
@@ -480,6 +501,7 @@ section{padding:44px 0}
   line-height:1.45;
 }
 
+/* Slight spacing polish for form text */
 .fineprint{ margin-top:12px; }
 .consent{ margin-top:8px; }
 
