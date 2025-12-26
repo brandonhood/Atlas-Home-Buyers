@@ -432,6 +432,15 @@ section{padding:44px 0}
   color:var(--text);
 }
 
+.context-bridge{
+  margin:18px auto 0;
+  max-width:720px;
+  text-align:center;
+  font-size:14px;
+  color:var(--muted);
+  font-style:italic;
+}
+
 /* SITUATIONS BAND (Process → Is This For Me bridge) */
 .situations{
   background:#ffffff;
