@@ -1286,7 +1286,8 @@ footer a{color:var(--muted)}
   color: var(--muted);
   font-style: italic;
 }
-/* THANK YOU – proof snippets under badges */
+
+/* THANK YOU – proof snippets under badges (GREEN, consistent) */
 .ty-proof{
   margin-top: 14px;
   padding-top: 14px;
@@ -1296,8 +1297,8 @@ footer a{color:var(--muted)}
 }
 
 .ty-proof-item{
-  background: rgba(153,0,0,.04);
-  border: 1px solid rgba(153,0,0,.10);
+  background: var(--successBg);
+  border: 1px solid var(--successLine);
   border-radius: 14px;
   padding: 12px;
 }
@@ -1312,12 +1313,13 @@ footer a{color:var(--muted)}
 .ty-proof-who{
   margin-top: 8px;
   font-size: 12px;
-  color: var(--muted);
+  color: var(--successDark);
 }
 
+/* If you still use .ty-quote anywhere, keep it consistent too */
 .ty-quote{
-  background: var(--successBg);          /* light green */
-  border: 1px solid var(--successLine);  /* green border */
+  background: var(--successBg);
+  border: 1px solid var(--successLine);
 }
 
 .ty-quote-who{
