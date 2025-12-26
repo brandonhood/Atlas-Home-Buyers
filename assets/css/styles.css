@@ -969,50 +969,47 @@ details p{
   padding:56px 0 44px;
 }
 
-/* FAQ accordion layout */
-.faq details summary {
-  display: flex;
-  align-items: center;
-  gap: 14px;
+/* FAQ accordion — LEFT icon (+ / -) */
+.faq summary {
+  position: relative;
+  padding-left: 52px; /* room for icon on left */
+  padding-right: 16px;
   cursor: pointer;
   font-weight: 800;
-  padding: 14px 16px;
-  list-style: none;
 }
 
-/* Remove default marker */
-.faq details summary::-webkit-details-marker {
+/* remove default marker */
+.faq summary::-webkit-details-marker {
   display: none;
 }
 
-/* Icon box */
-.faq-icon {
-  flex-shrink: 0;
+/* left-side icon */
+.faq summary::before {
+  content: "+";
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
   width: 28px;
   height: 28px;
-  border-radius: 8px;
-  display: inline-flex;
+  border-radius: 8px; /* square-ish like your reference */
+  display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 900;
-  font-size: 16px;
+  line-height: 1;
   color: var(--brand);
   background: rgba(153,0,0,.08);
-  border: 1px solid rgba(153,0,0,.25);
+  border: 1px solid rgba(153,0,0,.18);
   transition: transform .2s ease, background .2s ease;
 }
 
-/* Question text */
-.faq-question {
-  flex: 1;
-  color: var(--text);
-}
-
-/* Open state: rotate + into – */
-.faq details[open] .faq-icon {
-  transform: rotate(45deg);
+/* open state = minus */
+.faq details[open] summary::before {
+  content: "–";
   background: rgba(153,0,0,.14);
 }
+
 /* FOOTER BAND */
 .footer-band{
   border-top:1px solid var(--line);
