@@ -63,8 +63,6 @@
     keys.forEach((k) => {
       const v = params.get(k);
       if (!v) return;
-
-      // prevent duplicates if script runs twice
       if (form.querySelector(`input[name="${k}"]`)) return;
 
       const input = document.createElement("input");
@@ -88,14 +86,14 @@
     });
   })();
 
-  // Testimonials carousel (4-ish dots everywhere, grouped by 3 cards)
+  // Testimonials carousel (dots + swipe/scroll, grouped by 3 cards)
   (function testimonialsCarousel() {
     const track = document.getElementById("tTrack");
     const dotsWrap = document.getElementById("tDots");
     const viewport = document.querySelector(".t-viewport");
     if (!track || !dotsWrap) return;
 
-    const GROUP = 3;
+    const GROUP = 3; // "desktop sets of 3" keeps dots consistent
 
     const getGap = () => {
       const styles = getComputedStyle(track);
@@ -143,7 +141,7 @@
       dots = Array.from({ length: count }).map((_, i) => {
         const b = document.createElement("button");
         b.type = "button";
-        b.className = "t-dot";
+        b.className = "t-dot"; // <-- your red oblong CSS hooks this
         b.setAttribute("aria-label", `Go to testimonial set ${i + 1}`);
         b.addEventListener("click", () => goToPage(i));
         dotsWrap.appendChild(b);
@@ -153,22 +151,35 @@
       setActiveDot();
     };
 
+    // Build dots after layout is ready
+    const init = () => {
+      buildDots();
+      setActiveDot();
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init, { once: true });
+    } else {
+      init();
+    }
+
     let raf = null;
     track.addEventListener("scroll", () => {
       if (raf) cancelAnimationFrame(raf);
       raf = requestAnimationFrame(setActiveDot);
     });
 
-    window.addEventListener("resize", () => setActiveDot());
+    window.addEventListener("resize", () => {
+      // re-build in case card widths change
+      buildDots();
+      setActiveDot();
+    });
 
     (viewport || track).addEventListener("keydown", (e) => {
       if (!dots.length) return;
-      if (e.key === "ArrowRight")
-        goToPage(Math.min(getPageIndex() + 1, dots.length - 1));
-      if (e.key === "ArrowLeft")
-        goToPage(Math.max(getPageIndex() - 1, 0));
+      if (e.key === "ArrowRight") goToPage(Math.min(getPageIndex() + 1, dots.length - 1));
+      if (e.key === "ArrowLeft") goToPage(Math.max(getPageIndex() - 1, 0));
     });
-
-    buildDots();
   })();
+
 })();
