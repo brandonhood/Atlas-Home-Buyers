@@ -1286,3 +1286,31 @@ footer a{color:var(--muted)}
   color: var(--muted);
   font-style: italic;
 }
+/* THANK YOU – proof snippets under badges */
+.ty-proof{
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(229,231,235,.7);
+  display: grid;
+  gap: 12px;
+}
+
+.ty-proof-item{
+  background: rgba(153,0,0,.04);
+  border: 1px solid rgba(153,0,0,.10);
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.ty-proof-text{
+  margin: 6px 0 0;
+  color: var(--text);
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+
+.ty-proof-who{
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
