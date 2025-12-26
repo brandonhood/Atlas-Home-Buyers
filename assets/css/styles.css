@@ -1033,84 +1033,235 @@ footer a{color:var(--muted)}
   .footer-grid{grid-template-columns:1fr 1fr}
 }
 
-.ty-schedule {
-  padding: 64px 0;
+/* =========================
+   THANK YOU PAGE
+   ========================= */
+
+.ty-page{
+  padding-top: 96px; /* matches fixed header offset if header is present */
+  padding-bottom: 64px;
+  background: #fafafa;
 }
 
-.ty-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 32px;
-  align-items: start;
-}
-
-.ty-calendar h2 {
-  margin-bottom: 6px;
-}
-
-.ty-sub {
-  color: #6b7280;
+.ty-hero{
+  padding: 22px;
+  text-align: center;
   margin-bottom: 18px;
 }
 
-.ty-micro {
+.ty-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  letter-spacing:.12em;
+  font-weight:900;
+  color: var(--successDark);
+  background: var(--successBg);
+  border:1px solid var(--successLine);
+  padding: 6px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  margin: 0 auto 10px;
+}
+
+.ty-title{
+  margin: 0 0 8px;
+  font-size: 32px;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+}
+
+.ty-sub{
+  margin: 0 auto 14px;
+  max-width: 72ch;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.ty-actions{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top: 10px;
+}
+
+.ty-actions .btn{ width:auto; min-width: 220px; }
+
+.ty-micro{
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.ty-grid{
+  display:grid;
+  gap: 18px;
+  align-items: start;
+  margin-top: 16px;
+}
+
+@media (min-width: 900px){
+  .ty-grid{
+    grid-template-columns: minmax(0, 760px) minmax(0, 420px);
+    justify-content:center;
+    gap: 22px;
+  }
+}
+
+/* Calendar card */
+.ty-calendar{
+  padding: 18px;
+}
+
+.ty-section-title{
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -.01em;
+}
+
+.ty-section-sub{
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.ty-inline-cta{
+  margin: 10px 0 14px;
+}
+
+.ty-inline-note{
+  font-size: 14px;
+  color: var(--muted);
+}
+.ty-inline-note a{
+  color: var(--brand);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.ty-embed{
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+}
+
+/* Give the embed enough height so it doesn't look "cut off" */
+.ty-embed iframe{
+  display:block;
+  width:100%;
+  min-height: 760px;
+}
+
+.ty-after{
+  margin-top: 14px;
+  border-top: 1px solid rgba(229,231,235,.7);
+  padding-top: 14px;
+}
+
+.ty-mini-title{
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: -.01em;
+}
+
+.ty-steps{
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text);
+}
+.ty-steps li{
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.ty-fine{
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Trust card: reuse offer-trust styles but keep spacing tight */
+.ty-trust{
+  height: auto;
+}
+
+/* Mini testimonial inside trust */
+.ty-quote{
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(229,231,235,.7);
+}
+
+.ty-stars{
+  color: var(--star);
+  font-weight: 900;
+  letter-spacing: .08em;
+  font-size: 12px;
+}
+
+.ty-quote-text{
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.ty-quote-who{
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Note block */
+.ty-note{
   margin-top: 12px;
-  font-size: 14px;
-  color: #6b7280;
-}
-
-.ty-trust {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
-  padding: 24px;
-}
-
-.ty-trust h3 {
-  margin-bottom: 14px;
-}
-
-.ty-checklist {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 18px;
-}
-
-.ty-checklist li {
-  padding-left: 28px;
-  margin-bottom: 10px;
-  position: relative;
-}
-
-.ty-checklist li::before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: #16a34a;
-  font-weight: 700;
-}
-
-.ty-cred {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  margin-top: 16px;
-}
-
-.ty-cred img {
-  max-height: 36px;
-}
-
-.ty-note {
-  margin-top: 16px;
-  font-size: 14px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(17,24,39,.03);
+  border: 1px solid rgba(17,24,39,.06);
   color: #374151;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+/* Secondary reassurance */
+.ty-reassure{
+  margin-top: 18px;
+  padding: 18px;
+}
+
+.ty-reassure-grid{
+  display:grid;
+  gap: 12px;
+  margin-top: 10px;
+}
+@media (min-width: 900px){
+  .ty-reassure-grid{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.ty-reassure-item{
+  border: 1px solid rgba(229,231,235,.8);
+  border-radius: 14px;
+  padding: 14px;
+  background: #fff;
+}
+.ty-reassure-item p{
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
 }
 
 /* Mobile */
-@media (max-width: 900px) {
-  .ty-grid {
-    grid-template-columns: 1fr;
-  }
+@media (max-width: 900px){
+  .ty-title{ font-size: 26px; }
+  .ty-embed iframe{ min-height: 880px; }
+  .ty-actions .btn{ width: 100%; }
 }
