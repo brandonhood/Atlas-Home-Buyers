@@ -957,22 +957,3 @@ footer a{color:var(--muted)}
   .footer-grid{grid-template-columns:1fr 1fr}
 }
 
-/* STICKY CTA (MOBILE) */
-.sticky-cta{
-  position:fixed;
-  left:0; right:0; bottom:0;
-  z-index:60;
-  padding:10px 12px;
-  background:rgba(255,255,255,.92);
-  border-top:1px solid rgba(229,231,235,.9);
-  backdrop-filter:saturate(180%) blur(10px);
-}
-
-.sticky-cta .btn{
-  height:52px;
-  font-size:14px;
-}
-
-@media (min-width:992px){
-  .sticky-cta{display:none}
-}
