@@ -261,35 +261,43 @@ img{max-width:100%;height:auto;display:block}
   line-height: 1.3;
 }
 
-@media (max-width: 640px){
-  .hero-offer-micro{
-    text-align: center;
-  }
+/* Bottom stack: divider + tight vertical rhythm */
+.hero-offer-bottom{
+  border-top:1px solid rgba(229,231,235,.45);
+  padding-top:8px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px; /* microcopy to logos spacing */
 }
 
+/* Microcopy centered */
+.hero-offer-micro{
+  margin:0;
+  font-size:12px;
+  color:var(--muted);
+  text-align:center;
+  line-height:1.2;
+}
+
+/* Logos tuck under microcopy and stay within its visual width */
 .hero-offer-trust{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:4px;
+  width:100%;
+  max-width:520px;          /* keeps logos inside the microcopy “edges” */
+  display:flex;
   align-items:center;
-  justify-items:center;
-  padding-top:4px;
-  border-top:1px solid rgba(229,231,235,.45);
+  justify-content:space-between;
+  gap:16px;
+  padding:0;
+  border-top:none;          /* divider is now on hero-offer-bottom */
 }
 
 .hero-offer-trust img{
-  height:44px;
-  max-width:100%;
+  height:40px;
   width:auto;
   object-fit:contain;
   display:block;
   opacity:.95;
-}
-
-.hero-micro{
-  margin-top:10px;
-  color:var(--muted);
-  font-size:13px;
 }
 
 /* HERO responsive */
