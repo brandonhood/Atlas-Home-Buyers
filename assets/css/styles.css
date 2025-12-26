@@ -736,11 +736,9 @@ section{padding:44px 0}
   flex-direction:column;
 }
 
-/* Sticky only if you want it. NOTE: Sticky and equal-height can conflict visually. */
 @media (min-width: 900px){
   .offer-trust{
-    position:relative; /* change from sticky to keep equal height */
-    top:auto;
+    position:static;
   }
 }
 
