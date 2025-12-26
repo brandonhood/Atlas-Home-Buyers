@@ -88,85 +88,87 @@
     });
   })();
 
-  // Testimonials carousel (dots + swipe/scroll, no arrows)
   // Testimonials carousel (4-ish dots everywhere, grouped by 3 cards)
-(function testimonialsCarousel() {
-  const track = document.getElementById("tTrack");
-  const dotsWrap = document.getElementById("tDots");
-  const viewport = document.querySelector(".t-viewport");
-  if (!track || !dotsWrap) return;
+  (function testimonialsCarousel() {
+    const track = document.getElementById("tTrack");
+    const dotsWrap = document.getElementById("tDots");
+    const viewport = document.querySelector(".t-viewport");
+    if (!track || !dotsWrap) return;
 
-  const GROUP = 3; // keep dots consistent (and match desktop “3 per view”)
+    const GROUP = 3;
 
-  const getGap = () => {
-    const styles = getComputedStyle(track);
-    const gap = parseFloat(styles.gap || styles.columnGap || "14");
-    return Number.isFinite(gap) ? gap : 14;
-  };
+    const getGap = () => {
+      const styles = getComputedStyle(track);
+      const gap = parseFloat(styles.gap || styles.columnGap || "14");
+      return Number.isFinite(gap) ? gap : 14;
+    };
 
-  const getStep = () => {
-    const card = track.querySelector(".t-card");
-    if (!card) return 0;
-    return card.getBoundingClientRect().width + getGap();
-  };
+    const getStep = () => {
+      const card = track.querySelector(".t-card");
+      if (!card) return 0;
+      return card.getBoundingClientRect().width + getGap();
+    };
 
-  const getCardIndex = () => {
-    const step = getStep() || 1;
-    return Math.round(track.scrollLeft / step);
-  };
+    const getCardIndex = () => {
+      const step = getStep() || 1;
+      return Math.round(track.scrollLeft / step);
+    };
 
-  const getPageIndex = () => Math.floor(getCardIndex() / GROUP);
+    const getPageIndex = () => Math.floor(getCardIndex() / GROUP);
 
-  const goToPage = (idx) => {
-    const step = getStep();
-    if (!step) return;
-    track.scrollTo({ left: step * GROUP * idx, behavior: "smooth" });
-  };
+    const goToPage = (idx) => {
+      const step = getStep();
+      if (!step) return;
+      track.scrollTo({ left: step * GROUP * idx, behavior: "smooth" });
+    };
 
-  let dots = [];
+    let dots = [];
 
-  const setActiveDot = () => {
-    if (!dots.length) return;
-    const idx = getPageIndex();
-    const clamped = Math.max(0, Math.min(idx, dots.length - 1));
-    dots.forEach((d, i) => {
-      const active = i === clamped;
-      d.classList.toggle("is-active", active);
-      d.setAttribute("aria-current", active ? "true" : "false");
+    const setActiveDot = () => {
+      if (!dots.length) return;
+      const idx = getPageIndex();
+      const clamped = Math.max(0, Math.min(idx, dots.length - 1));
+      dots.forEach((d, i) => {
+        const active = i === clamped;
+        d.classList.toggle("is-active", active);
+        d.setAttribute("aria-current", active ? "true" : "false");
+      });
+    };
+
+    const buildDots = () => {
+      const cards = Array.from(track.querySelectorAll(".t-card"));
+      const count = Math.max(1, Math.ceil(cards.length / GROUP));
+
+      dotsWrap.innerHTML = "";
+      dots = Array.from({ length: count }).map((_, i) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "t-dot";
+        b.setAttribute("aria-label", `Go to testimonial set ${i + 1}`);
+        b.addEventListener("click", () => goToPage(i));
+        dotsWrap.appendChild(b);
+        return b;
+      });
+
+      setActiveDot();
+    };
+
+    let raf = null;
+    track.addEventListener("scroll", () => {
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(setActiveDot);
     });
-  };
 
-  const buildDots = () => {
-    const cards = Array.from(track.querySelectorAll(".t-card"));
-    const count = Math.max(1, Math.ceil(cards.length / GROUP));
+    window.addEventListener("resize", () => setActiveDot());
 
-    dotsWrap.innerHTML = "";
-    dots = Array.from({ length: count }).map((_, i) => {
-      const b = document.createElement("button");
-      b.type = "button";
-      b.className = "t-dot";
-      b.setAttribute("aria-label", `Go to testimonial set ${i + 1}`);
-      b.addEventListener("click", () => goToPage(i));
-      dotsWrap.appendChild(b);
-      return b;
+    (viewport || track).addEventListener("keydown", (e) => {
+      if (!dots.length) return;
+      if (e.key === "ArrowRight")
+        goToPage(Math.min(getPageIndex() + 1, dots.length - 1));
+      if (e.key === "ArrowLeft")
+        goToPage(Math.max(getPageIndex() - 1, 0));
     });
 
-    setActiveDot();
-  };
-
-  let raf = null;
-  track.addEventListener("scroll", () => {
-    if (raf) cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(setActiveDot);
-  });
-
-  window.addEventListener("resize", () => setActiveDot());
-
-  (viewport || track).addEventListener("keydown", (e) => {
-    if (!dots.length) return;
-    if (e.key === "ArrowRight") goToPage(Math.min(getPageIndex() + 1, dots.length - 1));
-    if (e.key === "ArrowLeft") goToPage(Math.max(getPageIndex() - 1, 0));
-  });
-
-  buildDots();
+    buildDots();
+  })();
 })();
