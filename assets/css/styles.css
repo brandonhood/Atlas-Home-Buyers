@@ -634,32 +634,32 @@ section{padding:44px 0}
 
 .t-dots{
   display:flex;
-  gap:10px;
   justify-content:center;
+  gap:10px;
   margin-top:14px;
 }
 
 .t-dot{
-  width:8px;
-  height:8px;
+  width:22px;
+  height:7px;
   border-radius:999px;
-  border:1px solid rgba(107,114,128,.35);
-  background:rgba(107,114,128,.15);
+  border:1px solid rgba(153,0,0,.28);
+  background:rgba(153,0,0,.14);
   cursor:pointer;
-  transition:all .2s ease;
+  transition:transform .12s ease, background .2s ease, border-color .2s ease;
 }
+
+.t-dot:hover{ transform:translateY(-1px); }
 
 .t-dot.is-active{
-  background:#16a34a; /* trust green */
-  border-color:#16a34a;
+  background:var(--brand);
+  border-color:var(--brand);
+  box-shadow:0 10px 18px rgba(153,0,0,.18);
 }
 
-.t-dot{
-  appearance:none;
-  -webkit-appearance:none;
-  border:1px solid rgba(107,114,128,.35);
-  background:rgba(107,114,128,.15);
-  padding:0;
+.t-dot:focus-visible{
+  outline:none;
+  box-shadow:0 0 0 3px rgba(153,0,0,.22);
 }
 
 /* ======================================
