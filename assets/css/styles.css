@@ -634,9 +634,9 @@ section{padding:44px 0}
 
 .t-dots{
   display:flex;
-  gap:8px;
+  gap:10px;
   justify-content:center;
-  margin-top:10px;
+  margin-top:14px;
 }
 
 .t-dot{
@@ -644,13 +644,14 @@ section{padding:44px 0}
   height:8px;
   border-radius:999px;
   border:1px solid rgba(107,114,128,.35);
-  background:rgba(107,114,128,.12);
+  background:rgba(107,114,128,.15);
   cursor:pointer;
+  transition:all .2s ease;
 }
 
 .t-dot.is-active{
-  background:rgba(153,0,0,.18);
-  border-color:rgba(153,0,0,.35);
+  background:#16a34a; /* trust green */
+  border-color:#16a34a;
 }
 
 /* ======================================
