@@ -654,6 +654,14 @@ section{padding:44px 0}
   border-color:#16a34a;
 }
 
+.t-dot{
+  appearance:none;
+  -webkit-appearance:none;
+  border:1px solid rgba(107,114,128,.35);
+  background:rgba(107,114,128,.15);
+  padding:0;
+}
+
 /* ======================================
    OFFER SECTION (form + trust as a unit)
 ====================================== */
