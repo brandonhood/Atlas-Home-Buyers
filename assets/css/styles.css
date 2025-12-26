@@ -685,6 +685,108 @@ section{padding:44px 0}
   border-color:rgba(22,163,74,.25);
 }
 
+/* =========================
+   OFFER GRID (FORM + TRUST)
+   Drop this ABOVE your FORM block
+========================= */
+
+.offer-grid{
+  display:grid;
+  gap:18px;
+  align-items:start;
+}
+
+/* Desktop: 2 columns */
+@media (min-width: 900px){
+  .offer-grid{
+    grid-template-columns: 1.15fr .85fr; /* form wider than bullets */
+    gap:22px;
+  }
+}
+
+/* Left column (form card) */
+.offer-form{
+  max-width:none; /* overrides .form-wrap max-width so it can sit in grid */
+}
+
+/* Right column (trust bullets panel) */
+.offer-trust{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:18px;
+}
+
+/* Sticky on desktop so bullets stay visible while form scrolls */
+@media (min-width: 900px){
+  .offer-trust{
+    position:sticky;
+    top:96px; /* aligns with your fixed header spacing */
+  }
+}
+
+.offer-trust-title{
+  margin:0 0 12px;
+  font-size:18px;
+  line-height:1.2;
+  font-weight:900;
+  letter-spacing:-.01em;
+}
+
+.offer-trust-list{
+  margin:0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:10px;
+}
+
+.offer-trust-list li{
+  position:relative;
+  padding-left:30px;
+  font-size:14px;
+  line-height:1.45;
+  color:var(--text);
+}
+
+.offer-trust-list li::before{
+  content:"✓";
+  position:absolute;
+  left:0;
+  top:0.05em;
+  width:20px;
+  height:20px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  font-size:13px;
+  background:rgba(22,163,74,.12);
+  border:1px solid rgba(22,163,74,.35);
+  color:#16a34a;
+}
+
+/* Optional badges row */
+.offer-badges{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  justify-content:flex-start;
+  margin-top:14px;
+  padding-top:14px;
+  border-top:1px solid rgba(229,231,235,.7);
+}
+
+.offer-badges img{
+  height:34px;
+  width:auto;
+  object-fit:contain;
+  display:block;
+  opacity:.95;
+}
+
 /* FORM */
 .form-wrap{
   max-width:760px;
