@@ -253,22 +253,14 @@ img{max-width:100%;height:auto;display:block}
   font-size:14px;
 }
 
-.hero-offer-micro{
-  margin-top: 8px;
-  font-size: 12px;
-  color: var(--muted);
-  text-align: center;
-  line-height: 1.3;
-}
-
 /* Bottom stack: divider + tight vertical rhythm */
 .hero-offer-bottom{
   border-top:1px solid rgba(229,231,235,.45);
-  padding-top:8px;
+  padding-top:6px;
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:8px; /* microcopy to logos spacing */
+  gap:6px;
 }
 
 /* Microcopy centered */
@@ -280,20 +272,21 @@ img{max-width:100%;height:auto;display:block}
   line-height:1.2;
 }
 
-/* Logos tuck under microcopy and stay within its visual width */
+/* Logos: bring together + keep under the microcopy width */
 .hero-offer-trust{
-  width:100%;
-  max-width:520px;          /* keeps logos inside the microcopy “edges” */
-  display:flex;
+  display:inline-flex;
   align-items:center;
-  justify-content:space-between;
-  gap:16px;
+  justify-content:center;
+  gap:18px;
   padding:0;
-  border-top:none;          /* divider is now on hero-offer-bottom */
+  border-top:none;
+  max-width:100%;
+  margin:0 auto;     /* centers the inline-flex row */
+  flex-wrap:wrap;    /* avoids overflow on small screens */
 }
 
 .hero-offer-trust img{
-  height:40px;
+  height:38px;
   width:auto;
   object-fit:contain;
   display:block;
