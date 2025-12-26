@@ -208,24 +208,6 @@ img{max-width:100%;height:auto;display:block}
   font-size:16px;
 }
 
-.hero-bullets{
-  list-style:none;
-  padding:0;
-  margin:0 auto 22px;
-  max-width:720px;
-  display:grid;
-  gap:10px;
-}
-
-.hero-bullets li{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:12px 14px;
-  box-shadow:0 6px 18px rgba(0,0,0,.05);
-  font-weight:600;
-}
-
 /* HERO OFFER */
 .hero-offer{
   margin:10px auto 10px;
@@ -450,17 +432,19 @@ section{padding:44px 0}
   color:var(--text);
 }
 
-/* TESTIMONIALS (connected band into form) */
+/* ======================================
+   TESTIMONIALS (band + centered dividers)
+====================================== */
 .testimonials{
   position:relative;
   background:linear-gradient(to bottom, #fafafa 0%, #ffffff 88%);
   border-top:none;
   border-bottom:none;
   padding-top:56px;
-  padding-bottom:28px;
+  padding-bottom:26px;
 }
 
-/* Centered divider BEFORE testimonials */
+/* centered divider before testimonials */
 .testimonials::before{
   content:"";
   position:absolute;
@@ -472,26 +456,14 @@ section{padding:44px 0}
   background:rgba(229,231,235,.9);
 }
 
-/* Tighten spacing between testimonials and the next section (form) */
+/* tighten handoff into the form section */
 .testimonials + section{
-  padding-top:24px; /* was 44px */
+  padding-top:26px;
 }
 
-/* Optional tighter on desktop */
-@media (min-width:900px){
-  .testimonials + section{
-    padding-top:18px;
-  }
-}
-
-/* Existing testimonial text styles */
-.testimonials .testimonial-intro{
-  margin-bottom:18px;
-}
-
-.testimonials .testimonial-intro .section-sub{
-  margin:0 auto 6px;
-}
+/* keep your intro spacing */
+.testimonials .testimonial-intro{margin-bottom:18px}
+.testimonials .testimonial-intro .section-sub{margin:0 auto 6px}
 
 .testimonials .testimonial-micro{
   margin:0;
@@ -501,15 +473,8 @@ section{padding:44px 0}
   line-height:1.45;
 }
 
-/* Slight spacing polish for form text */
-.fineprint{ margin-top:12px; }
-.consent{ margin-top:8px; }
-
-.t-shell{
-  position:relative;
-  margin-top:12px;
-}
-
+/* TESTIMONIALS carousel */
+.t-shell{position:relative;margin-top:12px}
 .t-viewport{outline:none}
 
 .t-track{
@@ -524,15 +489,10 @@ section{padding:44px 0}
 }
 .t-track::-webkit-scrollbar{display:none}
 
-.t-track .t-card{
-  scroll-snap-align:start;
-  flex:0 0 100%;
-}
+.t-track .t-card{scroll-snap-align:start;flex:0 0 100%}
 
 @media (min-width:900px){
-  .t-track .t-card{
-    flex:0 0 calc((100% - 28px) / 3);
-  }
+  .t-track .t-card{flex:0 0 calc((100% - 28px) / 3)}
 }
 
 .t-card{
@@ -546,12 +506,7 @@ section{padding:44px 0}
   gap:10px;
 }
 
-.t-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
+.t-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
 
 .t-stars{
   font-weight:900;
@@ -572,12 +527,7 @@ section{padding:44px 0}
   color:var(--brand);
 }
 
-.t-quote{
-  margin:0;
-  color:var(--text);
-  font-size:14px;
-  line-height:1.55;
-}
+.t-quote{margin:0;color:var(--text);font-size:14px;line-height:1.55}
 
 .t-person{
   margin-top:auto;
@@ -585,20 +535,9 @@ section{padding:44px 0}
   border-top:1px solid rgba(229,231,235,.7);
 }
 
-.t-person strong{
-  display:block;
-  font-size:13px;
-  font-weight:900;
-}
+.t-person strong{display:block;font-size:13px;font-weight:900}
+.t-person span{display:block;margin-top:2px;font-size:12px;color:var(--muted)}
 
-.t-person span{
-  display:block;
-  margin-top:2px;
-  font-size:12px;
-  color:var(--muted);
-}
-
-/* Full review accordion inside card */
 .t-more{
   border:1px solid rgba(229,231,235,.8);
   border-radius:12px;
@@ -606,24 +545,12 @@ section{padding:44px 0}
   padding:10px 12px;
 }
 
-.t-more summary{
-  cursor:pointer;
-  font-weight:900;
-  list-style:none;
-}
+.t-more summary{cursor:pointer;font-weight:900;list-style:none}
 .t-more summary::-webkit-details-marker{display:none}
+.t-more p{margin:10px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
 
-.t-more p{
-  margin:10px 0 0;
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.5;
-}
-
-/* Hide arrows entirely (we’re using dots + swipe) */
 .t-nav{display:none !important}
 
-/* Dots */
 .t-dots{
   display:flex;
   gap:8px;
@@ -643,6 +570,195 @@ section{padding:44px 0}
 .t-dot.is-active{
   background:rgba(153,0,0,.18);
   border-color:rgba(153,0,0,.35);
+}
+
+/* ======================================
+   OFFER SECTION (form + trust as a unit)
+====================================== */
+section[aria-label="Consultation Form"]{
+  position:relative;
+  padding-top:32px;
+}
+
+/* centered divider above the form band */
+section[aria-label="Consultation Form"]::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:140px;
+  height:1px;
+  background:rgba(229,231,235,.9);
+}
+
+/* Grid container */
+.offer-grid{
+  display:grid;
+  gap:18px;
+  align-items:start; /* IMPORTANT: do NOT stretch */
+}
+
+/* Desktop: lock widths so right panel doesn't feel huge */
+@media (min-width:900px){
+  .offer-grid{
+    grid-template-columns: minmax(0, 760px) minmax(0, 420px);
+    justify-content:center;
+    gap:22px;
+  }
+}
+
+/* Form card stays as-is */
+.offer-form{
+  max-width:none;
+}
+
+/* Trust card should be natural height and scroll normally */
+.offer-trust{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:16px;
+  height:auto;
+  display:flex;
+  flex-direction:column;
+  position:static; /* ensure not sticky */
+}
+
+.offer-trust-title{
+  margin:0 0 10px;
+  font-size:17px;
+  line-height:1.2;
+  font-weight:900;
+  letter-spacing:-.01em;
+}
+
+.offer-trust-list{
+  margin:0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:10px;
+}
+
+.offer-trust-list li{
+  position:relative;
+  padding-left:30px;
+  font-size:14px;
+  line-height:1.45;
+  color:var(--text);
+}
+
+.offer-trust-list li::before{
+  content:"✓";
+  position:absolute;
+  left:0;
+  top:0.05em;
+  width:20px;
+  height:20px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  font-size:13px;
+  background:rgba(22,163,74,.12);
+  border:1px solid rgba(22,163,74,.35);
+  color:#16a34a;
+}
+
+/* badges sit at bottom if space exists, but do not force height */
+.offer-badges{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  justify-content:flex-start;
+  margin-top:14px;
+  padding-top:14px;
+  border-top:1px solid rgba(229,231,235,.7);
+}
+
+.offer-badges img{
+  height:34px;
+  width:auto;
+  object-fit:contain;
+  display:block;
+  opacity:.95;
+}
+
+/* FORM */
+.form-wrap{
+  max-width:760px;
+  margin:0 auto;
+}
+
+.form-title{
+  margin:0 0 6px;
+  font-weight:900;
+  font-size:18px;
+  text-align:center;
+}
+
+.form-sub{
+  margin:0 0 14px;
+  color:var(--muted);
+  font-size:13px;
+  text-align:center;
+}
+
+label{
+  display:block;
+  font-weight:700;
+  font-size:12px;
+  letter-spacing:.02em;
+  margin:12px 0 6px;
+}
+
+input, select, textarea{
+  width:100%;
+  padding:12px 12px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  font-size:14px;
+  outline:none;
+}
+
+input:focus, select:focus, textarea:focus{
+  border-color:rgba(153,0,0,.45);
+  box-shadow:0 0 0 3px rgba(153,0,0,.10);
+  background:#fff;
+}
+
+.grid-2{display:grid;gap:12px}
+@media (min-width:560px){
+  .grid-2{grid-template-columns:1fr 1fr}
+}
+
+.under-submit{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:12px;
+  text-align:center;
+}
+
+.fineprint{
+  margin-top:12px;
+  font-size:12px;
+  color:var(--muted);
+  display:flex;
+  gap:8px;
+  align-items:flex-start;
+  justify-content:center;
+}
+
+.consent{
+  margin-top:8px;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.35;
+  text-align:center;
 }
 
 /* WHO IT’S FOR / NOT FOR */
@@ -719,185 +835,6 @@ section{padding:44px 0}
 .fit-card:first-child{
   box-shadow:0 16px 40px rgba(22,163,74,.12);
   border-color:rgba(22,163,74,.25);
-}
-
-/* =========================
-   OFFER GRID (FORM + TRUST)
-========================= */
-
-.offer-grid{
-  display:grid;
-  gap:18px;
-  align-items:stretch; /* IMPORTANT: equal height children */
-}
-
-/* Desktop: 2 columns */
-@media (min-width: 900px){
-  .offer-grid{
-    grid-template-columns: 1.15fr .85fr;
-    gap:22px;
-    align-items:stretch; /* keep stretching on desktop */
-  }
-}
-
-/* Left column (form card) */
-.offer-form{
-  max-width:none;
-  height:100%;
-}
-
-/* Right column (trust bullets panel) */
-.offer-trust{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  padding:18px;
-  height:100%;                /* equal height */
-  display:flex;               /* lets us anchor badges to bottom */
-  flex-direction:column;
-}
-
-@media (min-width: 900px){
-  .offer-trust{
-    position:static;
-  }
-}
-
-/* Title + bullets */
-.offer-trust-title{
-  margin:0 0 12px;
-  font-size:18px;
-  line-height:1.2;
-  font-weight:900;
-  letter-spacing:-.01em;
-}
-
-.offer-trust-list{
-  margin:0;
-  padding:0;
-  list-style:none;
-  display:grid;
-  gap:10px;
-}
-
-.offer-trust-list li{
-  position:relative;
-  padding-left:30px;
-  font-size:14px;
-  line-height:1.45;
-  color:var(--text);
-}
-
-.offer-trust-list li::before{
-  content:"✓";
-  position:absolute;
-  left:0;
-  top:0.05em;
-  width:20px;
-  height:20px;
-  border-radius:999px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:900;
-  font-size:13px;
-  background:rgba(22,163,74,.12);
-  border:1px solid rgba(22,163,74,.35);
-  color:#16a34a;
-}
-
-/* Badges pinned to bottom of trust panel */
-.offer-badges{
-  display:flex;
-  gap:12px;
-  align-items:center;
-  justify-content:flex-start;
-  margin-top:auto; /* pushes to bottom */
-  padding-top:14px;
-  border-top:1px solid rgba(229,231,235,.7);
-}
-
-.offer-badges img{
-  height:34px;
-  width:auto;
-  object-fit:contain;
-  display:block;
-  opacity:.95;
-}
-
-/* FORM */
-.form-wrap{
-  max-width:760px;
-  margin:0 auto;
-}
-
-.form-title{
-  margin:0 0 6px;
-  font-weight:900;
-  font-size:18px;
-  text-align:center;
-}
-
-.form-sub{
-  margin:0 0 14px;
-  color:var(--muted);
-  font-size:13px;
-  text-align:center;
-}
-
-label{
-  display:block;
-  font-weight:700;
-  font-size:12px;
-  letter-spacing:.02em;
-  margin:12px 0 6px;
-}
-
-input, select, textarea{
-  width:100%;
-  padding:12px 12px;
-  border-radius:12px;
-  border:1px solid var(--line);
-  background:var(--panel);
-  font-size:14px;
-  outline:none;
-}
-
-input:focus, select:focus, textarea:focus{
-  border-color:rgba(153,0,0,.45);
-  box-shadow:0 0 0 3px rgba(153,0,0,.10);
-  background:#fff;
-}
-
-.grid-2{display:grid;gap:12px}
-@media (min-width:560px){
-  .grid-2{grid-template-columns:1fr 1fr}
-}
-
-.under-submit{
-  margin-top:10px;
-  color:var(--muted);
-  font-size:12px;
-  text-align:center;
-}
-
-.fineprint{
-  margin-top:10px;
-  font-size:12px;
-  color:var(--muted);
-  display:flex;
-  gap:8px;
-  align-items:flex-start;
-  justify-content:center;
-}
-
-.consent{
-  margin-top:10px;
-  font-size:12px;
-  color:var(--muted);
-  line-height:1.35;
-  text-align:center;
 }
 
 /* FAQ */
