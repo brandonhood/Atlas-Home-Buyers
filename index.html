@@ -491,28 +491,63 @@
   </section>
 
   <section aria-label="Consultation Form">
-    <div class="container">
-      <div id="form" class="form-wrap card" aria-label="Consultation form">
+  <div class="container">
+
+    <div id="form" class="offer-grid">
+
+      <!-- =====================
+           LEFT: FORM
+      ====================== -->
+      <div class="offer-form card form-wrap" aria-label="Consultation form">
+
         <p class="form-title"><strong>Let’s Talk About Your Options</strong></p>
-        <p class="form-sub">Share a few details and we’ll walk you through what makes sense for your situation.</p>
+        <p class="form-sub">
+          Share a few details and we’ll walk you through what makes sense for your situation.
+        </p>
 
         <form action="#" method="post" data-lead-form data-demo="true">
+
           <label for="address">Property Address (required)</label>
-          <input id="address" name="address" type="text" placeholder="123 Main St" autocomplete="street-address" required />
+          <input
+            id="address"
+            name="address"
+            type="text"
+            placeholder="123 Main St"
+            autocomplete="street-address"
+            required
+          />
 
           <div class="grid-2">
             <div>
               <label for="name">Full Name (required)</label>
-              <input id="name" name="name" type="text" placeholder="Your name" required />
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Your name"
+                required
+              />
             </div>
+
             <div>
               <label for="phone">Phone (required)</label>
-              <input id="phone" name="phone" type="tel" placeholder="(904) 944-9419" required />
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                placeholder="(904) 944-9419"
+                required
+              />
             </div>
           </div>
 
           <label for="email">Email (optional)</label>
-          <input id="email" name="email" type="email" placeholder="you@example.com" />
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="you@example.com"
+          />
 
           <label for="timeline">Ideal Timing</label>
           <select id="timeline" name="timeline">
@@ -523,21 +558,58 @@
             <option>Not sure yet</option>
           </select>
 
-          <button class="btn" type="submit">Get My Cash Offer</button>
+          <button class="btn" type="submit">
+            Get My Cash Offer
+          </button>
 
-          <div class="under-submit">No obligation. No commissions. We cover closing costs.</div>
+          <div class="under-submit">
+            No obligation. No commissions. We cover closing costs.
+          </div>
 
           <div class="fineprint" aria-label="privacy reassurance">
             🔒 <span>Your information is kept private and never shared.</span>
           </div>
 
           <div class="consent">
-            By submitting, you agree to receive calls/texts regarding your request. Message &amp; data rates may apply. Reply STOP to unsubscribe.
+            By submitting, you agree to receive calls/texts regarding your request.
+            Message &amp; data rates may apply. Reply STOP to unsubscribe.
           </div>
+
         </form>
       </div>
+
+      <!-- =====================
+           RIGHT: TRUST / BULLETS
+      ====================== -->
+      <aside class="offer-trust" aria-label="Why homeowners choose Atlas">
+
+        <h3 class="offer-trust-title">
+          #1 Most Trusted Cash Home Buyer Since 2019
+        </h3>
+
+        <ul class="offer-trust-list">
+          <li>Zero fees to sell your house</li>
+          <li>Highest off-market price</li>
+          <li>Sell as-is. No cleanup. No repairs.</li>
+          <li>No closing costs</li>
+          <li>No realtors</li>
+          <li>No showings</li>
+        </ul>
+
+        <!-- OPTIONAL: badges -->
+        <!--
+        <div class="offer-badges">
+          <img src="/img/google-stars.svg" alt="Google Reviews">
+          <img src="/img/bbb.svg" alt="BBB Accredited Business">
+        </div>
+        -->
+
+      </aside>
+
     </div>
-  </section>
+
+  </div>
+</section>
 
   <section aria-label="FAQ">
     <div class="container">
