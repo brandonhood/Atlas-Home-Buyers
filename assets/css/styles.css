@@ -969,6 +969,40 @@ details p{
   padding:56px 0 44px;
 }
 
+/* FAQ accordion icon (+ / -) */
+.faq details {
+  position: relative;
+  padding-right: 54px; /* room for icon */
+}
+
+.faq summary {
+  position: relative;
+  padding-right: 54px; /* room for icon */
+}
+
+.faq summary::after{
+  content:"+";
+  position:absolute;
+  right:14px;
+  top:50%;
+  transform:translateY(-50%);
+  width:28px;
+  height:28px;
+  border-radius:8px; /* square-ish like screenshot */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  line-height:1;
+  color: var(--brand);
+  background: rgba(153,0,0,.08);
+  border: 1px solid rgba(153,0,0,.18);
+}
+
+.faq details[open] summary::after{
+  content:"–";
+}
+
 /* FOOTER BAND */
 .footer-band{
   border-top:1px solid var(--line);
