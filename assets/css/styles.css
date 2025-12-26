@@ -208,13 +208,15 @@ img{max-width:100%;height:auto;display:block}
   font-size:16px;
 }
 
-/* HERO OFFER */
+/* =========================
+   HERO OFFER (fixed)
+   ========================= */
 .hero-offer{
-  margin:10px auto 10px;
+  margin:10px auto;
   max-width:760px;
   display:flex;
   flex-direction:column;
-  gap:6px;
+  gap:10px;                 /* clearer separation between input row and bottom stack */
   padding:12px;
   background:#fff;
   border:1px solid var(--line);
@@ -235,7 +237,7 @@ img{max-width:100%;height:auto;display:block}
   height:52px;
   border:1px solid var(--line);
   border-radius:12px;
-  padding:14px 14px;
+  padding:14px;
   font-size:16px;
   outline:none;
   background:var(--panel);
@@ -253,17 +255,16 @@ img{max-width:100%;height:auto;display:block}
   font-size:14px;
 }
 
-/* Bottom stack: divider + tight vertical rhythm */
+/* Bottom stack: divider + tight rhythm */
 .hero-offer-bottom{
   border-top:1px solid rgba(229,231,235,.45);
-  padding-top:6px;
+  padding-top:8px;
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:6px;
+  gap:8px;
 }
 
-/* Microcopy centered */
 .hero-offer-micro{
   margin:0;
   font-size:12px;
@@ -272,28 +273,30 @@ img{max-width:100%;height:auto;display:block}
   line-height:1.2;
 }
 
-/* Logos: bring together + keep under the microcopy width */
+/* Trust row: stays tight on desktop (won’t stretch) */
 .hero-offer-trust{
   display:inline-flex;
+  width:fit-content;          /* key: prevents full-width spreading */
+  max-width:100%;
   align-items:center;
   justify-content:center;
   gap:18px;
+  margin:0 auto;
   padding:0;
   border-top:none;
-  max-width:100%;
-  margin:0 auto;     /* centers the inline-flex row */
-  flex-wrap:wrap;    /* avoids overflow on small screens */
+  flex-wrap:wrap;             /* safety for tiny screens */
 }
 
 .hero-offer-trust img{
   height:38px;
   width:auto;
+  max-width:100%;
   object-fit:contain;
   display:block;
   opacity:.95;
 }
 
-/* HERO responsive */
+/* Responsive */
 @media (max-width:640px){
   .hero-inner{padding:34px 0 26px}
   .hero h1{font-size:30px}
@@ -301,10 +304,8 @@ img{max-width:100%;height:auto;display:block}
   .hero-offer-main .btn{height:52px}
   .hero-offer-trust img{height:40px}
 }
-@media (max-width:420px){
-  .hero-offer-trust{grid-template-columns:1fr}
-}
 
+/* (Removed the old max-width:420 rule — it was for grid, not flex) */
 /* Sections */
 section{padding:44px 0}
 
