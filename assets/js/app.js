@@ -138,15 +138,23 @@
     let dots = [];
 
     const setActiveDot = () => {
-      if (!dots.length) return;
-      const idx = getPageIndex();
-      const clamped = Math.max(0, Math.min(idx, dots.length - 1));
-      dots.forEach((d, i) => {
-        const active = i === clamped;
-        d.classList.toggle("is-active", active);
-        d.setAttribute("aria-current", active ? "true" : "false");
-      });
-    };
+  if (!dots.length) return;
+
+  // Normal page calc
+  let idx = getPageIndex();
+
+  // ✅ Hard-fix: if we're basically at the end of the scroll, force last dot active
+  const maxScrollLeft = track.scrollWidth - track.clientWidth;
+  const atEnd = track.scrollLeft >= (maxScrollLeft - 2); // 2px tolerance
+  if (atEnd) idx = dots.length - 1;
+
+  const clamped = Math.max(0, Math.min(idx, dots.length - 1));
+  dots.forEach((d, i) => {
+    const active = i === clamped;
+    d.classList.toggle("is-active", active);
+    d.setAttribute("aria-current", active ? "true" : "false");
+  });
+};
 
     const buildDots = () => {
       const cards = Array.from(track.querySelectorAll(".t-card"));
