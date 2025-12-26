@@ -613,7 +613,7 @@ section[aria-label="Consultation Form"]::before{
   max-width:none;
 }
 
-/* Trust card should be natural height and scroll normally */
+/* Trust card: natural height, sticky on desktop */
 .offer-trust{
   background:#fff;
   border:1px solid var(--line);
@@ -623,9 +623,16 @@ section[aria-label="Consultation Form"]::before{
   height:auto;
   display:flex;
   flex-direction:column;
-  position:static; /* ensure not sticky */
 }
 
+/* Only sticky on desktop */
+@media (min-width: 900px){
+  .offer-trust{
+    position: sticky;
+    top: 96px;        /* matches header height + scroll offset */
+    align-self: start; /* prevents grid stretch weirdness */
+  }
+}
 .offer-trust-title{
   margin:0 0 10px;
   font-size:17px;
