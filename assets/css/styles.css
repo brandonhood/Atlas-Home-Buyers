@@ -432,6 +432,57 @@ section{padding:44px 0}
   color:var(--text);
 }
 
+/* SITUATIONS BAND (Process → Is This For Me bridge) */
+.situations{
+  background:#ffffff;
+  padding:56px 0;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+.situations .section-sub{
+  max-width:760px;
+}
+
+/* Grid */
+.situations-grid{
+  margin-top:26px;
+  display:grid;
+  gap:14px;
+}
+
+/* Desktop layout */
+@media (min-width:768px){
+  .situations-grid{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width:1024px){
+  .situations-grid{
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Individual item */
+.situation-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 16px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#fff;
+  box-shadow:0 6px 18px rgba(0,0,0,.05);
+  font-size:14px;
+  line-height:1.4;
+}
+
+.s-icon{
+  font-size:20px;
+  line-height:1;
+}
+
 /* ======================================
    TESTIMONIALS (band + centered dividers)
 ====================================== */
