@@ -1,3 +1,4 @@
+/* assets/js/app.js */
 (function () {
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
@@ -100,13 +101,9 @@
       return;
     }
 
-    // IMPORTANT:
-    // - Desktop shows 3 cards per view visually, but on mobile we STILL group by 3
-    //   to keep dot count consistent (and match your oblong style).
+    // Group by 3 so dot count stays consistent with your desktop layout.
     const GROUP = 3;
 
-    // Make sure dots container is not empty/hidden by accident
-    // (CSS should handle it, but this prevents edge cases)
     dotsWrap.style.display = "flex";
     dotsWrap.style.visibility = "visible";
 
@@ -138,23 +135,22 @@
     let dots = [];
 
     const setActiveDot = () => {
-  if (!dots.length) return;
+      if (!dots.length) return;
 
-  // Normal page calc
-  let idx = getPageIndex();
+      let idx = getPageIndex();
 
-  // ✅ Hard-fix: if we're basically at the end of the scroll, force last dot active
-  const maxScrollLeft = track.scrollWidth - track.clientWidth;
-  const atEnd = track.scrollLeft >= (maxScrollLeft - 2); // 2px tolerance
-  if (atEnd) idx = dots.length - 1;
+      // Force last dot active when at the end (tolerance for rounding)
+      const maxScrollLeft = track.scrollWidth - track.clientWidth;
+      const atEnd = track.scrollLeft >= (maxScrollLeft - 2);
+      if (atEnd) idx = dots.length - 1;
 
-  const clamped = Math.max(0, Math.min(idx, dots.length - 1));
-  dots.forEach((d, i) => {
-    const active = i === clamped;
-    d.classList.toggle("is-active", active);
-    d.setAttribute("aria-current", active ? "true" : "false");
-  });
-};
+      const clamped = Math.max(0, Math.min(idx, dots.length - 1));
+      dots.forEach((d, i) => {
+        const active = i === clamped;
+        d.classList.toggle("is-active", active);
+        d.setAttribute("aria-current", active ? "true" : "false");
+      });
+    };
 
     const buildDots = () => {
       const cards = Array.from(track.querySelectorAll(".t-card"));
@@ -164,7 +160,7 @@
       dots = Array.from({ length: count }).map((_, i) => {
         const b = document.createElement("button");
         b.type = "button";
-        b.className = "t-dot"; // uses your red oblong CSS
+        b.className = "t-dot";
         b.setAttribute("aria-label", `Go to testimonial set ${i + 1}`);
         b.addEventListener("click", () => goToPage(i));
         dotsWrap.appendChild(b);
@@ -175,7 +171,6 @@
       setActiveDot();
     };
 
-    // Build immediately (if DOM is ready) and also watch for late changes
     const init = () => {
       buildDots();
       setActiveDot();
@@ -207,14 +202,30 @@
       if (e.key === "ArrowLeft") goToPage(Math.max(getPageIndex() - 1, 0));
     });
 
-    // Watch for cards being injected/changed (rare, but fixes “dots never show” issues)
+    // Watch for cards being injected/changed
     const obs = new MutationObserver(() => {
-      // If dots count doesn't match expected, rebuild.
       const cards = track.querySelectorAll(".t-card").length;
       const expected = Math.max(1, Math.ceil(cards / GROUP));
       if (expected !== dots.length) buildDots();
     });
 
     obs.observe(track, { childList: true, subtree: true });
+  })();
+
+  // ========= FAQ accordion: only one <details> open at a time =========
+  (function faqAccordion() {
+    const root = document.querySelector(".faq");
+    if (!root) return;
+
+    const items = Array.from(root.querySelectorAll("details"));
+
+    items.forEach((d) => {
+      d.addEventListener("toggle", () => {
+        if (!d.open) return;
+        items.forEach((other) => {
+          if (other !== d) other.open = false;
+        });
+      });
+    });
   })();
 })();
