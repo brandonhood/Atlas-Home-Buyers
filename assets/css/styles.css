@@ -952,15 +952,35 @@ details p{
   font-size:14px;
 }
 
-/* FOOTER */
+/* FAQ band with divider */
+.faq-band{
+  border-top:1px solid var(--line);
+  background:#fff;
+  padding:56px 0 44px;
+}
+
+/* FOOTER BAND */
+.footer-band{
+  border-top:1px solid var(--line);
+  background:#fff;
+}
+
+/* Footer spacing tightened now that it has its own band */
 footer{
-  padding:28px 0 88px;
+  padding:26px 0 48px;
   color:var(--muted);
   font-size:12px;
 }
 footer a{color:var(--muted)}
 
-.footer-grid{display:grid;gap:12px}
+.footer-grid{
+  display:grid;
+  gap:16px;
+  align-items:start;
+}
+
 @media (min-width:900px){
-  .footer-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+  }
 }
