@@ -1,221 +1,65 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Thanks — Next Steps | Atlas Home Buyers</title>
-  <meta name="robots" content="noindex, nofollow" />
 
-  <!-- If your site has a main stylesheet, keep it -->
+  <title>Request Received | Atlas Home Buyers</title>
+  <meta name="description" content="Thanks — we received your request. Here’s what happens next and how to get your cash offer quickly." />
+
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/styles.css" />
 
-  <!-- Scoped safety net styles for this page -->
-  <style>
-    :root{
-      --brand: #990000;
-      --text: #111827;
-      --muted: #6b7280;
-      --line: #e5e7eb;
-      --bg: #f8fafc;
-      --card: #ffffff;
-      --radius: 16px;
-    }
-
-    body { background: var(--bg); color: var(--text); }
-    .container{ width:min(1100px, 92vw); margin:0 auto; }
-    .ty-wrap{ padding: 56px 0; }
-
-    .ty-hero{
-      text-align:center;
-      margin-bottom: 26px;
-    }
-    .ty-hero h1{
-      font-size: clamp(26px, 3.2vw, 40px);
-      margin: 0 0 8px;
-      letter-spacing: -0.02em;
-    }
-    .ty-hero p{
-      margin: 0;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.5;
-    }
-
-    .ty-grid{
-      display:grid;
-      grid-template-columns: 1.35fr .85fr;
-      gap: 26px;
-      align-items: start;
-      margin-top: 22px;
-    }
-
-    .ty-card{
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: 0 10px 30px rgba(17,24,39,.04);
-    }
-
-    .ty-calendar{ padding: 22px; }
-    .ty-calendar h2{
-      margin:0 0 6px;
-      font-size: 20px;
-      letter-spacing: -0.01em;
-    }
-    .ty-sub{
-      color: var(--muted);
-      margin: 0 0 14px;
-      line-height: 1.5;
-      font-size: 15px;
-    }
-
-    .ty-inline-cta{
-      display:flex;
-      flex-wrap:wrap;
-      gap: 10px;
-      align-items:center;
-      margin: 14px 0 18px;
-    }
-    .ty-inline-cta a{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      height: 44px;
-      padding: 0 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(153,0,0,.25);
-      background: rgba(153,0,0,.06);
-      color: var(--brand);
-      font-weight: 700;
-      text-decoration:none;
-      white-space: nowrap;
-    }
-    .ty-inline-cta .ty-inline-note{
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .ty-iframe{
-      width:100%;
-      border:none;
-      overflow:hidden;
-      min-height: 720px; /* ensures it doesn’t look “cut off” */
-      border-radius: 14px;
-    }
-
-    .ty-micro{
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 14px;
-      text-align:center;
-    }
-
-    .ty-trust{ padding: 22px; position: sticky; top: 16px; }
-    .ty-trust h3{
-      margin:0 0 12px;
-      font-size: 18px;
-      letter-spacing: -0.01em;
-    }
-
-    .ty-checklist{
-      list-style: none;
-      padding: 0;
-      margin: 0 0 16px;
-      display:grid;
-      gap: 10px;
-    }
-    .ty-checklist li{
-      position: relative;
-      padding-left: 28px;
-      color: #111827;
-      line-height: 1.35;
-    }
-    .ty-checklist li::before{
-      content:"✓";
-      position:absolute;
-      left:0;
-      top:0;
-      width: 20px;
-      height: 20px;
-      border-radius: 999px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      background: rgba(22,163,74,.12);
-      color: #16a34a;
-      font-weight: 900;
-      font-size: 13px;
-    }
-
-    .ty-cred{
-      display:flex;
-      gap: 12px;
-      align-items:center;
-      flex-wrap:wrap;
-      padding-top: 14px;
-      border-top: 1px solid var(--line);
-      margin-top: 14px;
-    }
-    .ty-cred img{
-      height: 34px;
-      width: auto;
-      display:block;
-    }
-
-    .ty-note{
-      margin-top: 14px;
-      padding: 12px 12px;
-      border-radius: 12px;
-      background: rgba(17,24,39,.03);
-      border: 1px solid rgba(17,24,39,.06);
-      color: #374151;
-      font-size: 14px;
-      line-height: 1.45;
-    }
-
-    .ty-testimonial{
-      margin-top: 18px;
-      padding: 14px;
-      border-radius: 14px;
-      background: rgba(153,0,0,.04);
-      border: 1px solid rgba(153,0,0,.12);
-    }
-    .ty-testimonial .stars{ color: #f59e0b; font-weight: 800; letter-spacing: .06em; }
-    .ty-testimonial p{ margin: 8px 0 0; color:#374151; font-size: 14px; line-height: 1.45; }
-    .ty-testimonial .who{ margin-top: 10px; font-size: 13px; color: var(--muted); }
-
-    @media (max-width: 920px){
-      .ty-grid{ grid-template-columns: 1fr; }
-      .ty-trust{ position: static; }
-      .ty-iframe{ min-height: 860px; }
-    }
-  </style>
+  <!-- OPTIONAL: If you’re using GA4 gtag directly (not only GTM), keep this.
+       If GA is only via GTM, remove this block and track in GTM instead. -->
+  <script>
+    // Fire ONLY on thank-you page (cleanest conversion signal)
+    window.dataLayer = window.dataLayer || [];
+  </script>
 </head>
 
 <body>
 
-  <main class="ty-wrap">
+  <header class="header">
     <div class="container">
+      <div class="header-inner">
+        <a class="brand" href="/" aria-label="Atlas Home Buyers">
+          <img src="assets/img/atlas-logo.png" alt="Atlas Home Buyers" />
+        </a>
 
-      <header class="ty-hero">
-        <h1>Thanks — You’re All Set</h1>
-        <p>Your info was received. The next step is a quick conversation to clarify options and timeline.</p>
-      </header>
+        <a class="call pill" href="tel:9049449419" aria-label="Call Atlas Home Buyers">
+          📞 <strong>(904) 944-9419</strong>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="hero" style="padding-top: 26px;">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-copy">
+
+          <div class="hero-eyebrow">Request Received</div>
+
+          <h1>You're All Set: Here’s What Happens Next</h1>
+
+          <p class="subhead">
+            You'll receive a text from our team shortly. One of our local home buying specialists will then call you to discuss a few details and make sure we understand your situation.
+            
+          </p>
 
       <section class="ty-grid">
 
         <!-- LEFT: Calendar -->
         <div class="ty-card ty-calendar">
-          <h2>Schedule Your Seller Consultation</h2>
-          <p class="ty-sub">
-            Pick a time that works for you. We’ll walk through your options and help you decide what makes sense.
+                  <p class="ty-sub">
+            Or - If you’d like to to book in a specific time, feel free to do so below.
           </p>
 
-          <div class="ty-inline-cta">
-            <a href="tel:19049449419">Call Now: (904) 944-9419</a>
-            <div class="ty-inline-note">No pressure. No obligation. Just a straightforward conversation.</div>
-          </div>
-
+        
           <!-- GHL / calendar widget -->
           <iframe
             class="ty-iframe"
