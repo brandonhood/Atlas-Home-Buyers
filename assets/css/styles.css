@@ -1314,3 +1314,18 @@ footer a{color:var(--muted)}
   font-size: 12px;
   color: var(--muted);
 }
+
+.ty-quote{
+  background: var(--successBg);
+  border: 1px solid var(--successLine);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.ty-quote-text{
+  color: var(--text);
+}
+
+.ty-stars{
+  color: var(--success);
+}
