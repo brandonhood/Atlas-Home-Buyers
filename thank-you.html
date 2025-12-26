@@ -12,16 +12,19 @@
 
 <body>
 
-  <!-- Optional: keep your existing header if you want site-wide continuity
-  <header class="header">
-    <div class="container header-inner">
-      <a class="brand" href="/">
-        <img src="assets/img/logo.png" alt="Atlas Home Buyers" />
-      </a>
-      <a class="call pill" href="tel:+19049449419"><strong>Call:</strong> (904) 944-9419</a>
+<header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a class="brand" href="#top" aria-label="Atlas Home Buyers">
+          <img src="assets/img/atlas-logo.png" alt="Atlas Home Buyers" />
+        </a>
+
+        <a class="call pill" href="tel:19049449419" aria-label="Call Atlas Home Buyers">
+          📞 <strong>(904) 944-9419</strong>
+        </a>
+      </div>
     </div>
   </header>
-  -->
 
   <main class="ty-page">
     <div class="container">
@@ -142,7 +145,33 @@
 
     </div>
   </main>
+  
+<!-- FOOTER BAND -->
+  <section class="footer-band">
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
 
+          <div class="footer-brand" style="display:flex; gap:14px; align-items:flex-start;">
+            <img src="assets/img/atlas-logo.png" alt="Atlas Home Buyers" style="height:42px; width:auto;" />
+            <div class="footer-info">
+              <strong>Atlas Home Buyers</strong>
+              <p>Jacksonville, FL</p>
+              <p><a href="tel:19049449419">(904) 944-9419</a></p>
+            </div>
+          </div>
+
+          <div>
+            <p>This site is for informational purposes only and does not constitute legal or financial advice.</p>
+            <p>All offers subject to verification and property review.</p>
+            <p><a href="/privacy.html">Privacy Policy</a></p>
+          </div>
+
+        </div>
+      </div>
+    </footer>
+  </section>
+  
   <script src="assets/js/app.js" defer></script>
 </body>
 </html>
