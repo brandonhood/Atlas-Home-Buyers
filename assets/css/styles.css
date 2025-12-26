@@ -224,7 +224,7 @@ img{max-width:100%;height:auto;display:block}
 }
 
 /* =========================
-   HERO OFFER (fixed)
+   HERO OFFER
    ========================= */
 .hero-offer{
   margin:10px auto;
@@ -258,7 +258,6 @@ img{max-width:100%;height:auto;display:block}
   background:var(--panel);
 }
 
-/* keep HERO focus as brand (CTA context) */
 .hero-offer-main input:focus{
   border-color:rgba(153,0,0,.35);
   box-shadow:0 0 0 4px rgba(153,0,0,.08);
@@ -271,7 +270,6 @@ img{max-width:100%;height:auto;display:block}
   font-size:14px;
 }
 
-/* Bottom stack: divider + tight rhythm */
 .hero-offer-bottom{
   border-top:1px solid rgba(229,231,235,.45);
   padding-top:8px;
@@ -289,7 +287,6 @@ img{max-width:100%;height:auto;display:block}
   line-height:1.2;
 }
 
-/* Trust row: stays tight on desktop (won’t stretch) */
 .hero-offer-trust{
   display:inline-flex;
   width:fit-content;
@@ -312,7 +309,6 @@ img{max-width:100%;height:auto;display:block}
   opacity:.95;
 }
 
-/* Responsive */
 @media (max-width:640px){
   .hero-inner{padding:34px 0 26px}
   .hero h1{font-size:30px}
@@ -417,7 +413,6 @@ section{padding:44px 0}
   overflow:visible;
 }
 
-/* PROCESS ICONS – GREEN (progress + trust) */
 .process-icon{
   position:absolute;
   top:-28px;
@@ -426,15 +421,12 @@ section{padding:44px 0}
   width:58px;
   height:58px;
   border-radius:999px;
-
   background:var(--successBg);
   border:1px solid var(--successLine);
   color:var(--successDark);
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   box-shadow:0 10px 22px rgba(22,163,74,.18);
   z-index:2;
 }
@@ -480,7 +472,7 @@ section{padding:44px 0}
   font-style:italic;
 }
 
-/* SITUATIONS BAND */
+/* SITUATIONS */
 .situations{
   background:#ffffff;
   padding:56px 0;
@@ -488,9 +480,7 @@ section{padding:44px 0}
   border-bottom:1px solid var(--line);
 }
 
-.situations .section-sub{
-  max-width:760px;
-}
+.situations .section-sub{max-width:760px}
 
 .situations-grid{
   margin-top:26px;
@@ -526,8 +516,6 @@ section{padding:44px 0}
 .testimonials{
   position:relative;
   background:linear-gradient(to bottom, #fafafa 0%, #ffffff 88%);
-  border-top:none;
-  border-bottom:none;
   padding-top:56px;
   padding-bottom:26px;
 }
@@ -632,6 +620,7 @@ section{padding:44px 0}
 
 .t-nav{display:none !important}
 
+/* --- DOTS (FULL OVERWRITE: red + oblong + button reset) --- */
 .t-dots{
   display:flex;
   justify-content:center;
@@ -640,20 +629,33 @@ section{padding:44px 0}
 }
 
 .t-dot{
+  appearance:none;
+  -webkit-appearance:none;
+  border:0;
+  padding:0;
+  margin:0;
+  background:transparent;
+  font:inherit;
+  line-height:0;
+  -webkit-tap-highlight-color: transparent;
+
   width:22px;
   height:7px;
   border-radius:999px;
   border:1px solid rgba(153,0,0,.28);
   background:rgba(153,0,0,.14);
   cursor:pointer;
-  transition:transform .12s ease, background .2s ease, border-color .2s ease;
+  opacity:1;
+  transition:transform .12s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
 }
 
 .t-dot:hover{ transform:translateY(-1px); }
+.t-dot:active{ transform:translateY(0); }
 
 .t-dot.is-active{
   background:var(--brand);
   border-color:var(--brand);
+  transform:translateY(-1px);
   box-shadow:0 10px 18px rgba(153,0,0,.18);
 }
 
@@ -822,7 +824,6 @@ textarea:focus{
   background: #ffffff;
 }
 
-/* “filled” tint (works with placeholders OR required+valid fields) */
 input:not(:placeholder-shown),
 textarea:not(:placeholder-shown),
 input:valid,
@@ -974,7 +975,6 @@ details p{
   background:#fff;
 }
 
-/* Footer spacing tightened now that it has its own band */
 footer{
   padding:26px 0 48px;
   color:var(--muted);
@@ -989,7 +989,5 @@ footer a{color:var(--muted)}
 }
 
 @media (min-width:900px){
-  .footer-grid{
-    grid-template-columns:1fr 1fr;
-  }
+  .footer-grid{grid-template-columns:1fr 1fr}
 }
