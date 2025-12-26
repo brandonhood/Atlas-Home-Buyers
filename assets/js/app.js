@@ -2,6 +2,10 @@
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
+  // ========= Debug: confirm JS loads =========
+  // Remove later once confirmed.
+  console.log("[Atlas] app.js loaded");
+
   // Smooth scroll for anchor links
   $$('a[href^="#"]').forEach((a) => {
     a.addEventListener("click", (e) => {
@@ -86,14 +90,25 @@
     });
   })();
 
-  // Testimonials carousel (dots + swipe/scroll, grouped by 3 cards)
-  (function testimonialsCarousel() {
+  // ========= Testimonials carousel dots =========
+  (function testimonialsCarouselDots() {
     const track = document.getElementById("tTrack");
     const dotsWrap = document.getElementById("tDots");
     const viewport = document.querySelector(".t-viewport");
-    if (!track || !dotsWrap) return;
+    if (!track || !dotsWrap) {
+      console.warn("[Atlas] testimonials: missing #tTrack or #tDots");
+      return;
+    }
 
-    const GROUP = 3; // "desktop sets of 3" keeps dots consistent
+    // IMPORTANT:
+    // - Desktop shows 3 cards per view visually, but on mobile we STILL group by 3
+    //   to keep dot count consistent (and match your oblong style).
+    const GROUP = 3;
+
+    // Make sure dots container is not empty/hidden by accident
+    // (CSS should handle it, but this prevents edge cases)
+    dotsWrap.style.display = "flex";
+    dotsWrap.style.visibility = "visible";
 
     const getGap = () => {
       const styles = getComputedStyle(track);
@@ -141,17 +156,18 @@
       dots = Array.from({ length: count }).map((_, i) => {
         const b = document.createElement("button");
         b.type = "button";
-        b.className = "t-dot"; // <-- your red oblong CSS hooks this
+        b.className = "t-dot"; // uses your red oblong CSS
         b.setAttribute("aria-label", `Go to testimonial set ${i + 1}`);
         b.addEventListener("click", () => goToPage(i));
         dotsWrap.appendChild(b);
         return b;
       });
 
+      console.log(`[Atlas] testimonials: built ${dots.length} dots`);
       setActiveDot();
     };
 
-    // Build dots after layout is ready
+    // Build immediately (if DOM is ready) and also watch for late changes
     const init = () => {
       buildDots();
       setActiveDot();
@@ -163,23 +179,34 @@
       init();
     }
 
+    // Update active dot on scroll (throttled)
     let raf = null;
     track.addEventListener("scroll", () => {
       if (raf) cancelAnimationFrame(raf);
       raf = requestAnimationFrame(setActiveDot);
     });
 
+    // Rebuild on resize (card widths change)
     window.addEventListener("resize", () => {
-      // re-build in case card widths change
       buildDots();
       setActiveDot();
     });
 
+    // Keyboard support
     (viewport || track).addEventListener("keydown", (e) => {
       if (!dots.length) return;
       if (e.key === "ArrowRight") goToPage(Math.min(getPageIndex() + 1, dots.length - 1));
       if (e.key === "ArrowLeft") goToPage(Math.max(getPageIndex() - 1, 0));
     });
-  })();
 
+    // Watch for cards being injected/changed (rare, but fixes “dots never show” issues)
+    const obs = new MutationObserver(() => {
+      // If dots count doesn't match expected, rebuild.
+      const cards = track.querySelectorAll(".t-card").length;
+      const expected = Math.max(1, Math.ceil(cards / GROUP));
+      if (expected !== dots.length) buildDots();
+    });
+
+    obs.observe(track, { childList: true, subtree: true });
+  })();
 })();
