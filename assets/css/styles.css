@@ -704,6 +704,11 @@ section[aria-label="Consultation Form"]::before{
   }
 }
 
+/* Button spacing consistency inside offer form */
+.offer-form .btn{
+  margin-top:4px;
+}
+
 .offer-form{max-width:none}
 
 .offer-trust{
@@ -805,12 +810,27 @@ section[aria-label="Consultation Form"]::before{
   text-align:center;
 }
 
-label{
+/* FORM SPACING SYSTEM (gap-based, scoped) */
+.offer-form form{
+  display:flex;
+  flex-direction:column;
+  gap:20px; /* vertical rhythm between groups */
+}
+
+/* remove margin-driven spacing inside this form */
+.offer-form label{
   display:block;
   font-weight:700;
   font-size:12px;
   letter-spacing:.02em;
-  margin:12px 0 6px;
+  margin:0; /* IMPORTANT: gap controls spacing now */
+}
+
+/* each group controls label->input spacing */
+.offer-form .form-group{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
 }
 
 input, select, textarea{
@@ -839,20 +859,31 @@ select:valid{
   background: var(--successFill);
 }
 
-.grid-2{display:grid;gap:12px}
-@media (min-width:560px){
-  .grid-2{grid-template-columns:1fr 1fr}
+.grid-2{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:20px; /* match vertical rhythm */
 }
 
+@media (min-width:560px){
+  .grid-2{
+    grid-template-columns:1fr 1fr;
+    gap:16px; /* tighter horizontal spacing on desktop */
+  }
+}
+
+/* Post-submit text spacing (consistent rhythm) */
 .under-submit{
-  margin-top:10px;
+  margin:0;              /* let form gap control */
+  margin-top:-6px;       /* optional micro tighten */
   color:var(--muted);
   font-size:12px;
   text-align:center;
 }
 
 .fineprint{
-  margin-top:12px;
+  margin:0;
+  margin-top:6px;
   font-size:12px;
   color:var(--muted);
   display:flex;
@@ -862,7 +893,8 @@ select:valid{
 }
 
 .consent{
-  margin-top:8px;
+  margin:0;
+  margin-top:6px;
   font-size:12px;
   color:var(--muted);
   line-height:1.35;
