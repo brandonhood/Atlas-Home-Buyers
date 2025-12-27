@@ -25,14 +25,20 @@
     if (!window.google || !google.maps || !google.maps.places) return false;
 
     const input = document.getElementById("address");
-    if (!input) return true; // address field not on page (or not loaded yet)
+    if (!input) return true;
 
-    // If user types anything after selecting a suggestion, invalidate the selection
-    input.addEventListener("input", () => {
-      input.dataset.formatted = "";
-      input.dataset.lat = "";
-      input.dataset.lng = "";
-    });
+    // attach once (prevents duplicates if boot() retries)
+    if (!input.dataset.acBound) {
+      input.addEventListener("input", () => {
+        input.dataset.formatted = "";
+        input.dataset.lat = "";
+        input.dataset.lng = "";
+      });
+      input.dataset.acBound = "1";
+    }
+
+    // prevent creating Autocomplete twice
+    if (input.dataset.acInit) return true;
 
     const ac = new google.maps.places.Autocomplete(input, {
       types: ["address"],
@@ -50,18 +56,17 @@
       input.dataset.lng = place.geometry?.location?.lng() || "";
     });
 
+    input.dataset.acInit = "1";
     return true;
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    // try immediately
     if (boot()) return;
 
-    // if google isn't ready yet, retry a few times
     let tries = 0;
     const t = setInterval(() => {
       tries += 1;
-      if (boot() || tries >= 20) clearInterval(t); // ~5s max
+      if (boot() || tries >= 20) clearInterval(t);
     }, 250);
   });
 })();
