@@ -851,11 +851,14 @@ textarea:focus{
   background: #ffffff;
 }
 
-input:not(:placeholder-shown),
-textarea:not(:placeholder-shown),
-input:valid,
-textarea:valid,
-select:valid{
+* Filled state only when user actually entered something */
+.offer-form input:not(:placeholder-shown),
+.offer-form textarea:not(:placeholder-shown){
+  background: var(--successFill);
+  border-color: var(--successLine);
+}
+
+.offer-form select:valid{
   background: var(--successFill);
 }
 
