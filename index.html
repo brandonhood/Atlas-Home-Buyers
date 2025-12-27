@@ -525,7 +525,7 @@ If you're looking to sell your home quickly and easily, they are definitely wort
     name="address"
     type="text"
     placeholder="123 Main St, Jacksonville, FL"
-    autocomplete="street-address"
+    autocomplete="off"
     required
   />
 
@@ -679,7 +679,11 @@ If you're looking to sell your home quickly and easily, they are definitely wort
     </footer>
   </section>
 
-  <!-- Your main JS (contains smooth scroll, hero flow, attribution, submit, carousel dots) -->
- <script src="assets/js/app.js" defer></script>
-</body>
+  <script
+  src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE&libraries=places"
+  defer
+></script>
+
+<script src="assets/js/app.js" defer></script>
+  </body>
 </html>
