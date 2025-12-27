@@ -19,7 +19,7 @@
     });
   });
   
-// ========= Google Places Address Autocomplete + "clear on typing" guard =========
+// ========= Google Places Address Autocomplete + structured parsing =========
 (function initAddressAutocomplete() {
   function boot() {
     if (!window.google || !google.maps || !google.maps.places) return false;
@@ -27,18 +27,16 @@
     const input = document.getElementById("address");
     if (!input) return true;
 
-    // attach once (prevents duplicates if boot() retries)
-    if (!input.dataset.acBound) {
-      input.addEventListener("input", () => {
-        input.dataset.formatted = "";
-        input.dataset.lat = "";
-        input.dataset.lng = "";
-      });
-      input.dataset.acBound = "1";
-    }
-
-    // prevent creating Autocomplete twice
-    if (input.dataset.acInit) return true;
+    // Clear selection if user edits after choosing
+    input.addEventListener("input", () => {
+      input.dataset.formatted = "";
+      input.dataset.street = "";
+      input.dataset.city = "";
+      input.dataset.state = "";
+      input.dataset.postal = "";
+      input.dataset.lat = "";
+      input.dataset.lng = "";
+    });
 
     const ac = new google.maps.places.Autocomplete(input, {
       types: ["address"],
@@ -48,15 +46,31 @@
 
     ac.addListener("place_changed", () => {
       const place = ac.getPlace();
-      if (!place || !place.formatted_address) return;
+      if (!place || !place.address_components) return;
+
+      const components = {};
+      place.address_components.forEach((c) => {
+        c.types.forEach((t) => {
+          components[t] = c;
+        });
+      });
+
+      const street =
+        (components.street_number?.long_name || "") +
+        " " +
+        (components.route?.long_name || "");
 
       input.value = place.formatted_address;
+
       input.dataset.formatted = place.formatted_address;
+      input.dataset.street = street.trim();
+      input.dataset.city = components.locality?.long_name || "";
+      input.dataset.state = components.administrative_area_level_1?.short_name || "";
+      input.dataset.postal = components.postal_code?.long_name || "";
       input.dataset.lat = place.geometry?.location?.lat() || "";
       input.dataset.lng = place.geometry?.location?.lng() || "";
     });
 
-    input.dataset.acInit = "1";
     return true;
   }
 
@@ -309,18 +323,22 @@
         form.address.focus();
         return;
       }
+      
       const payload = {
-        address: form.address.dataset.formatted,
-        latitude: form.address.dataset.lat || "",
-        longitude: form.address.dataset.lng || "",
-        first_name: (form.first_name?.value || "").trim(),
-        last_name: (form.last_name?.value || "").trim(),
-        phone: (form.phone?.value || "").trim(),
-        email: (form.email?.value || "").trim(),
-        ...getUtmBundle(),
-        source: "Google Ads - Landing Page v 12.25.26",
-        tag: "google_ads",
-      };
+          address: form.address.dataset.street,
+          city: form.address.dataset.city,
+          state: form.address.dataset.state,
+          postal_code: form.address.dataset.postal,
+          latitude: form.address.dataset.lat || "",
+          longitude: form.address.dataset.lng || "",
+          first_name: (form.first_name?.value || "").trim(),
+          last_name: (form.last_name?.value || "").trim(),
+          phone: (form.phone?.value || "").trim(),
+          email: (form.email?.value || "").trim(),
+          ...getUtmBundle(),
+          source: "Google Ads - Landing Page v 12.25.26",
+          tag: "google_ads",
+        };
 
       try {
         const res = await fetch(WEBHOOK_URL, {
