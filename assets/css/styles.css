@@ -769,9 +769,9 @@ section[aria-label="Consultation Form"]::before{
 
 .offer-badges{
   display:flex;
-  gap:12px;
+  gap:14px;
   align-items:center;
-  justify-content:flex-start;
+  justify-content:center; /* center horizontally */
   margin-top:14px;
   padding-top:14px;
   border-top:1px solid rgba(229,231,235,.7);
