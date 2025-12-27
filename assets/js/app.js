@@ -18,7 +18,54 @@
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   });
+  
+// ========= Google Places Address Autocomplete + "clear on typing" guard =========
+(function initAddressAutocomplete() {
+  function boot() {
+    if (!window.google || !google.maps || !google.maps.places) return false;
 
+    const input = document.getElementById("address");
+    if (!input) return true; // address field not on page (or not loaded yet)
+
+    // If user types anything after selecting a suggestion, invalidate the selection
+    input.addEventListener("input", () => {
+      input.dataset.formatted = "";
+      input.dataset.lat = "";
+      input.dataset.lng = "";
+    });
+
+    const ac = new google.maps.places.Autocomplete(input, {
+      types: ["address"],
+      componentRestrictions: { country: "us" },
+      fields: ["formatted_address", "geometry", "address_components"],
+    });
+
+    ac.addListener("place_changed", () => {
+      const place = ac.getPlace();
+      if (!place || !place.formatted_address) return;
+
+      input.value = place.formatted_address;
+      input.dataset.formatted = place.formatted_address;
+      input.dataset.lat = place.geometry?.location?.lat() || "";
+      input.dataset.lng = place.geometry?.location?.lng() || "";
+    });
+
+    return true;
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // try immediately
+    if (boot()) return;
+
+    // if google isn't ready yet, retry a few times
+    let tries = 0;
+    const t = setInterval(() => {
+      tries += 1;
+      if (boot() || tries >= 20) clearInterval(t); // ~5s max
+    }, 250);
+  });
+})();
+  
   // ========= Hero CTA: copy address into form + scroll =========
   (function heroAddressFlow() {
     const heroInput = $("#heroAddress");
@@ -28,16 +75,23 @@
     if (!heroBtn || !heroInput || !formAddress || !formWrap) return;
 
     function goToForm() {
-      const val = (heroInput.value || "").trim();
-      if (val) formAddress.value = val;
+  const val = (heroInput.value || "").trim();
+  if (val) {
+    formAddress.value = val;
+    // Clear any previous selection so we don't accept a typed string
+    formAddress.dataset.formatted = "";
+    formAddress.dataset.lat = "";
+    formAddress.dataset.lng = "";
+  }
 
-      formWrap.scrollIntoView({ behavior: "smooth", block: "start" });
+  formWrap.scrollIntoView({ behavior: "smooth", block: "start" });
 
-      setTimeout(() => {
-        const first = $("#firstName");
-        if (first) first.focus({ preventScroll: true });
-      }, 350);
-    }
+  setTimeout(() => {
+    // If they came from hero, make them pick the suggestion on the real field
+    if (val) formAddress.focus({ preventScroll: true });
+    else $("#firstName")?.focus({ preventScroll: true });
+  }, 350);
+}
 
     heroBtn.addEventListener("click", goToForm);
     heroInput.addEventListener("keydown", (e) => {
@@ -245,14 +299,21 @@
         return;
       }
 
+      if (!form.address.dataset.formatted) {
+        alert("Please select your address from the suggestions.");
+        form.address.focus();
+        return;
+      }
       const payload = {
-        address: (form.address?.value || "").trim(),
+        address: form.address.dataset.formatted,
+        latitude: form.address.dataset.lat || "",
+        longitude: form.address.dataset.lng || "",
         first_name: (form.first_name?.value || "").trim(),
         last_name: (form.last_name?.value || "").trim(),
         phone: (form.phone?.value || "").trim(),
         email: (form.email?.value || "").trim(),
         ...getUtmBundle(),
-        source: "LP_v3",
+        source: "Google Ads - Landing Page v 12.25.26",
         tag: "google_ads",
       };
 
