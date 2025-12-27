@@ -7,7 +7,7 @@
   // Remove later once confirmed.
   console.log("[Atlas] app.js loaded");
 
-  // Smooth scroll for anchor links
+  // ========= Smooth scroll for anchor links =========
   $$('a[href^="#"]').forEach((a) => {
     a.addEventListener("click", (e) => {
       const id = a.getAttribute("href");
@@ -19,7 +19,7 @@
     });
   });
 
-  // Hero CTA: copy address into form + scroll to form
+  // ========= Hero CTA: copy address into form + scroll =========
   (function heroAddressFlow() {
     const heroInput = $("#heroAddress");
     const heroBtn = $("#heroCtaBtn");
@@ -34,8 +34,8 @@
       formWrap.scrollIntoView({ behavior: "smooth", block: "start" });
 
       setTimeout(() => {
-        const name = $("#name");
-        if (name) name.focus({ preventScroll: true });
+        const first = $("#firstName");
+        if (first) first.focus({ preventScroll: true });
       }, 350);
     }
 
@@ -48,7 +48,7 @@
     });
   })();
 
-  // Capture UTM + GCLID params into hidden inputs if present
+  // ========= Capture UTM/GCLID into hidden inputs =========
   (function captureAttribution() {
     const form = $('form[data-lead-form]');
     if (!form) return;
@@ -78,19 +78,6 @@
     });
   })();
 
-  // Demo submit handler (replace with GHL endpoint/webhook)
-  (function handleSubmit() {
-    const form = $('form[data-lead-form]');
-    if (!form) return;
-
-    form.addEventListener("submit", (e) => {
-      if (form.getAttribute("data-demo") === "true") {
-        e.preventDefault();
-        window.location.href = "/thank-you.html";
-      }
-    });
-  })();
-
   // ========= Testimonials carousel dots =========
   (function testimonialsCarouselDots() {
     const track = document.getElementById("tTrack");
@@ -101,7 +88,6 @@
       return;
     }
 
-    // Group by 3 so dot count stays consistent with your desktop layout.
     const GROUP = 3;
 
     dotsWrap.style.display = "flex";
@@ -139,7 +125,6 @@
 
       let idx = getPageIndex();
 
-      // Force last dot active when at the end (tolerance for rounding)
       const maxScrollLeft = track.scrollWidth - track.clientWidth;
       const atEnd = track.scrollLeft >= (maxScrollLeft - 2);
       if (atEnd) idx = dots.length - 1;
@@ -182,27 +167,23 @@
       init();
     }
 
-    // Update active dot on scroll (throttled)
     let raf = null;
     track.addEventListener("scroll", () => {
       if (raf) cancelAnimationFrame(raf);
       raf = requestAnimationFrame(setActiveDot);
     });
 
-    // Rebuild on resize (card widths change)
     window.addEventListener("resize", () => {
       buildDots();
       setActiveDot();
     });
 
-    // Keyboard support
     (viewport || track).addEventListener("keydown", (e) => {
       if (!dots.length) return;
       if (e.key === "ArrowRight") goToPage(Math.min(getPageIndex() + 1, dots.length - 1));
       if (e.key === "ArrowLeft") goToPage(Math.max(getPageIndex() - 1, 0));
     });
 
-    // Watch for cards being injected/changed
     const obs = new MutationObserver(() => {
       const cards = track.querySelectorAll(".t-card").length;
       const expected = Math.max(1, Math.ceil(cards / GROUP));
@@ -228,4 +209,68 @@
       });
     });
   })();
+
+  // ========= GHL WEBHOOK SUBMIT =========
+  const WEBHOOK_URL =
+    "https://services.leadconnectorhq.com/hooks/hiXh5eL05l3CLqIHJsPz/webhook-trigger/d3ee1f72-65ee-4995-8594-27ea6cc048e5";
+
+  function getParam(name) {
+    return new URLSearchParams(window.location.search).get(name) || "";
+  }
+
+  function getUtmBundle() {
+    return {
+      utm_source: getParam("utm_source"),
+      utm_medium: getParam("utm_medium"),
+      utm_campaign: getParam("utm_campaign"),
+      utm_term: getParam("utm_term"),
+      utm_content: getParam("utm_content"),
+      gclid: getParam("gclid"),
+      gbraid: getParam("gbraid"),
+      wbraid: getParam("wbraid"),
+      page_url: window.location.href,
+      referrer: document.referrer || "",
+    };
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("leadForm");
+    if (!form) return;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const payload = {
+        address: (form.address?.value || "").trim(),
+        first_name: (form.first_name?.value || "").trim(),
+        last_name: (form.last_name?.value || "").trim(),
+        phone: (form.phone?.value || "").trim(),
+        email: (form.email?.value || "").trim(),
+        ...getUtmBundle(),
+        source: "LP_v3",
+        tag: "google_ads",
+      };
+
+      try {
+        const res = await fetch(WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) throw new Error("Webhook failed");
+
+        // redirect to thank-you page
+        window.location.href = "thank-you.html";
+      } catch (err) {
+        console.error(err);
+        alert("Something went wrong. Please try again or call (904) 944-9419.");
+      }
+    });
+  });
 })();
