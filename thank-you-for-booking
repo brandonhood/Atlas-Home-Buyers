@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Request Received — Next Steps | Atlas Home Buyers</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    page_type: "thank_you",
+    funnel_stage: "post_lead",
+    site_section: "ppc",
+    page_name: "Atlas Home Buyers – Thank You"
+  });
+</script>
+
+<!-- Google Tag Manager -->
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NNZ39N2');
+</script>
+<!-- End Google Tag Manager -->
+
+<link rel="icon" type="image/png" href="assets/img/favicon.png" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NNZ39N2"
+          height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a class="brand" href="#top" aria-label="Atlas Home Buyers">
+          <img src="assets/img/atlas-logo.png" alt="Atlas Home Buyers" />
+        </a>
+
+        <a class="call pill" href="tel:19049449419" aria-label="Call Atlas Home Buyers">
+          📞 <strong>(904) 944-9419</strong>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="ty-page">
+    <div class="container">
+
+      <!-- HERO / CONFIRMATION -->
+      <section class="ty-hero card">
+        <div class="ty-hero-top">
+          <div class="ty-badge" aria-hidden="true">✅ Request Received</div>
+          <h1 class="ty-title">Here's What to Expect Next</h1>
+          <p class="ty-sub">
+            You'll receive a text from one of our local Home Buying Specialists shortly.<br>
+            They’ll then call you for a brief consultation so we can confirm a few specifics and walk through your options.
+          </p>
+          <div class="ty-after">
+          <div class="ty-nextsteps">
+  <h3 class="ty-mini-title">During your consultation</h3>
+          </div>
+          </div>
+          
+
+  <div class="ty-nextsteps-text">
+    <p>
+      <strong>Confirm details:</strong>
+      We’ll verify the property information and your timeline so we’re on the same page.
+    </p>
+
+    <p>
+      <strong>Walk through options:</strong>
+      We’ll explain the easiest paths forward and what each one looks like.
+    </p>
+
+    <p>
+      <strong>Offer:</strong>
+      If we can help, we’ll outline a clear offer and next steps.
+    </p>
+  </div>
+
+  <div class="ty-micro">
+    No pressure. No obligation. Just options for your next step.
+  </div>
+</div>
+      </section>
+
+      <!-- MAIN: CALENDAR + TRUST (SIDE BY SIDE) -->
+     <section id="schedule" class="ty-grid">
+
+  <!-- LEFT: CALENDAR CARD -->
+  <div class="card ty-calendar">
+    <h2 class="ty-section-title">Schedule Your Consultation</h2>
+    <p class="ty-section-sub">
+      Prefer to book in a specific time? Feel free to do so below.
+    </p>
+    <p class="ty-calendar-note">
+      If you don’t see a good time, respond to our text and we’ll set something up that works for you.
+    </p>
+
+    <div class="ty-embed">
+      <iframe
+        src="https://link.unapologeticresultsrei.com/widget/booking/3ocldyF3ZLDK9PvGxHgM"
+        style="width: 100%; border: none; overflow: hidden;"
+        scrolling="no"
+        loading="lazy"
+        id="3ocldyF3ZLDK9PvGxHgM_1766781766306"></iframe>
+         </div>
+ <script src="https://link.unapologeticresultsrei.com/js/form_embed.js" type="text/javascript"></script>
+  </div>
+
+        <!-- RIGHT: EXACT TRUSTED BUYER BLOCK (MATCHING YOUR PRIOR PAGE) -->
+        <aside class="offer-trust ty-trust" aria-label="Trusted buyer reassurance">
+          <h3 class="offer-trust-title">A Trusted Local Option for Jacksonville Homeowners</h3>
+
+          <ul class="offer-trust-list">
+            <li>Zero fees to sell your house</li>
+            <li>Highest off-market price</li>
+            <li>Sell as-is. No cleanup. No repairs.</li>
+            <li>No closing costs</li>
+            <li>No realtors</li>
+            <li>No showings</li>
+          </ul>
+
+          <div class="offer-badges" aria-label="Trust badges">
+            <!-- Use your existing badge assets -->
+            <img src="assets/img/google-reviews.png" alt="Google Reviews" loading="lazy">
+            <img src="assets/img/bbb-business.png" alt="BBB Accredited Business" loading="lazy">
+          </div>
+
+          <div class="ty-note">
+            Not sure you’re ready yet? This call is simply to clarify your options — you decide what happens next.
+          </div>
+           <!-- Reinforcing testimonial (short + punchy) -->
+          <div class="ty-proof" aria-label="Seller testimonials">
+  <div class="ty-proof-item">
+    <div class="ty-stars" aria-hidden="true">★★★★★</div>
+    <p class="ty-proof-text">“Honesty, integrity, communication… we felt a genuine caring for us.”</p>
+    <div class="ty-proof-who"><strong>Steve & Valerie Griggs</strong></div>
+  </div>
+
+  <div class="ty-proof-item">
+    <div class="ty-stars" aria-hidden="true">★★★★★</div>
+    <p class="ty-proof-text">“What was promised is what was given to me… professional, seamless, and smooth.”</p>
+    <div class="ty-proof-who"><strong>William ‘Bill’ Markille</strong></div>
+  </div>
+
+  <div class="ty-proof-item">
+    <div class="ty-stars" aria-hidden="true">★★★★★</div>
+    <p class="ty-proof-text">“Highest price and closed in a couple of weeks. Completely stress free.”</p>
+    <div class="ty-proof-who"><strong>Amanda Greene</strong></div>
+  </div>
+</div>
+
+        </aside>
+      </section>
+
+      <!-- OPTIONAL: SECONDARY REASSURANCE STRIP (keeps them moving) -->
+      <section class="ty-reassure card">
+        <h2 class="ty-section-title">Quick reminders</h2>
+        <div class="ty-reassure-grid">
+          <div class="ty-reassure-item">
+            <h3 class="ty-mini-title">No repairs required</h3>
+            <p>We buy as-is. You don’t need to clean, fix, or prep the house.</p>
+          </div>
+          <div class="ty-reassure-item">
+            <h3 class="ty-mini-title">Your info stays private</h3>
+            <p>We only use your details to follow up about your request.</p>
+          </div>
+          <div class="ty-reassure-item">
+            <h3 class="ty-mini-title">Flexible timeline options</h3>
+            <p>You pick your closing date - As little as 7-14 days, or on a date of your choice.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+  
+ <!-- FAQ BAND -->
+<section class="faq-band" aria-label="FAQ">
+  <div class="container">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+
+    <div class="faq">
+      <details>
+        <summary>Do I need to make repairs or clean the house first?</summary>
+        <p>
+          No. We buy homes in as-is condition — even if they need repairs, cleanup, or updates.
+          You don’t need to fix anything or prepare the house, even after you accept our offer.
+        </p>
+      </details>
+
+      <details>
+        <summary>How fast can you close?</summary>
+        <p>
+          We can close in as little as 7–14 days, but the timeline is up to you.
+          If you need more time to move, coordinate, or handle personal matters, we’ll work around your schedule.
+        </p>
+      </details>
+
+      <details>
+        <summary>Are there any commissions, fees, or hidden costs?</summary>
+        <p>
+          No. There are no commissions, no agent fees, and no closing costs.
+          The offer you receive is the amount you’d receive at closing, subject to a quick property review.
+        </p>
+      </details>
+
+      <details>
+        <summary>What happens after I submit my address?</summary>
+        <p>
+          Once you submit your address, a local home buying specialist will call you for a short, no-obligation conversation.
+          We’ll ask a few questions, explain your options, and help you decide what is best for you — even if selling isn’t the right move.
+        </p>
+      </details>
+
+      <details>
+        <summary>Can you still help if I owe money, have liens, or am behind on payments?</summary>
+        <p>
+          Yes — many homeowners we work with are dealing with liens, past-due payments, or other financial pressure.
+          During the consultation, we’ll review your situation and explain what options may be available.
+        </p>
+      </details>
+
+      <details>
+        <summary>What if I’m not sure I’m ready to sell yet?</summary>
+        <p>
+          That’s completely okay.
+          The initial conversation is simply to help you understand your options so you can make the best decision for your situation — with no obligation to move forward.
+        </p>
+      </details>
+    </div>
+
+  </div>
+</section>
+  
+<!-- FOOTER BAND -->
+  <section class="footer-band">
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+
+          <div class="footer-brand" style="display:flex; gap:14px; align-items:flex-start;">
+            <img src="assets/img/atlas-logo.png" alt="Atlas Home Buyers" style="height:42px; width:auto;" />
+            <div class="footer-info">
+              <strong>Atlas Home Buyers</strong>
+              <p>Jacksonville, FL</p>
+              <p><a href="tel:19049449419">(904) 944-9419</a></p>
+            </div>
+          </div>
+
+          <div>
+            <p>This site is for informational purposes only and does not constitute legal or financial advice.</p>
+            <p>All offers subject to verification and property review.</p>
+            <p><a href="/privacy.html">Privacy Policy</a></p>
+          </div>
+
+        </div>
+      </div>
+    </footer>
+  </section>
+  
+  <script src="assets/js/app.js" defer></script>
+</body>
+</html>
