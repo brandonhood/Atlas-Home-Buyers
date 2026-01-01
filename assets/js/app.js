@@ -338,6 +338,32 @@
       );
     });
 
+    function hasFullPlacesParts(addressEl) {
+  return !!(
+    (addressEl.dataset.street || "").trim() &&
+    (addressEl.dataset.city || "").trim() &&
+    (addressEl.dataset.state || "").trim() &&
+    (addressEl.dataset.postal || "").trim()
+  );
+}
+
+// Require: "123 Main St, Jacksonville, FL 32256" (zip optional if you want)
+function looksLikeFullAddressString(v) {
+  const s = (v || "").trim();
+
+  // Street number + street name
+  const hasStreet = /^\d+\s+.+/.test(s);
+
+  // City/state chunk like ", Jacksonville, FL"
+  const hasCityState = /,\s*[^,]+,\s*[A-Z]{2}\b/.test(s);
+
+  // ZIP (optional). If you want ZIP REQUIRED, keep this AND require it.
+  const hasZip = /\b\d{5}(-\d{4})?\b/.test(s);
+
+  return hasStreet && hasCityState && hasZip; // <-- ZIP REQUIRED
+  // return hasStreet && hasCityState;        // <-- ZIP NOT required
+}
+
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
@@ -346,21 +372,31 @@
         return;
       }
 
-      if (!addressEl?.dataset?.formatted) {
-        alert("Please select your address from the suggestions.");
-        addressEl?.focus();
-        return;
-      }
+      const rawAddress = (addressEl?.value || "").trim();
+
+// Case 1: user selected from Google Places
+const usedPlaces = !!(addressEl?.dataset?.formatted && addressEl.dataset.formatted.trim());
+const placesIsFull = usedPlaces && hasFullPlacesParts(addressEl);
+
+// Case 2: user typed/autofilled a full address string
+const typedIsFull = looksLikeFullAddressString(rawAddress);
+
+if (!placesIsFull && !typedIsFull) {
+  alert('Please enter a full address like "123 Main St, Jacksonville, FL 32256".');
+  addressEl?.focus();
+  return;
+}
 
       window.dataLayer.push({ event: "form_submit", form_id: "leadForm" });
 
       const payload = {
-        address: addressEl.dataset.street || "",
-        city: addressEl.dataset.city || "",
-        state: addressEl.dataset.state || "",
-        postal_code: addressEl.dataset.postal || "",
-        latitude: addressEl.dataset.lat || "",
-        longitude: addressEl.dataset.lng || "",
+        address: placesIsFull ? (addressEl.dataset.street || "").trim() : rawAddress,
+        city: placesIsFull ? (addressEl.dataset.city || "").trim() : "",
+        state: placesIsFull ? (addressEl.dataset.state || "").trim() : "",
+        postal_code: placesIsFull ? (addressEl.dataset.postal || "").trim() : "",
+        latitude: placesIsFull ? (addressEl.dataset.lat || "").trim() : "",
+        longitude: placesIsFull ? (addressEl.dataset.lng || "").trim() : "",
+        address_source: placesIsFull ? "google_places" : "manual_or_autofill",
         first_name: (form.first_name?.value || "").trim(),
         last_name: (form.last_name?.value || "").trim(),
         phone: (form.phone?.value || "").trim(),
