@@ -3,7 +3,6 @@
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-
   // ========= Smooth scroll for anchor links =========
   $$('a[href^="#"]').forEach((a) => {
     a.addEventListener("click", (e) => {
@@ -15,73 +14,72 @@
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   });
-  
-// ========= Google Places Address Autocomplete + structured parsing =========
-(function initAddressAutocomplete() {
-  function boot() {
-    if (!window.google || !google.maps || !google.maps.places) return false;
 
-    const input = document.getElementById("address");
-    if (!input) return true;
+  // ========= Google Places Address Autocomplete + structured parsing =========
+  (function initAddressAutocomplete() {
+    function boot() {
+      if (!window.google || !google.maps || !google.maps.places) return false;
 
-    // Clear selection if user edits after choosing
-    input.addEventListener("input", () => {
-      input.dataset.formatted = "";
-      input.dataset.street = "";
-      input.dataset.city = "";
-      input.dataset.state = "";
-      input.dataset.postal = "";
-      input.dataset.lat = "";
-      input.dataset.lng = "";
-    });
+      const input = document.getElementById("address");
+      if (!input) return true;
 
-    const ac = new google.maps.places.Autocomplete(input, {
-      types: ["address"],
-      componentRestrictions: { country: "us" },
-      fields: ["formatted_address", "geometry", "address_components"],
-    });
-
-    ac.addListener("place_changed", () => {
-      const place = ac.getPlace();
-      if (!place || !place.address_components) return;
-
-      const components = {};
-      place.address_components.forEach((c) => {
-        c.types.forEach((t) => {
-          components[t] = c;
-        });
+      // Clear selection if user edits after choosing
+      input.addEventListener("input", () => {
+        input.dataset.formatted = "";
+        input.dataset.street = "";
+        input.dataset.city = "";
+        input.dataset.state = "";
+        input.dataset.postal = "";
+        input.dataset.lat = "";
+        input.dataset.lng = "";
       });
 
-      const street =
-        (components.street_number?.long_name || "") +
-        " " +
-        (components.route?.long_name || "");
+      const ac = new google.maps.places.Autocomplete(input, {
+        types: ["address"],
+        componentRestrictions: { country: "us" },
+        fields: ["formatted_address", "geometry", "address_components"],
+      });
 
-      input.value = place.formatted_address;
+      ac.addListener("place_changed", () => {
+        const place = ac.getPlace();
+        if (!place || !place.address_components) return;
 
-      input.dataset.formatted = place.formatted_address;
-      input.dataset.street = street.trim();
-      input.dataset.city = components.locality?.long_name || "";
-      input.dataset.state = components.administrative_area_level_1?.short_name || "";
-      input.dataset.postal = components.postal_code?.long_name || "";
-      input.dataset.lat = place.geometry?.location?.lat() || "";
-      input.dataset.lng = place.geometry?.location?.lng() || "";
+        const components = {};
+        place.address_components.forEach((c) => {
+          c.types.forEach((t) => (components[t] = c));
+        });
+
+        const street =
+          (components.street_number?.long_name || "") +
+          " " +
+          (components.route?.long_name || "");
+
+        input.value = place.formatted_address;
+
+        input.dataset.formatted = place.formatted_address;
+        input.dataset.street = street.trim();
+        input.dataset.city = components.locality?.long_name || "";
+        input.dataset.state =
+          components.administrative_area_level_1?.short_name || "";
+        input.dataset.postal = components.postal_code?.long_name || "";
+        input.dataset.lat = place.geometry?.location?.lat() || "";
+        input.dataset.lng = place.geometry?.location?.lng() || "";
+      });
+
+      return true;
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (boot()) return;
+
+      let tries = 0;
+      const t = setInterval(() => {
+        tries += 1;
+        if (boot() || tries >= 20) clearInterval(t);
+      }, 250);
     });
+  })();
 
-    return true;
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    if (boot()) return;
-
-    let tries = 0;
-    const t = setInterval(() => {
-      tries += 1;
-      if (boot() || tries >= 20) clearInterval(t);
-    }, 250);
-  });
-})();
-  
   // ========= Hero CTA: copy address into form + scroll =========
   (function heroAddressFlow() {
     const heroInput = $("#heroAddress");
@@ -91,23 +89,22 @@
     if (!heroBtn || !heroInput || !formAddress || !formWrap) return;
 
     function goToForm() {
-  const val = (heroInput.value || "").trim();
-  if (val) {
-    formAddress.value = val;
-    // Clear any previous selection so we don't accept a typed string
-    formAddress.dataset.formatted = "";
-    formAddress.dataset.lat = "";
-    formAddress.dataset.lng = "";
-  }
+      const val = (heroInput.value || "").trim();
+      if (val) {
+        formAddress.value = val;
+        // Clear any previous selection so we don't accept a typed string
+        formAddress.dataset.formatted = "";
+        formAddress.dataset.lat = "";
+        formAddress.dataset.lng = "";
+      }
 
-  formWrap.scrollIntoView({ behavior: "smooth", block: "start" });
+      formWrap.scrollIntoView({ behavior: "smooth", block: "start" });
 
-  setTimeout(() => {
-    // If they came from hero, make them pick the suggestion on the real field
-    if (val) formAddress.focus({ preventScroll: true });
-    else $("#firstName")?.focus({ preventScroll: true });
-  }, 350);
-}
+      setTimeout(() => {
+        if (val) formAddress.focus({ preventScroll: true });
+        else $("#firstName")?.focus({ preventScroll: true });
+      }, 350);
+    }
 
     heroBtn.addEventListener("click", goToForm);
     heroInput.addEventListener("keydown", (e) => {
@@ -153,10 +150,7 @@
     const track = document.getElementById("tTrack");
     const dotsWrap = document.getElementById("tDots");
     const viewport = document.querySelector(".t-viewport");
-    if (!track || !dotsWrap) {
-      console.warn("[Atlas] testimonials: missing #tTrack or #tDots");
-      return;
-    }
+    if (!track || !dotsWrap) return;
 
     const GROUP = 3;
 
@@ -207,28 +201,28 @@
       });
     };
 
-            const buildDots = () => {
-          const cards = Array.from(track.querySelectorAll(".t-card"));
-          const count = Math.max(1, Math.ceil(cards.length / GROUP));
-        
-          dotsWrap.innerHTML = "";
-          dots = Array.from({ length: count }).map((_, i) => {
-            const b = document.createElement("button");
-            b.type = "button";
-            b.className = "t-dot";
-            b.setAttribute("aria-label", `Go to testimonial set ${i + 1}`);
-            b.addEventListener("click", () => goToPage(i));
-            dotsWrap.appendChild(b);
-            return b;
-          });
-        
-          setActiveDot();
-        }; // ✅ CLOSE buildDots properly
-        
-        const init = () => {
-          buildDots();
-          setActiveDot();
-        };
+    const buildDots = () => {
+      const cards = Array.from(track.querySelectorAll(".t-card"));
+      const count = Math.max(1, Math.ceil(cards.length / GROUP));
+
+      dotsWrap.innerHTML = "";
+      dots = Array.from({ length: count }).map((_, i) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "t-dot";
+        b.setAttribute("aria-label", `Go to testimonial set ${i + 1}`);
+        b.addEventListener("click", () => goToPage(i));
+        dotsWrap.appendChild(b);
+        return b;
+      });
+
+      setActiveDot();
+    };
+
+    const init = () => {
+      buildDots();
+      setActiveDot();
+    };
 
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", init, { once: true });
@@ -262,13 +256,12 @@
     obs.observe(track, { childList: true, subtree: true });
   })();
 
-  // ========= FAQ accordion: only one <details> open at a time =========
+  // ========= FAQ accordion =========
   (function faqAccordion() {
     const root = document.querySelector(".faq");
     if (!root) return;
 
     const items = Array.from(root.querySelectorAll("details"));
-
     items.forEach((d) => {
       d.addEventListener("toggle", () => {
         if (!d.open) return;
@@ -279,7 +272,7 @@
     });
   })();
 
-  // ========= Attribution helpers (persist across redirect) =========
+  // ========= Attribution helpers =========
   function getParam(name) {
     return new URLSearchParams(window.location.search).get(name) || "";
   }
@@ -298,19 +291,14 @@
   }
 
   function loadAttribution() {
-    // 1) pull from URL
     const fromUrl = getAttributionFromUrl();
-
-    // if URL has anything, store it (freshest wins)
-    const hasAny =
-      Object.values(fromUrl).some((v) => v && String(v).trim().length > 0);
+    const hasAny = Object.values(fromUrl).some((v) => v && String(v).trim().length > 0);
 
     if (hasAny) {
       sessionStorage.setItem("atlas_attribution", JSON.stringify(fromUrl));
       return fromUrl;
     }
 
-    // 2) fallback to sessionStorage
     try {
       const stored = sessionStorage.getItem("atlas_attribution");
       return stored ? JSON.parse(stored) : fromUrl;
@@ -321,94 +309,84 @@
 
   function getUtmBundle() {
     const a = loadAttribution();
-    return {
-      ...a,
-      page_url: window.location.href,
-      referrer: document.referrer || "",
-    };
+    return { ...a, page_url: window.location.href, referrer: document.referrer || "" };
   }
 
+  // ========= Webhook submit + redirect =========
   const WEBHOOK_URL =
-  "https://services.leadconnectorhq.com/hooks/hQAfrsswFluxo23n8S8z/webhook-trigger/ebee092d-0e74-4235-9f67-7d146626ad0e";
+    "https://services.leadconnectorhq.com/hooks/hQAfrsswFluxo23n8S8z/webhook-trigger/ebee092d-0e74-4235-9f67-7d146626ad0e";
 
- document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("leadForm");
-  if (!form) return;
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("leadForm");
+    if (!form) return;
 
-  const addressEl = document.getElementById("address");
+    const addressEl = document.getElementById("address");
 
-  // Ensure dataLayer exists
-  window.dataLayer = window.dataLayer || [];
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: "form_view", form_id: "leadForm" });
 
-  // Form is present on page
-  window.dataLayer.push({ event: "form_view", form_id: "leadForm" });
+    let started = false;
+    ["input", "change"].forEach((evt) => {
+      form.addEventListener(
+        evt,
+        () => {
+          if (started) return;
+          started = true;
+          window.dataLayer.push({ event: "form_start", form_id: "leadForm" });
+        },
+        { passive: true }
+      );
+    });
 
-  // A) Fire once when they start interacting with the form
-  let started = false;
-  ["input", "change"].forEach((evt) => {
-    form.addEventListener(
-      evt,
-      () => {
-        if (started) return;
-        started = true;
-        window.dataLayer.push({ event: "form_start", form_id: "leadForm" });
-      },
-      { passive: true }
-    );
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      if (!addressEl?.dataset?.formatted) {
+        alert("Please select your address from the suggestions.");
+        addressEl?.focus();
+        return;
+      }
+
+      window.dataLayer.push({ event: "form_submit", form_id: "leadForm" });
+
+      const payload = {
+        address: addressEl.dataset.street || "",
+        city: addressEl.dataset.city || "",
+        state: addressEl.dataset.state || "",
+        postal_code: addressEl.dataset.postal || "",
+        latitude: addressEl.dataset.lat || "",
+        longitude: addressEl.dataset.lng || "",
+        first_name: (form.first_name?.value || "").trim(),
+        last_name: (form.last_name?.value || "").trim(),
+        phone: (form.phone?.value || "").trim(),
+        email: (form.email?.value || "").trim(),
+        ...getUtmBundle(),
+        source: "Google Ads - Landing Page v 12.25.26",
+        tag: "google_ads",
+      };
+
+      try {
+        const res = await fetch(WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          keepalive: true,
+        });
+
+        if (!res.ok) throw new Error("Webhook failed");
+
+        window.dataLayer.push({ event: "lead_webhook_success", form_id: "leadForm" });
+        window.location.href = "thank-you.html";
+      } catch (err) {
+        console.error(err);
+        window.dataLayer.push({ event: "lead_webhook_error", form_id: "leadForm" });
+        alert("Something went wrong. Please try again or call (904) 944-9419.");
+      }
+    });
   });
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-
-    // Require Google Places selection
-    if (!addressEl?.dataset?.formatted) {
-      alert("Please select your address from the suggestions.");
-      addressEl?.focus();
-      return;
-    }
-
-    // B) Submit (validation passed)
-    window.dataLayer.push({ event: "form_submit", form_id: "leadForm" });
-
-    const payload = {
-      address: addressEl.dataset.street || "",
-      city: addressEl.dataset.city || "",
-      state: addressEl.dataset.state || "",
-      postal_code: addressEl.dataset.postal || "",
-      latitude: addressEl.dataset.lat || "",
-      longitude: addressEl.dataset.lng || "",
-      first_name: (form.first_name?.value || "").trim(),
-      last_name: (form.last_name?.value || "").trim(),
-      phone: (form.phone?.value || "").trim(),
-      email: (form.email?.value || "").trim(),
-      ...getUtmBundle(),
-      source: "Google Ads - Landing Page v 12.25.26",
-      tag: "google_ads",
-    };
-
-    try {
-      const res = await fetch(WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-        keepalive: true,
-      });
-
-      if (!res.ok) throw new Error("Webhook failed");
-
-      // Success (optional, but keep if you want)
-      window.dataLayer.push({ event: "lead_webhook_success", form_id: "leadForm" });
-
-      window.location.href = "thank-you.html";
-    } catch (err) {
-      console.error(err);
-      window.dataLayer.push({ event: "lead_webhook_error", form_id: "leadForm" });
-      alert("Something went wrong. Please try again or call (904) 944-9419.");
-    }
-  });
-});
+})(); // ✅ THIS WAS MISSING
