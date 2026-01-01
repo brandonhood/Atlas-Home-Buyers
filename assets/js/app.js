@@ -207,27 +207,28 @@
       });
     };
 
-    const buildDots = () => {
-      const cards = Array.from(track.querySelectorAll(".t-card"));
-      const count = Math.max(1, Math.ceil(cards.length / GROUP));
-
-      dotsWrap.innerHTML = "";
-      dots = Array.from({ length: count }).map((_, i) => {
-        const b = document.createElement("button");
-        b.type = "button";
-        b.className = "t-dot";
-        b.setAttribute("aria-label", `Go to testimonial set ${i + 1}`);
-        b.addEventListener("click", () => goToPage(i));
-        dotsWrap.appendChild(b);
-        return b;
-      });
-
-      
-
-    const init = () => {
-      buildDots();
-      setActiveDot();
-    };
+            const buildDots = () => {
+          const cards = Array.from(track.querySelectorAll(".t-card"));
+          const count = Math.max(1, Math.ceil(cards.length / GROUP));
+        
+          dotsWrap.innerHTML = "";
+          dots = Array.from({ length: count }).map((_, i) => {
+            const b = document.createElement("button");
+            b.type = "button";
+            b.className = "t-dot";
+            b.setAttribute("aria-label", `Go to testimonial set ${i + 1}`);
+            b.addEventListener("click", () => goToPage(i));
+            dotsWrap.appendChild(b);
+            return b;
+          });
+        
+          setActiveDot();
+        }; // ✅ CLOSE buildDots properly
+        
+        const init = () => {
+          buildDots();
+          setActiveDot();
+        };
 
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", init, { once: true });
@@ -326,6 +327,9 @@
       referrer: document.referrer || "",
     };
   }
+
+  const WEBHOOK_URL =
+  "https://services.leadconnectorhq.com/hooks/hQAfrsswFluxo23n8S8z/webhook-trigger/ebee092d-0e74-4235-9f67-7d146626ad0e";
 
  document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("leadForm");
