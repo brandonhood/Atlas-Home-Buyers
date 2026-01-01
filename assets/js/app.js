@@ -3,9 +3,6 @@
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  // ========= Debug: confirm JS loads =========
-  // Remove later once confirmed.
-  console.log("[Atlas] app.js loaded");
 
   // ========= Smooth scroll for anchor links =========
   $$('a[href^="#"]').forEach((a) => {
@@ -225,9 +222,7 @@
         return b;
       });
 
-      console.log(`[Atlas] testimonials: built ${dots.length} dots`);
-      setActiveDot();
-    };
+      
 
     const init = () => {
       buildDots();
@@ -283,15 +278,12 @@
     });
   })();
 
-  // ========= GHL WEBHOOK SUBMIT =========
-  const WEBHOOK_URL =
-    "https://services.leadconnectorhq.com/hooks/hQAfrsswFluxo23n8S8z/webhook-trigger/ebee092d-0e74-4235-9f67-7d146626ad0e";
-
+  // ========= Attribution helpers (persist across redirect) =========
   function getParam(name) {
     return new URLSearchParams(window.location.search).get(name) || "";
   }
 
-  function getUtmBundle() {
+  function getAttributionFromUrl() {
     return {
       utm_source: getParam("utm_source"),
       utm_medium: getParam("utm_medium"),
@@ -301,60 +293,118 @@
       gclid: getParam("gclid"),
       gbraid: getParam("gbraid"),
       wbraid: getParam("wbraid"),
+    };
+  }
+
+  function loadAttribution() {
+    // 1) pull from URL
+    const fromUrl = getAttributionFromUrl();
+
+    // if URL has anything, store it (freshest wins)
+    const hasAny =
+      Object.values(fromUrl).some((v) => v && String(v).trim().length > 0);
+
+    if (hasAny) {
+      sessionStorage.setItem("atlas_attribution", JSON.stringify(fromUrl));
+      return fromUrl;
+    }
+
+    // 2) fallback to sessionStorage
+    try {
+      const stored = sessionStorage.getItem("atlas_attribution");
+      return stored ? JSON.parse(stored) : fromUrl;
+    } catch {
+      return fromUrl;
+    }
+  }
+
+  function getUtmBundle() {
+    const a = loadAttribution();
+    return {
+      ...a,
       page_url: window.location.href,
       referrer: document.referrer || "",
     };
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("leadForm");
-    if (!form) return;
+ document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("leadForm");
+  if (!form) return;
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+  const addressEl = document.getElementById("address");
 
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
+  // Ensure dataLayer exists
+  window.dataLayer = window.dataLayer || [];
 
-      if (!form.address.dataset.formatted) {
-        alert("Please select your address from the suggestions.");
-        form.address.focus();
-        return;
-      }
-      
-      const payload = {
-          address: form.address.dataset.street,
-          city: form.address.dataset.city,
-          state: form.address.dataset.state,
-          postal_code: form.address.dataset.postal,
-          latitude: form.address.dataset.lat || "",
-          longitude: form.address.dataset.lng || "",
-          first_name: (form.first_name?.value || "").trim(),
-          last_name: (form.last_name?.value || "").trim(),
-          phone: (form.phone?.value || "").trim(),
-          email: (form.email?.value || "").trim(),
-          ...getUtmBundle(),
-          source: "Google Ads - Landing Page v 12.25.26",
-          tag: "google_ads",
-        };
+  // Form is present on page
+  window.dataLayer.push({ event: "form_view", form_id: "leadForm" });
 
-      try {
-        const res = await fetch(WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-
-        if (!res.ok) throw new Error("Webhook failed");
-
-        // redirect to thank-you page
-        window.location.href = "thank-you.html";
-      } catch (err) {
-        console.error(err);
-        alert("Something went wrong. Please try again or call (904) 944-9419.");
-      }
-    });
+  // A) Fire once when they start interacting with the form
+  let started = false;
+  ["input", "change"].forEach((evt) => {
+    form.addEventListener(
+      evt,
+      () => {
+        if (started) return;
+        started = true;
+        window.dataLayer.push({ event: "form_start", form_id: "leadForm" });
+      },
+      { passive: true }
+    );
   });
-})();
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    // Require Google Places selection
+    if (!addressEl?.dataset?.formatted) {
+      alert("Please select your address from the suggestions.");
+      addressEl?.focus();
+      return;
+    }
+
+    // B) Submit (validation passed)
+    window.dataLayer.push({ event: "form_submit", form_id: "leadForm" });
+
+    const payload = {
+      address: addressEl.dataset.street || "",
+      city: addressEl.dataset.city || "",
+      state: addressEl.dataset.state || "",
+      postal_code: addressEl.dataset.postal || "",
+      latitude: addressEl.dataset.lat || "",
+      longitude: addressEl.dataset.lng || "",
+      first_name: (form.first_name?.value || "").trim(),
+      last_name: (form.last_name?.value || "").trim(),
+      phone: (form.phone?.value || "").trim(),
+      email: (form.email?.value || "").trim(),
+      ...getUtmBundle(),
+      source: "Google Ads - Landing Page v 12.25.26",
+      tag: "google_ads",
+    };
+
+    try {
+      const res = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      });
+
+      if (!res.ok) throw new Error("Webhook failed");
+
+      // Success (optional, but keep if you want)
+      window.dataLayer.push({ event: "lead_webhook_success", form_id: "leadForm" });
+
+      window.location.href = "thank-you.html";
+    } catch (err) {
+      console.error(err);
+      window.dataLayer.push({ event: "lead_webhook_error", form_id: "leadForm" });
+      alert("Something went wrong. Please try again or call (904) 944-9419.");
+    }
+  });
+});
