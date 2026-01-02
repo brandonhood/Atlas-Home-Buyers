@@ -469,11 +469,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const submission_id =
         Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
 
-    const phoneRaw = (form.phone?.value || "").trim();
-    
+    const phoneRaw = (phoneEl?.value || "").trim();
+
       if (!isValidUSPhone(phoneRaw)) {
         alert("Please enter a valid 10-digit US phone number.");
-        form.phone?.focus();
+        phoneEl?.focus();
         setSubmitting(false);
         return;
       }
