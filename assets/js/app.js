@@ -3,7 +3,31 @@
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  // ========= Smooth scroll for anchor links =========
+    // ========= Scroll helper (supports sticky headers) =========
+  function getStickyOffset() {
+    const header =
+      document.querySelector("[data-sticky-header]") ||
+      document.querySelector("header") ||
+      document.querySelector(".site-header") ||
+      document.querySelector(".header");
+    if (!header) return 0;
+
+    const styles = window.getComputedStyle(header);
+    const isSticky =
+      styles.position === "fixed" || styles.position === "sticky";
+    return isSticky ? Math.ceil(header.getBoundingClientRect().height) : 0;
+  }
+
+  function smoothScrollTo(el, extraOffset = 12) {
+    if (!el) return;
+    const offset = getStickyOffset() + extraOffset;
+    const y =
+      el.getBoundingClientRect().top + window.pageYOffset - offset;
+
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }
+
+    // ========= Smooth scroll for anchor links =========
   $$('a[href^="#"]').forEach((a) => {
     a.addEventListener("click", (e) => {
       const id = a.getAttribute("href");
@@ -11,7 +35,7 @@
       const el = $(id);
       if (!el) return;
       e.preventDefault();
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      smoothScrollTo(el, 12);
     });
   });
 
@@ -98,7 +122,12 @@
         formAddress.dataset.lng = "";
       }
 
-      formWrap.scrollIntoView({ behavior: "smooth", block: "start" });
+            const target =
+        document.querySelector("#exploreOptions") || // ✅ if you add this id to the section
+        formWrap.closest("section") ||
+        formWrap;
+
+      smoothScrollTo(target, 12);
 
       setTimeout(() => {
         if (val) formAddress.focus({ preventScroll: true });
