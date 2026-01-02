@@ -323,6 +323,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const addressEl = document.getElementById("address");
 
+    // ---- phone helpers (format + validate + normalize) ----
+  const phoneEl = form.querySelector('input[name="phone"], #phone');
+
+  function normalizeUSPhone(raw) {
+    const digits = String(raw || "").replace(/\D/g, "");
+    if (digits.length === 11 && digits.startsWith("1")) return digits.slice(1);
+    return digits;
+  }
+
+  function isValidUSPhone(raw) {
+    const d = normalizeUSPhone(raw);
+    // 10 digits, area code + exchange cannot start with 0/1
+    return /^[2-9]\d{2}[2-9]\d{6}$/.test(d);
+  }
+
+  function formatUSPhone(raw) {
+    const d = normalizeUSPhone(raw).slice(0, 10);
+    if (d.length <= 3) return d;
+    if (d.length <= 6) return `(${d.slice(0, 3)}) ${d.slice(3)}`;
+    return `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
+  }
+
+  // Live formatting (does not blank out; only formats digits)
+  if (phoneEl) {
+    phoneEl.addEventListener("input", () => {
+      const formatted = formatUSPhone(phoneEl.value);
+      phoneEl.value = formatted;
+    });
+  }
+
   // ---- dataLayer events ----
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ event: "form_view", form_id: "leadForm" });
@@ -439,26 +469,37 @@ document.addEventListener("DOMContentLoaded", () => {
       const submission_id =
         Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
 
+    const phoneRaw = (form.phone?.value || "").trim();
+    
+      if (!isValidUSPhone(phoneRaw)) {
+        alert("Please enter a valid 10-digit US phone number.");
+        form.phone?.focus();
+        setSubmitting(false);
+        return;
+      }
+      
+      const phoneDigits = normalizeUSPhone(phoneRaw);
+
       const payload = {
-        submission_id,
+  submission_id,
 
-        address: placesIsFull ? (addressEl.dataset.street || "").trim() : rawAddress,
-        city: placesIsFull ? (addressEl.dataset.city || "").trim() : "",
-        state: placesIsFull ? (addressEl.dataset.state || "").trim() : "",
-        postal_code: placesIsFull ? (addressEl.dataset.postal || "").trim() : "",
-        latitude: placesIsFull ? (addressEl.dataset.lat || "").trim() : "",
-        longitude: placesIsFull ? (addressEl.dataset.lng || "").trim() : "",
-        address_source: placesIsFull ? "google_places" : "manual_or_autofill",
+  address: placesIsFull ? (addressEl.dataset.street || "").trim() : rawAddress,
+  city: placesIsFull ? (addressEl.dataset.city || "").trim() : "",
+  state: placesIsFull ? (addressEl.dataset.state || "").trim() : "",
+  postal_code: placesIsFull ? (addressEl.dataset.postal || "").trim() : "",
+  latitude: placesIsFull ? (addressEl.dataset.lat || "").trim() : "",
+  longitude: placesIsFull ? (addressEl.dataset.lng || "").trim() : "",
+  address_source: placesIsFull ? "google_places" : "manual_or_autofill",
 
-        first_name: (form.first_name?.value || "").trim(),
-        last_name: (form.last_name?.value || "").trim(),
-        phone: (form.phone?.value || "").trim(),
-        email: (form.email?.value || "").trim(),
+  first_name: (form.first_name?.value || "").trim(),
+  last_name: (form.last_name?.value || "").trim(),
+  phone: phoneDigits, // ✅ THIS IS THE ONLY PHONE LINE IN THE PAYLOAD
+  email: (form.email?.value || "").trim(),
 
-        ...getUtmBundle(),
-        source: "Google Ads - Landing Page v 12.25.26",
-        tag: "google_ads",
-      };
+  ...getUtmBundle(),
+  source: "Google Ads - Landing Page v 12.25.26",
+  tag: "google_ads",
+};
 
       const res = await fetch(WEBHOOK_URL, {
         method: "POST",
