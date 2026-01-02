@@ -347,11 +347,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Live formatting (does not blank out; only formats digits)
   if (phoneEl) {
-    phoneEl.addEventListener("input", () => {
-      const formatted = formatUSPhone(phoneEl.value);
-      phoneEl.value = formatted;
-    });
-  }
+  phoneEl.addEventListener("blur", () => {
+    phoneEl.value = formatUSPhone(phoneEl.value);
+  });
+}
 
   // ---- dataLayer events ----
   window.dataLayer = window.dataLayer || [];
