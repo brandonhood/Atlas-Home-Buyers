@@ -1453,3 +1453,13 @@ input[type="tel"]:-webkit-autofill {
   box-shadow: 0 0 0px 1000px var(--field-bg) inset !important; /* forces background */
   caret-color: var(--text) !important;
 }
+
+
+/* Force visible text inside offer form fields */
+.offer-form input,
+.offer-form select,
+.offer-form textarea{
+  color: var(--text) !important;
+  -webkit-text-fill-color: var(--text) !important;
+  caret-color: var(--text) !important;
+}
