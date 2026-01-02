@@ -313,83 +313,135 @@
   }
 
   // ========= Webhook submit + redirect =========
-  const WEBHOOK_URL =
-    "https://services.leadconnectorhq.com/hooks/hQAfrsswFluxo23n8S8z/webhook-trigger/ebee092d-0e74-4235-9f67-7d146626ad0e";
+// ========= Webhook submit + redirect (HARDENED) =========
+const WEBHOOK_URL =
+  "https://services.leadconnectorhq.com/hooks/hQAfrsswFluxo23n8S8z/webhook-trigger/ebee092d-0e74-4235-9f67-7d146626ad0e";
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("leadForm");
-    if (!form) return;
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("leadForm");
+  if (!form) return;
 
-    const addressEl = document.getElementById("address");
+  const addressEl = document.getElementById("address");
 
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: "form_view", form_id: "leadForm" });
+  // ---- dataLayer events ----
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: "form_view", form_id: "leadForm" });
 
-    let started = false;
-    ["input", "change"].forEach((evt) => {
-      form.addEventListener(
-        evt,
-        () => {
-          if (started) return;
-          started = true;
-          window.dataLayer.push({ event: "form_start", form_id: "leadForm" });
-        },
-        { passive: true }
-      );
-    });
+  let started = false;
+  ["input", "change"].forEach((evt) => {
+    form.addEventListener(
+      evt,
+      () => {
+        if (started) return;
+        started = true;
+        window.dataLayer.push({ event: "form_start", form_id: "leadForm" });
+      },
+      { passive: true }
+    );
+  });
 
-    function hasFullPlacesParts(addressEl) {
-  return !!(
-    (addressEl.dataset.street || "").trim() &&
-    (addressEl.dataset.city || "").trim() &&
-    (addressEl.dataset.state || "").trim() &&
-    (addressEl.dataset.postal || "").trim()
+  // ---- address helpers ----
+  function hasFullPlacesParts(el) {
+    return !!(
+      (el?.dataset?.street || "").trim() &&
+      (el?.dataset?.city || "").trim() &&
+      (el?.dataset?.state || "").trim() &&
+      (el?.dataset?.postal || "").trim()
+    );
+  }
+
+  // Require: "123 Main St, Jacksonville, FL 32256" (ZIP REQUIRED)
+  function looksLikeFullAddressString(v) {
+    const s = (v || "").trim();
+    const hasStreet = /^\d+\s+.+/.test(s);
+    const hasCityState = /,\s*[^,]+,\s*[A-Z]{2}\b/.test(s);
+    const hasZip = /\b\d{5}(-\d{4})?\b/.test(s);
+    return hasStreet && hasCityState && hasZip;
+  }
+
+  // ---- submit hardening ----
+  const submitBtn = form.querySelector(
+    'button[type="submit"], input[type="submit"]'
   );
-}
 
-// Require: "123 Main St, Jacksonville, FL 32256" (zip optional if you want)
-function looksLikeFullAddressString(v) {
-  const s = (v || "").trim();
+  let isSubmitting = false;
 
-  // Street number + street name
-  const hasStreet = /^\d+\s+.+/.test(s);
+  function setSubmitting(state) {
+    isSubmitting = state;
 
-  // City/state chunk like ", Jacksonville, FL"
-  const hasCityState = /,\s*[^,]+,\s*[A-Z]{2}\b/.test(s);
+    if (submitBtn) {
+      submitBtn.disabled = state;
+      submitBtn.setAttribute("aria-disabled", state ? "true" : "false");
 
-  // ZIP (optional). If you want ZIP REQUIRED, keep this AND require it.
-  const hasZip = /\b\d{5}(-\d{4})?\b/.test(s);
+      // Button label swap (works for <button> and <input type="submit">)
+      if (!submitBtn.dataset.originalText) {
+        submitBtn.dataset.originalText =
+          submitBtn.tagName === "INPUT"
+            ? (submitBtn.value || "Submit")
+            : (submitBtn.textContent || "Submit");
+      }
 
-  return hasStreet && hasCityState && hasZip; // <-- ZIP REQUIRED
-  // return hasStreet && hasCityState;        // <-- ZIP NOT required
-}
+      const nextText = state ? "Submitting..." : submitBtn.dataset.originalText;
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+      if (submitBtn.tagName === "INPUT") submitBtn.value = nextText;
+      else submitBtn.textContent = nextText;
+    }
 
+    // Lock inputs while sending (but keep hidden inputs enabled)
+    Array.from(form.elements).forEach((el) => {
+      if (!el) return;
+      if (el === submitBtn) return;
+      if (el.type === "hidden") return;
+      el.disabled = state;
+    });
+  }
+
+  // Prevent Enter key from re-submitting while locked
+  form.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && isSubmitting) e.preventDefault();
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // HARD STOP for double-submit / button mashing
+    if (isSubmitting) return;
+    setSubmitting(true);
+
+    try {
       if (!form.checkValidity()) {
         form.reportValidity();
+        setSubmitting(false);
         return;
       }
 
       const rawAddress = (addressEl?.value || "").trim();
 
-// Case 1: user selected from Google Places
-const usedPlaces = !!(addressEl?.dataset?.formatted && addressEl.dataset.formatted.trim());
-const placesIsFull = usedPlaces && hasFullPlacesParts(addressEl);
+      // Case 1: user selected from Google Places
+      const usedPlaces = !!(
+        addressEl?.dataset?.formatted && addressEl.dataset.formatted.trim()
+      );
+      const placesIsFull = usedPlaces && hasFullPlacesParts(addressEl);
 
-// Case 2: user typed/autofilled a full address string
-const typedIsFull = looksLikeFullAddressString(rawAddress);
+      // Case 2: user typed/autofilled a full address string
+      const typedIsFull = looksLikeFullAddressString(rawAddress);
 
-if (!placesIsFull && !typedIsFull) {
-  alert('Please enter a full address like "123 Main St, Jacksonville, FL 32256".');
-  addressEl?.focus();
-  return;
-}
+      if (!placesIsFull && !typedIsFull) {
+        alert('Please enter a full address like "123 Main St, Jacksonville, FL 32256".');
+        addressEl?.focus();
+        setSubmitting(false);
+        return;
+      }
 
       window.dataLayer.push({ event: "form_submit", form_id: "leadForm" });
 
+      // Dedupe key (useful if you later dedupe server-side)
+      const submission_id =
+        Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
+
       const payload = {
+        submission_id,
+
         address: placesIsFull ? (addressEl.dataset.street || "").trim() : rawAddress,
         city: placesIsFull ? (addressEl.dataset.city || "").trim() : "",
         state: placesIsFull ? (addressEl.dataset.state || "").trim() : "",
@@ -397,32 +449,37 @@ if (!placesIsFull && !typedIsFull) {
         latitude: placesIsFull ? (addressEl.dataset.lat || "").trim() : "",
         longitude: placesIsFull ? (addressEl.dataset.lng || "").trim() : "",
         address_source: placesIsFull ? "google_places" : "manual_or_autofill",
+
         first_name: (form.first_name?.value || "").trim(),
         last_name: (form.last_name?.value || "").trim(),
         phone: (form.phone?.value || "").trim(),
         email: (form.email?.value || "").trim(),
+
         ...getUtmBundle(),
         source: "Google Ads - Landing Page v 12.25.26",
         tag: "google_ads",
       };
 
-      try {
-        const res = await fetch(WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-          keepalive: true,
-        });
+      const res = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      });
 
-        if (!res.ok) throw new Error("Webhook failed");
+      if (!res.ok) throw new Error("Webhook failed");
 
-        window.dataLayer.push({ event: "lead_webhook_success", form_id: "leadForm" });
-        window.location.href = "thank-you.html";
-      } catch (err) {
-        console.error(err);
-        window.dataLayer.push({ event: "lead_webhook_error", form_id: "leadForm" });
-        alert("Something went wrong. Please try again or call (904) 944-9419.");
-      }
-    });
+      window.dataLayer.push({ event: "lead_webhook_success", form_id: "leadForm" });
+
+      // Keep disabled; redirect immediately on success
+      window.location.href = "thank-you.html";
+    } catch (err) {
+      console.error(err);
+      window.dataLayer.push({ event: "lead_webhook_error", form_id: "leadForm" });
+      alert("Something went wrong. Please try again or call (904) 944-9419.");
+
+      // Only re-enable on error
+      setSubmitting(false);
+    }
   });
-})(); 
+});
