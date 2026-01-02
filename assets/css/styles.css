@@ -1367,3 +1367,61 @@ footer a{color:var(--muted)}
 .ty-quote-who{
   color: var(--successDark);
 }
+
+
+/* =========================================
+   FORM NORMALIZATION — paste at VERY BOTTOM
+   Goal: same box sizing + font sizing across ALL forms
+========================================= */
+
+:root{
+  --field-h: 56px;
+  --field-fz: 16px;
+  --field-radius: 12px;
+  --field-pad-x: 16px;
+  --field-bg: #f9fafb;
+}
+
+/* Normalize all offer-form controls */
+.offer-form input,
+.offer-form select,
+.offer-form textarea{
+  font-size: var(--field-fz) !important;
+  border-radius: var(--field-radius) !important;
+  background: var(--field-bg) !important;
+}
+
+/* Match heights (inputs + selects) */
+.offer-form input,
+.offer-form select{
+  height: var(--field-h) !important;
+  padding: 0 var(--field-pad-x) !important;
+  line-height: calc(var(--field-h) - 2px) !important; /* keeps text vertically centered */
+}
+
+/* Textareas get same font + radius, but keep natural height */
+.offer-form textarea{
+  min-height: 120px !important;
+  padding: 14px var(--field-pad-x) !important;
+  line-height: 1.5 !important;
+}
+
+/* Normalize the HERO address bar input to match the offer form */
+.hero-offer-main input{
+  height: var(--field-h) !important;
+  font-size: var(--field-fz) !important;
+  border-radius: var(--field-radius) !important;
+  padding: 0 var(--field-pad-x) !important;
+  line-height: calc(var(--field-h) - 2px) !important;
+  background: var(--field-bg) !important;
+}
+
+/* Match hero CTA height to input */
+.hero-offer-main .btn{
+  height: var(--field-h) !important;
+}
+
+/* Optional: make labels consistent (if you want them identical everywhere) */
+.offer-form label{
+  font-size: 12px !important;
+}
