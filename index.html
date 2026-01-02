@@ -591,7 +591,18 @@ If you're looking to sell your home quickly and easily, they are definitely wort
   <div class="grid-2">
     <div>
       <label for="phone">Phone (required)</label>
-      <input id="phone" name="phone" type="tel" placeholder="(904) 123-4567" required />
+      <input
+          id="phone"
+          name="phone"
+          type="tel"
+          inputmode="tel"
+          autocomplete="tel"
+          required
+          minlength="10"
+          maxlength="14"
+          pattern="^\s*(?:\+?1\s*)?(?:\(\s*\d{3}\s*\)|\d{3})[\s.-]*\d{3}[\s.-]*\d{4}\s*$"
+          title="Enter a valid US phone number (10 digits)."
+        />
     </div>
     <div>
       <label for="email">Email (required)</label>
