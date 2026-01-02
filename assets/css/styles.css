@@ -1425,3 +1425,25 @@ footer a{color:var(--muted)}
 .offer-form label{
   font-size: 12px !important;
 }
+
+/* ===== Fix invisible input text (phone field + autofill) ===== */
+.offer-form input,
+.offer-form select,
+.offer-form textarea {
+  color: #111827 !important; /* visible text */
+  -webkit-text-fill-color: #111827 !important; /* fixes Safari/Chrome autofill text */
+}
+
+.offer-form input::placeholder,
+.offer-form textarea::placeholder {
+  color: #9ca3af !important;
+  opacity: 1 !important;
+}
+
+/* Autofill background + text */
+.offer-form input:-webkit-autofill,
+.offer-form input:-webkit-autofill:hover,
+.offer-form input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #111827 !important;
+  transition: background-color 9999s ease-out 0s;
+}
