@@ -1426,24 +1426,30 @@ footer a{color:var(--muted)}
   font-size: 12px !important;
 }
 
-/* ===== Fix invisible input text (phone field + autofill) ===== */
-.offer-form input,
-.offer-form select,
-.offer-form textarea {
-  color: #111827 !important; /* visible text */
-  -webkit-text-fill-color: #111827 !important; /* fixes Safari/Chrome autofill text */
-}
-
-.offer-form input::placeholder,
-.offer-form textarea::placeholder {
-  color: #9ca3af !important;
+/* ===== FORCE phone input text to be visible (even if outside .offer-form) ===== */
+#phone,
+input#phone,
+input[name="phone"],
+input[type="tel"] {
+  color: var(--text) !important;
+  -webkit-text-fill-color: var(--text) !important;
+  caret-color: var(--text) !important;
   opacity: 1 !important;
 }
 
-/* Autofill background + text */
-.offer-form input:-webkit-autofill,
-.offer-form input:-webkit-autofill:hover,
-.offer-form input:-webkit-autofill:focus {
-  -webkit-text-fill-color: #111827 !important;
-  transition: background-color 9999s ease-out 0s;
+/* If anything is indenting/pushing text out of view */
+#phone,
+input[name="phone"],
+input[type="tel"] {
+  text-indent: 0 !important;
+  -webkit-text-security: none !important;
+}
+
+/* Autofill edge cases (Chrome/Safari) */
+#phone:-webkit-autofill,
+input[name="phone"]:-webkit-autofill,
+input[type="tel"]:-webkit-autofill {
+  -webkit-text-fill-color: var(--text) !important;
+  box-shadow: 0 0 0px 1000px var(--field-bg) inset !important; /* forces background */
+  caret-color: var(--text) !important;
 }
