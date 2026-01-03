@@ -1466,58 +1466,57 @@ input[type="tel"]:-webkit-autofill {
 
 
 /* =========================
-   CONSENT BLOCK (FINAL)
-   - Checkbox + text inline
-   - Matches "Your information is kept private..." styling
-   - Smaller checkboxes
+   CONSENT BLOCK – FINAL
+   Matches helper text styling
 ========================= */
 
 .consent-block{
   margin-top: 12px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400;           /* NOT bold */
   color: var(--muted);
   text-align: left;
 }
 
-/* Each consent line: checkbox + copy on same row */
+/* Checkbox + text inline and aligned */
 .consent-row{
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  margin-bottom: 12px;
+  gap: 8px;
+  margin-bottom: 10px;
   line-height: 1.45;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400;           /* NOT bold */
   color: var(--muted);
 }
 
-/* Keep checkbox from stretching and align to first line */
+/* Checkbox sizing + alignment */
 .consent-row input[type="checkbox"]{
   width: 14px;
   height: 14px;
   flex: 0 0 14px;
-  margin: 2px 0 0 0;
+  margin-top: 2px;            /* aligns with first line of text */
 }
 
-/* Make the text act like one clean paragraph */
+/* Ensure text behaves like body copy */
+.consent-row label,
 .consent-row span{
-  display: inline;
+  font-weight: 400;
+  color: var(--muted);
 }
 
-/* Links under the consent block */
+/* Privacy / Terms links */
 .consent-links{
   margin-top: 6px;
   text-align: center;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--muted);
 }
 
-/* Keep links gray like the helper text */
 .consent-links a{
   color: var(--muted);
-  font-weight: 500;
+  font-weight: 400;
   text-decoration: none;
 }
 
@@ -1526,6 +1525,6 @@ input[type="tel"]:-webkit-autofill {
 }
 
 .consent-links span{
-  margin: 0 8px;
+  margin: 0 6px;
   color: var(--muted);
 }
