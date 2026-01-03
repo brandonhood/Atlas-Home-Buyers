@@ -523,6 +523,8 @@ document.addEventListener("DOMContentLoaded", () => {
   last_name: (form.last_name?.value || "").trim(),
   phone: phoneDigits, // ✅ THIS IS THE ONLY PHONE LINE IN THE PAYLOAD
   email: (form.email?.value || "").trim(),
+  consent_transactional: form.querySelector('input[name="consent_transactional"]')?.checked || false,
+  consent_marketing: form.querySelector('input[name="consent_marketing"]')?.checked || false,
 
   ...getUtmBundle(),
   source: "Google Ads - Landing Page v 12.25.26",
