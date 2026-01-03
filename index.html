@@ -614,10 +614,43 @@ If you're looking to sell your home quickly and easily, they are definitely wort
   <button class="btn" type="submit">Get My Cash Offer</button>
 
   <div class="fineprint">🔒 <span>Your information is kept private and never shared.</span></div>
-  <div class="consent">
-    By submitting, you agree to receive calls/texts regarding your request.
-    Message &amp; data rates may apply. Reply STOP to unsubscribe.
+  div class="consent-block">
+
+  <label class="consent-row">
+    <input
+      type="checkbox"
+      name="consent_transactional"
+      required
+    />
+    <span>
+      I consent to receive <strong>transactional messages</strong> from Atlas Home Buyers
+      at the phone number provided. Message frequency may vary.
+      Message &amp; data rates may apply.
+      Reply <strong>HELP</strong> for help or <strong>STOP</strong> to opt out.
+    </span>
+  </label>
+
+  <label class="consent-row">
+    <input
+      type="checkbox"
+      name="consent_marketing"
+    />
+    <span>
+      I consent to receive <strong>marketing and promotional messages</strong> from Atlas Home Buyers
+      at the phone number provided. Message frequency may vary.
+      Message &amp; data rates may apply.
+      Reply <strong>HELP</strong> for help or <strong>STOP</strong> to opt out.
+    </span>
+  </label>
+
+  <!-- LEGAL LINKS -->
+  <div class="consent-links">
+    <a href="/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>
+    <span>|</span>
+    <a href="/terms.html" target="_blank" rel="noopener">Terms of Service</a>
   </div>
+
+</div>
 </form>
         </div>
 
