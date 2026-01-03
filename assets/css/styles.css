@@ -1528,3 +1528,43 @@ input[type="tel"]:-webkit-autofill {
   margin: 0 6px;
   color: var(--muted);
 }
+
+
+/* =========================
+   CONSENT ROW – checkbox flush to text
+========================= */
+
+/* Ensure the label itself behaves like a row */
+.consent-row{
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;                 /* kill any label default spacing */
+  padding: 0;                /* kill padding */
+  width: 100%;
+}
+
+/* Make checkbox sit right next to the text */
+.consent-row input[type="checkbox"]{
+  flex: 0 0 14px;
+  width: 14px;
+  height: 14px;
+  margin: 2px 0 0 0;         /* remove left/right margin */
+}
+
+/* Make the text block start immediately after checkbox */
+.consent-row span{
+  display: block;
+  margin: 0;                 /* remove any default spacing */
+  padding: 0;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+/* OPTIONAL: tighten the spacing between the two consent rows */
+.consent-block{
+  margin-top: 12px;
+}
+.consent-block .consent-row + .consent-row{
+  margin-top: 10px;
+}
