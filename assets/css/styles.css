@@ -1501,3 +1501,12 @@ input[type="tel"]:-webkit-autofill {
   margin: 0 6px;
   color: var(--muted);
 }
+
+
+/* Make consent checkboxes smaller + consistent */
+.consent-row input[type="checkbox"]{
+  width: 14px;
+  height: 14px;
+  flex: 0 0 16px;   /* prevents stretching */
+  margin-top: 3px;  /* aligns with first line of text */
+}
