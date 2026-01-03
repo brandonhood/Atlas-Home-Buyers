@@ -1568,3 +1568,26 @@ input[type="tel"]:-webkit-autofill {
 .consent-block .consent-row + .consent-row{
   margin-top: 10px;
 }
+
+/* === CONSENT ALIGNMENT FIX (overrides .offer-form label { display:block }) === */
+.offer-form label.consent-row{
+  display: flex;            /* restore flex */
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  margin: 0 0 10px;
+}
+
+/* keep the checkbox tight to the first line */
+.offer-form label.consent-row input[type="checkbox"]{
+  flex: 0 0 14px;
+  width: 14px;
+  height: 14px;
+  margin: 2px 0 0;          /* removes left indent + aligns to first line */
+}
+
+/* make the text sit immediately next to the checkbox */
+.offer-form label.consent-row span{
+  flex: 1;
+  margin: 0;
+}
