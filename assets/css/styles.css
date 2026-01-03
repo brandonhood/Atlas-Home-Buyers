@@ -818,12 +818,13 @@ section[aria-label="Consultation Form"]::before{
 }
 
 /* remove margin-driven spacing inside this form */
-.offer-form label{
+/* Labels (exclude consent rows so they can be flex) */
+.offer-form label:not(.consent-row){
   display:block;
   font-weight:700;
   font-size:12px;
   letter-spacing:.02em;
-  margin:0; /* IMPORTANT: gap controls spacing now */
+  margin:0; /* form gap controls spacing */
 }
 
 /* each group controls label->input spacing */
@@ -1368,11 +1369,10 @@ footer a{color:var(--muted)}
   color: var(--successDark);
 }
 
-
-/* =========================================
-   FORM NORMALIZATION — paste at VERY BOTTOM
-   Goal: same box sizing + font sizing across ALL forms
-========================================= */
+/* =========================================================
+   FINAL FORM NORMALIZATION + CONSENT ROW ALIGNMENT (CLEAN)
+   Paste at VERY BOTTOM
+========================================================= */
 
 :root{
   --field-h: 56px;
@@ -1382,131 +1382,99 @@ footer a{color:var(--muted)}
   --field-bg: #f9fafb;
 }
 
-/* Normalize all offer-form controls */
+/* Normalize offer-form controls */
 .offer-form input,
 .offer-form select,
 .offer-form textarea{
-  font-size: var(--field-fz) !important;
-  border-radius: var(--field-radius) !important;
-  background: var(--field-bg) !important;
+  font-size: var(--field-fz);
+  border-radius: var(--field-radius);
+  background: var(--field-bg);
+  color: var(--text);
+  -webkit-text-fill-color: var(--text);
+  caret-color: var(--text);
 }
 
-/* Match heights (inputs + selects) */
 .offer-form input,
 .offer-form select{
-  height: var(--field-h) !important;
-  padding: 0 var(--field-pad-x) !important;
-  line-height: calc(var(--field-h) - 2px) !important; /* keeps text vertically centered */
+  height: var(--field-h);
+  padding: 0 var(--field-pad-x);
+  line-height: calc(var(--field-h) - 2px);
 }
 
-/* Textareas get same font + radius, but keep natural height */
 .offer-form textarea{
-  min-height: 120px !important;
-  padding: 14px var(--field-pad-x) !important;
-  line-height: 1.5 !important;
+  min-height: 120px;
+  padding: 14px var(--field-pad-x);
+  line-height: 1.5;
 }
 
-/* Normalize the HERO address bar input to match the offer form */
+/* Match HERO address input + CTA height */
 .hero-offer-main input{
-  height: var(--field-h) !important;
-  font-size: var(--field-fz) !important;
-  border-radius: var(--field-radius) !important;
-  padding: 0 var(--field-pad-x) !important;
-  line-height: calc(var(--field-h) - 2px) !important;
-  background: var(--field-bg) !important;
+  height: var(--field-h);
+  font-size: var(--field-fz);
+  border-radius: var(--field-radius);
+  padding: 0 var(--field-pad-x);
+  line-height: calc(var(--field-h) - 2px);
+  background: var(--field-bg);
 }
 
-/* Match hero CTA height to input */
 .hero-offer-main .btn{
-  height: var(--field-h) !important;
+  height: var(--field-h);
 }
 
-/* Optional: make labels consistent (if you want them identical everywhere) */
-.offer-form label{
-  font-size: 12px !important;
+/* Autofill edge cases */
+.offer-form input:-webkit-autofill,
+.offer-form select:-webkit-autofill,
+.offer-form textarea:-webkit-autofill{
+  -webkit-text-fill-color: var(--text);
+  box-shadow: 0 0 0px 1000px var(--field-bg) inset;
+  caret-color: var(--text);
 }
-
-/* ===== FORCE phone input text to be visible (even if outside .offer-form) ===== */
-#phone,
-input#phone,
-input[name="phone"],
-input[type="tel"] {
-  color: var(--text) !important;
-  -webkit-text-fill-color: var(--text) !important;
-  caret-color: var(--text) !important;
-  opacity: 1 !important;
-}
-
-/* If anything is indenting/pushing text out of view */
-#phone,
-input[name="phone"],
-input[type="tel"] {
-  text-indent: 0 !important;
-  -webkit-text-security: none !important;
-}
-
-/* Autofill edge cases (Chrome/Safari) */
-#phone:-webkit-autofill,
-input[name="phone"]:-webkit-autofill,
-input[type="tel"]:-webkit-autofill {
-  -webkit-text-fill-color: var(--text) !important;
-  box-shadow: 0 0 0px 1000px var(--field-bg) inset !important; /* forces background */
-  caret-color: var(--text) !important;
-}
-
-
-/* Force visible text inside offer form fields */
-.offer-form input,
-.offer-form select,
-.offer-form textarea{
-  color: var(--text) !important;
-  -webkit-text-fill-color: var(--text) !important;
-  caret-color: var(--text) !important;
-}
-
 
 /* =========================
-   CONSENT BLOCK – FINAL
-   Matches helper text styling
+   CONSENT BLOCK (single source of truth)
 ========================= */
 
-.consent-block{
+/* wrapper */
+.offer-form .consent-block{
   margin-top: 12px;
   font-size: 12px;
-  font-weight: 400;           /* NOT bold */
+  font-weight: 400;
   color: var(--muted);
   text-align: left;
 }
 
-/* Checkbox + text inline and aligned */
-.consent-row{
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  margin-bottom: 10px;
-  line-height: 1.45;
-  font-size: 12px;
-  font-weight: 400;           /* NOT bold */
-  color: var(--muted);
+/* the row itself (works whether it's label.consent-row or .consent-row) */
+.offer-form :is(label.consent-row, .consent-row){
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  margin:0 0 10px;
+  padding:0;
+  width:100%;
+  line-height:1.45;
+  font-size:12px;
+  font-weight:400;
+  color:var(--muted);
 }
 
-/* Checkbox sizing + alignment */
-.consent-row input[type="checkbox"]{
+/* checkbox */
+.offer-form :is(label.consent-row, .consent-row) input[type="checkbox"]{
+  flex: 0 0 14px;
   width: 14px;
   height: 14px;
-  flex: 0 0 14px;
-  margin-top: 2px;            /* aligns with first line of text */
+  margin: 2px 0 0 0;
 }
 
-/* Ensure text behaves like body copy */
-.consent-row label,
-.consent-row span{
-  font-weight: 400;
-  color: var(--muted);
+/* text next to checkbox — catches raw text, span, or nested label */
+.offer-form :is(label.consent-row, .consent-row) :is(span, p, small, .consent-text, label){
+  margin:0;
+  padding:0;
+  font-weight:400;
+  color:var(--muted);
 }
 
-/* Privacy / Terms links */
-.consent-links{
+/* links under consent */
+.offer-form .consent-links{
   margin-top: 6px;
   text-align: center;
   font-size: 12px;
@@ -1514,80 +1482,12 @@ input[type="tel"]:-webkit-autofill {
   color: var(--muted);
 }
 
-.consent-links a{
+.offer-form .consent-links a{
   color: var(--muted);
   font-weight: 400;
   text-decoration: none;
 }
 
-.consent-links a:hover{
+.offer-form .consent-links a:hover{
   text-decoration: underline;
-}
-
-.consent-links span{
-  margin: 0 6px;
-  color: var(--muted);
-}
-
-
-/* =========================
-   CONSENT ROW – checkbox flush to text
-========================= */
-
-/* Ensure the label itself behaves like a row */
-.consent-row{
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  margin: 0;                 /* kill any label default spacing */
-  padding: 0;                /* kill padding */
-  width: 100%;
-}
-
-/* Make checkbox sit right next to the text */
-.consent-row input[type="checkbox"]{
-  flex: 0 0 14px;
-  width: 14px;
-  height: 14px;
-  margin: 2px 0 0 0;         /* remove left/right margin */
-}
-
-/* Make the text block start immediately after checkbox */
-.consent-row span{
-  display: block;
-  margin: 0;                 /* remove any default spacing */
-  padding: 0;
-  font-weight: 400;
-  color: var(--muted);
-}
-
-/* OPTIONAL: tighten the spacing between the two consent rows */
-.consent-block{
-  margin-top: 12px;
-}
-.consent-block .consent-row + .consent-row{
-  margin-top: 10px;
-}
-
-/* === CONSENT ALIGNMENT FIX (overrides .offer-form label { display:block }) === */
-.offer-form label.consent-row{
-  display: flex;            /* restore flex */
-  align-items: flex-start;
-  gap: 8px;
-  width: 100%;
-  margin: 0 0 10px;
-}
-
-/* keep the checkbox tight to the first line */
-.offer-form label.consent-row input[type="checkbox"]{
-  flex: 0 0 14px;
-  width: 14px;
-  height: 14px;
-  margin: 2px 0 0;          /* removes left indent + aligns to first line */
-}
-
-/* make the text sit immediately next to the checkbox */
-.offer-form label.consent-row span{
-  flex: 1;
-  margin: 0;
 }
