@@ -1484,8 +1484,8 @@ footer a{color:var(--muted)}
    PERFORMANCE / CLS GUARDRAILS (paste at very bottom)
 ========================================================= */
 
-/* Reduce cost of below-fold rendering */
-section{
+/* Only use on *below-the-fold* sections */
+.cv-auto{
   content-visibility: auto;
   contain-intrinsic-size: 1px 900px;
 }
