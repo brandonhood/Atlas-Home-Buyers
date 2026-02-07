@@ -1512,10 +1512,12 @@ section{
 /* Explicit header height prevents DOM injection pushing layout */
 .header{ height: 70px; }
 
-/* =========================================================
-   FINAL CLS LOCK
-========================================================= */
+/* Remove invalid attr() approach */
+img{max-width:100%;height:auto;display:block}
 
-img{
-  aspect-ratio: attr(width) / attr(height);
+/* If you want a CLS lock, do it per-component */
+.hero-offer-trust img,
+.offer-badges img,
+.logo-item img{
+  aspect-ratio: auto; /* widths/heights already set in HTML */
 }
