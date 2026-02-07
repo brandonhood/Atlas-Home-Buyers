@@ -1495,13 +1495,19 @@ footer a{color:var(--muted)}
 }
 
 
-/* Prevent below-fold from costing render time */
-section { content-visibility: auto; contain-intrinsic-size: 1px 900px; }
+/* =========================================================
+   PERFORMANCE / CLS GUARDRAILS (paste at very bottom)
+========================================================= */
 
-/* Lock hero typography to reduce font-swap shifts */
-.hero h1 { min-height: 3.2em; }
-.subhead { min-height: 3em; }
+/* Reduce cost of below-fold rendering */
+section{
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 900px;
+}
 
-/* Lock header height so injected stuff can't shove content */
-.header { height: 70px; }
-.hero { padding-top: 86px; } /* keep as-is, but now header height is explicit */
+/* Prevent hero text from reflowing when fonts swap */
+.hero h1{ min-height: 3.2em; }
+.subhead{ min-height: 3em; }
+
+/* Explicit header height prevents DOM injection pushing layout */
+.header{ height: 70px; }
