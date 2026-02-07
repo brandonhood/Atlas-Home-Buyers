@@ -41,11 +41,11 @@
 
   // ========= Google Places Address Autocomplete + structured parsing =========
   (function initAddressAutocomplete() {
-    function boot() {
+    function attachAutocomplete(inputId) {
       if (!window.google || !google.maps || !google.maps.places) return false;
 
-      const input = document.getElementById("address");
-      if (!input) return true;
+      const input = document.getElementById(inputId);
+      if (!input) return true; // nothing to do, but don't treat as failure
 
       // Clear selection if user edits after choosing
       input.addEventListener("input", () => {
@@ -93,14 +93,21 @@
       return true;
     }
 
+    function boot() {
+      // Attach to BOTH fields so autocomplete works wherever they type first
+      const ok1 = attachAutocomplete("address");
+      const ok2 = attachAutocomplete("heroAddress");
+      return ok1 && ok2;
+    }
+
+    // If maps already loaded, boot immediately
     document.addEventListener("DOMContentLoaded", () => {
       if (boot()) return;
+    });
 
-      let tries = 0;
-      const t = setInterval(() => {
-        tries += 1;
-        if (boot() || tries >= 20) clearInterval(t);
-      }, 250);
+    // Otherwise wait until the lazy loader signals maps is ready
+    window.addEventListener("atlas:maps-ready", () => {
+      boot();
     });
   })();
 
