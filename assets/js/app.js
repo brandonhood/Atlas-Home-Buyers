@@ -3,6 +3,23 @@
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
+  // ========= Lazy execution helper =========
+function runWhenVisible(el, fn) {
+  if (!el || !("IntersectionObserver" in window)) {
+    fn();
+    return;
+  }
+
+  const io = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      fn();
+      io.disconnect();
+    }
+  });
+
+  io.observe(el);
+}
+
     // ========= Scroll helper (supports sticky headers) =========
   function getStickyOffset() {
     const header =
