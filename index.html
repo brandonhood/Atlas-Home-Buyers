@@ -42,16 +42,27 @@
 <!-- End Google Tag Manager -->
 
 <!-- GoHighLevel External Tracking (Activity Tracking) -->
-<script 
+<script
   src="https://go.atlashomebuyers.com/js/external-tracking.js"
-  data-tracking-id="tk_da15b183b29742b3b01e7562ed573826">
+  data-tracking-id="tk_da15b183b29742b3b01e7562ed573826"
+  defer>
 </script>
-
+  
 <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+
+<!-- Preconnects (faster handshakes) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://www.googletagmanager.com" />
+<link rel="preconnect" href="https://www.google-analytics.com" />
+<link rel="preconnect" href="https://go.atlashomebuyers.com" />
+
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/styles.css" />
-</head>
+
+<!-- Non-blocking CSS -->
+<link rel="preload" href="assets/css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="assets/css/styles.css" /></noscript>
 
 <body>
 
@@ -767,10 +778,44 @@ If you're looking to sell your home quickly and easily, they are definitely wort
     </footer>
   </section>
 
-  <script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBduzKLhEn0lSkEmYB-Ijhni57GfGnucNA&libraries=places"
-  defer
-></script>
+  <script>
+  // Lazy-load Google Maps Places only when a user interacts with address fields.
+  (function () {
+    let mapsRequested = false;
+
+    window.atlasInitPlaces = function () {
+      // app.js will attach autocomplete once Maps is loaded
+      window.dispatchEvent(new Event("atlas:maps-ready"));
+    };
+
+    window.atlasLoadGoogleMaps = function () {
+      if (mapsRequested) return;
+      mapsRequested = true;
+
+      var s = document.createElement("script");
+      s.src =
+        "https://maps.googleapis.com/maps/api/js?key=AIzaSyBduzKLhEn0lSkEmYB-Ijhni57GfGnucNA&libraries=places&callback=atlasInitPlaces";
+      s.async = true;
+      document.head.appendChild(s);
+    };
+
+    function bindLazyLoad() {
+      var hero = document.getElementById("heroAddress");
+      var form = document.getElementById("address");
+
+      [hero, form].forEach(function (el) {
+        if (!el) return;
+        el.addEventListener("focus", window.atlasLoadGoogleMaps, { once: true });
+        el.addEventListener("pointerdown", window.atlasLoadGoogleMaps, { once: true });
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", bindLazyLoad, { once: true });
+    } else {
+      bindLazyLoad();
+    }
+  })();
+</script>
+
 <script src="assets/js/app.js" defer></script>
-  </body>
-</html>
