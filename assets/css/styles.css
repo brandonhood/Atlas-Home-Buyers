@@ -1511,3 +1511,11 @@ section{
 
 /* Explicit header height prevents DOM injection pushing layout */
 .header{ height: 70px; }
+
+/* =========================================================
+   FINAL CLS LOCK
+========================================================= */
+
+img{
+  aspect-ratio: attr(width) / attr(height);
+}
