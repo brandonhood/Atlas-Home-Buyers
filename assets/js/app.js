@@ -198,14 +198,14 @@ function runWhenVisible(el, fn) {
     });
   })();
 
-  // ========= Testimonials carousel dots =========
- runWhenVisible(document.querySelector(".testimonials"), function () {
+// ========= Testimonials carousel dots =========
+runWhenVisible(document.querySelector(".testimonials"), function () {
   (function testimonialsCarouselDots() {
     const track = document.getElementById("tTrack");
     const dotsWrap = document.getElementById("tDots");
     const viewport = document.querySelector(".t-viewport");
     if (!track || !dotsWrap) return;
-    
+
     const GROUP = 3;
 
     dotsWrap.style.display = "flex";
@@ -309,9 +309,9 @@ function runWhenVisible(el, fn) {
 
     obs.observe(track, { childList: true, subtree: true });
   })();
-   });
+});
 
-  // ========= FAQ accordion =========
+// ========= FAQ accordion =========
 runWhenVisible(document.querySelector(".faq"), function () {
   (function faqAccordion() {
     const root = document.querySelector(".faq");
@@ -327,7 +327,7 @@ runWhenVisible(document.querySelector(".faq"), function () {
       });
     });
   })();
-  });
+});
 
   // ========= Attribution helpers =========
   function getParam(name) {
