@@ -1493,3 +1493,15 @@ footer a{color:var(--muted)}
 .offer-form .consent-links a:hover{
   text-decoration: underline;
 }
+
+
+/* Prevent below-fold from costing render time */
+section { content-visibility: auto; contain-intrinsic-size: 1px 900px; }
+
+/* Lock hero typography to reduce font-swap shifts */
+.hero h1 { min-height: 3.2em; }
+.subhead { min-height: 3em; }
+
+/* Lock header height so injected stuff can't shove content */
+.header { height: 70px; }
+.hero { padding-top: 86px; } /* keep as-is, but now header height is explicit */
