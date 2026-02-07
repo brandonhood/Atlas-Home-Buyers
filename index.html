@@ -42,10 +42,27 @@
 <!-- End Google Tag Manager -->
 
 <!-- GoHighLevel External Tracking (Activity Tracking) -->
-<script
-  src="https://go.atlashomebuyers.com/js/external-tracking.js"
-  data-tracking-id="tk_da15b183b29742b3b01e7562ed573826"
-  defer>
+<script>
+  (function () {
+    var loaded = false;
+
+    function loadGHL() {
+      if (loaded) return;
+      loaded = true;
+
+      var s = document.createElement("script");
+      s.src = "https://go.atlashomebuyers.com/js/external-tracking.js";
+      s.defer = true;
+      s.setAttribute("data-tracking-id", "tk_da15b183b29742b3b01e7562ed573826");
+      document.head.appendChild(s);
+    }
+
+    // Load on first interaction OR after a short delay
+    ["pointerdown", "keydown", "scroll"].forEach(function (evt) {
+      window.addEventListener(evt, loadGHL, { once: true, passive: true });
+    });
+    setTimeout(loadGHL, 2000);
+  })();
 </script>
   
 <link rel="icon" type="image/png" href="assets/img/favicon.png" />
@@ -58,7 +75,23 @@
 <link rel="preconnect" href="https://go.atlashomebuyers.com" />
 
 <!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<noscript>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+  />
+</noscript>
 
 <!-- Non-blocking CSS -->
 <link rel="preload" href="assets/css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -77,7 +110,14 @@
     <div class="container">
       <div class="header-inner">
         <a class="brand" href="#top" aria-label="Atlas Home Buyers">
-          <img src="assets/img/atlas-logo.png" alt="Atlas Home Buyers" />
+          <img
+  src="assets/img/atlas-logo.png"
+  alt="Atlas Home Buyers"
+  width="170"
+  height="34"
+  decoding="async"
+  fetchpriority="high"
+/>
         </a>
 
         <a class="call pill" href="tel:19049449947" aria-label="Call Atlas Home Buyers">
@@ -120,8 +160,22 @@
               </div>
 
               <div class="hero-offer-trust" aria-label="Trust signals">
-                <img src="assets/img/google-reviews.png" alt="Google Reviews" loading="lazy" />
-                <img src="assets/img/bbb-business.png" alt="Better Business Bureau Business Profile" loading="lazy" />
+                <img
+  src="assets/img/google-reviews.png"
+  alt="Google Reviews"
+  width="170"
+  height="38"
+  loading="lazy"
+  decoding="async"
+/>
+<img
+  src="assets/img/bbb-business.png"
+  alt="Better Business Bureau Business Profile"
+  width="170"
+  height="38"
+  loading="lazy"
+  decoding="async"
+/>
               </div>
             </div>
           </div><!-- /.hero-offer -->
@@ -135,11 +189,11 @@
     <div class="container">
       <h5>As Seen In</h5>
       <div class="logo-grid">
-        <div class="logo-item"><img loading="lazy" src="assets/img/logo-fox.svg" alt="FOX" /></div>
-        <div class="logo-item"><img loading="lazy" src="assets/img/logo-nbc.svg" alt="NBC" /></div>
-        <div class="logo-item"><img loading="lazy" src="assets/img/logo-abc.svg" alt="ABC" /></div>
-        <div class="logo-item"><img loading="lazy" src="assets/img/logo-cbs.svg" alt="CBS" /></div>
-        <div class="logo-item"><img loading="lazy" src="assets/img/logo-benzinga.svg" alt="Benzinga" /></div>
+        <div class="logo-item"><img loading="lazy" decoding="async" width="140" height="38" src="assets/img/logo-fox.svg" alt="FOX" /></div>
+        <div class="logo-item"><img loading="lazy" decoding="async" width="140" height="38" src="assets/img/logo-nbc.svg" alt="NBC" /></div>
+        <div class="logo-item"><img loading="lazy" decoding="async" width="140" height="38" src="assets/img/logo-abc.svg" alt="ABC" /></div>
+        <div class="logo-item"><img loading="lazy" decoding="async" width="140" height="38" src="assets/img/logo-cbs.svg" alt="CBS" /></div>
+        <div class="logo-item"><img loading="lazy" decoding="async" width="140" height="38" src="assets/img/logo-benzinga.svg" alt="Benzinga" /></div>
       </div>
     </div>
   </section>
@@ -759,7 +813,14 @@ If you're looking to sell your home quickly and easily, they are definitely wort
         <div class="footer-grid">
 
           <div class="footer-brand" style="display:flex; gap:14px; align-items:flex-start;">
-            <img src="assets/img/atlas-logo.png" alt="Atlas Home Buyers" style="height:42px; width:auto;" />
+            <img
+  src="assets/img/atlas-logo.png"
+  alt="Atlas Home Buyers"
+  width="210"
+  height="42"
+  decoding="async"
+  loading="lazy"
+/>
             <div class="footer-info">
               <strong>Atlas Home Buyers</strong>
               <p>Jacksonville, FL</p>
@@ -778,42 +839,50 @@ If you're looking to sell your home quickly and easily, they are definitely wort
     </footer>
   </section>
 
-  <script>
-  // Lazy-load Google Maps Places only when a user interacts with address fields.
+<script>
   (function () {
-    let mapsRequested = false;
+    var loaded = false;
 
-    window.atlasInitPlaces = function () {
-      // app.js will attach autocomplete once Maps is loaded
-      window.dispatchEvent(new Event("atlas:maps-ready"));
-    };
-
-    window.atlasLoadGoogleMaps = function () {
-      if (mapsRequested) return;
-      mapsRequested = true;
+    function loadMaps() {
+      if (loaded) return;
+      loaded = true;
 
       var s = document.createElement("script");
       s.src =
-        "https://maps.googleapis.com/maps/api/js?key=AIzaSyBduzKLhEn0lSkEmYB-Ijhni57GfGnucNA&libraries=places&callback=atlasInitPlaces";
+        "https://maps.googleapis.com/maps/api/js?key=AIzaSyBduzKLhEn0lSkEmYB-Ijhni57GfGnucNA&libraries=places";
       s.async = true;
-      document.head.appendChild(s);
-    };
+      s.defer = true;
 
-    function bindLazyLoad() {
+      s.onload = function () {
+        window.dispatchEvent(new Event("atlas:maps-ready"));
+      };
+
+      document.head.appendChild(s);
+    }
+
+    function arm() {
       var hero = document.getElementById("heroAddress");
       var form = document.getElementById("address");
 
       [hero, form].forEach(function (el) {
         if (!el) return;
-        el.addEventListener("focus", window.atlasLoadGoogleMaps, { once: true });
-        el.addEventListener("pointerdown", window.atlasLoadGoogleMaps, { once: true });
+        el.addEventListener("focus", loadMaps, { once: true, passive: true });
+        el.addEventListener("pointerdown", loadMaps, { once: true, passive: true });
+        el.addEventListener("touchstart", loadMaps, { once: true, passive: true });
       });
+
+      // Safety fallback (loads in idle so autocomplete is ready if they scroll fast)
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(loadMaps, { timeout: 2500 });
+      } else {
+        setTimeout(loadMaps, 1800);
+      }
     }
 
     if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", bindLazyLoad, { once: true });
+      document.addEventListener("DOMContentLoaded", arm, { once: true });
     } else {
-      bindLazyLoad();
+      arm();
     }
   })();
 </script>
