@@ -907,13 +907,6 @@ If you're looking to sell your home quickly and easily, they are definitely wort
         el.addEventListener("pointerdown", loadMaps, { once: true, passive: true });
         el.addEventListener("touchstart", loadMaps, { once: true, passive: true });
       });
-
-      // Safety fallback (loads in idle so autocomplete is ready if they scroll fast)
-      if ("requestIdleCallback" in window) {
-        requestIdleCallback(loadMaps, { timeout: 2500 });
-      } else {
-        setTimeout(loadMaps, 1800);
-      }
     }
 
     if (document.readyState === "loading") {
